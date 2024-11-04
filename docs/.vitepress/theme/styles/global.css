@@ -1,0 +1,9 @@
+.VPNav {
+  border-bottom: 1px solid #f2f3f5;
+}
+
+.dark {
+  .VPNav {
+    border-bottom: 1px solid #000;
+  }
+}
