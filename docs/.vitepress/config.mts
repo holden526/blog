@@ -21,7 +21,7 @@ export default defineConfig({
       preprocessorOptions: {
         scss: {
           api: 'modern',
-          additionalData: `@use "@/docs/.vitepress/theme/styles/var" as *;`,
+          additionalData: `@use "@/docs/.vitepress/theme/styles/mixin" as *;`,
         },
       },
     },
@@ -46,10 +46,7 @@ export default defineConfig({
     }
   },
   themeConfig: {
-    nav: [
-      { text: '主页', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' },
-    ],
+    nav: [{ text: '主页', link: '/' }],
     sidebar: [
       {
         text: 'Examples',

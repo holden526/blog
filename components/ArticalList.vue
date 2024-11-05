@@ -36,10 +36,11 @@ console.log(posts)
   width: 100%;
   height: 100%;
   display: flex;
+  color: var(--black-color);
 
   .left-wrapper {
     margin-top: 3vh;
-    border: 1px solid $border-color;
+    border: 1px solid var(--border-color);
     width: 250px;
     height: 300px;
     display: flex;
@@ -64,7 +65,7 @@ console.log(posts)
 
     .text {
       font-size: 14px;
-      color: $gray-1;
+      color: var(--grey-color);
       user-select: none;
     }
 

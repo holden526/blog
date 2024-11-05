@@ -2,7 +2,16 @@
   border-bottom: 1px solid #f2f3f5;
 }
 
+:root {
+  --border-color: #f2f3f5;
+  --grey-color: #86909c;
+  --black-color: #3c3c43;
+}
+
 .dark {
+  --border-color: rgba(255, 255, 255, 0.08);
+  --grey-color: rgba(255, 255, 255, 0.5);
+  --black-color: rgba(255, 255, 255, 0.9);
   .VPNav {
     border-bottom: 1px solid #000;
   }
