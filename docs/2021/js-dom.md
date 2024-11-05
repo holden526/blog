@@ -1,14 +1,13 @@
 ---
 title: JavaScript DOM 常用知识点
 date: 2021-10-11
-sidebar: auto
-categories:
-  - JavaScript
 tags:
-  - JS
+  - JavaScript
 ---
 
-## 1.HTML DOM nodeType
+# JavaScript DOM 常用知识点
+
+## 1. HTML DOM nodeType
 
 nodeType 属性返回节点类型。属性是只读的。
 
@@ -20,7 +19,7 @@ nodeType 属性返回节点类型。属性是只读的。
 
 （4）如果节点是一个注释节点，nodeType 属性返回 8。
 
-## 2.获取标签
+## 2. 获取标签
 
 ### （1）获取 ol 下的所有 li
 
@@ -120,7 +119,7 @@ function getNextElementSibling(element) {
 }
 ```
 
-## 3.节点操作
+## 3. 节点操作
 
 ### （1）创建插入节点
 
@@ -153,7 +152,7 @@ node.cloneNode()
 
 直接将内容写入页面的内容流，文档流执行完毕后再使用，会导致页面全部重绘
 
-## 4.innerText 和 innerHTML 区别
+## 4. innerText 和 innerHTML 区别
 
 （1）innerHTML 能识别标签，innerText 不能识别标签
 
@@ -175,7 +174,7 @@ node.cloneNode()
 
 innerHTML 创建多个元素效率更高（不要用拼接字符串，使用数组形式拼接）
 
-## 5.h5 新增获取元素方式
+## 5. h5 新增获取元素方式
 
 缺点：兼容性差，仅 IE8 以上
 
@@ -186,7 +185,7 @@ querySelector('选择器')
 querySelectorAll('选择器')
 ```
 
-## 6.注册事件
+## 6. 注册事件
 
 （1）传统方式注册
 
@@ -207,7 +206,7 @@ node.onclick = function () {}
 node.addEventListener('click', function () {})
 ```
 
-## 7.DOM 事件流冒泡
+## 7. DOM 事件流冒泡
 
 （1）JS 代码中只能执行捕获或者冒泡其中的一个阶段。
 
@@ -217,7 +216,7 @@ node.addEventListener('click', function () {})
 
 （4）有些事件是没有冒泡的，比如 onblur、onfocus、onmouseenter、onmouseleave
 
-## 8.阻止行为
+## 8. 阻止行为
 
 （1）阻止冒泡
 
@@ -244,7 +243,7 @@ document.addEventListener('selectstart', function (e) {
 })
 ```
 
-## 10.JS 执行机制
+## 10. JS 执行机制
 
 （1）先执行执行栈中的同步任务
 
@@ -252,7 +251,7 @@ document.addEventListener('selectstart', function (e) {
 
 （3）一旦执行栈中的所有同步任务执行完毕，任务就会按次序读取任务队列的异步任务，于是被读取的异步任务进入执行栈，开始执行
 
-## 11.location 常用方法
+## 11. location 常用方法
 
 （1）获取 url
 
@@ -275,7 +274,7 @@ location.replace('地址') // 替换当前页面，不记录历史，不能后�
 location.reload() // 重新加载页面，参数true为强制刷新
 ```
 
-## 12.判断用户端设备
+## 12. 判断用户端设备
 
 ```js
 if((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
@@ -288,7 +287,7 @@ if((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobil
 }
 ```
 
-## 13.获取元素大小
+## 13. 获取元素大小
 
 （1）offset
 offset 可以得到任意样式表中的样式值
@@ -304,7 +303,7 @@ style.width 获得不包含 padding 和 border 的值
 style.width 是可读写属性，可以获取也可以赋值
 所以，我们想要给元素更改值，则需要用 style 改变
 
-## 14.获取 url 的参数
+## 14. 获取 url 的参数
 
 [MDN URLsearchParams](https://developer.mozilla.org/zh-CN/docs/Web/API/URLSearchParams)
 

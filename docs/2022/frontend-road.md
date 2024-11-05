@@ -1,12 +1,11 @@
 ---
 title: B站前端路线资源整合
-date: 2022-1-15
-sidebar: auto
-categories:
-  - 前端路线
+date: 2022-01-15
 tags:
-  - 资源
+  - 前端路线
 ---
+
+# B站前端路线资源整合
 
 ## 网络知识
 

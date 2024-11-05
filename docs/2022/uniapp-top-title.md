@@ -1,20 +1,16 @@
 ---
 title: Uniapp 小程序自定义顶部标题
-date: 2022-4-8
-sidebar: auto
-categories:
-  - WeChat
-  - Uniapp
+date: 2022-04-08
 tags:
+  - Uniapp
   - WeChat
-  - 框架
 ---
+
+# Uniapp 小程序自定义顶部标题
 
 ## 前言
 
 小程序自带的顶部不太好康，而且能改的只要颜色和文字。很多时候设计图都是需要自定义顶部的。比如放个**搜索框** 或者 **标题** 或者 **可切换的 tabs** 等等 。分享一下我之前的做法。
-
-<hr />
 
 ## 一、获取胶囊的位置信息 API
 
@@ -30,7 +26,7 @@ tags:
 
 获取菜单按钮（右上角胶囊按钮）的布局位置信息。坐标信息以屏幕左上角为原点。
 
-### 1.返回值
+### 1. 返回值
 
 **Object**
 
@@ -49,7 +45,7 @@ tags:
 
 标题型
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/0bfc3644851240909e3efe3cc0162c6f.png)
+![uniapp](../img/uniapp-top-title.png)
 
 ### 1.关闭原生的顶部栏
 
@@ -76,9 +72,7 @@ tags:
 ```html
 <template>
   <view class="bg">
-    <view class="title" :style="'padding-top:' + titleHeight + 'px'"
-      >新华的湖</view
-    >
+    <view class="title" :style="'padding-top:' + titleHeight + 'px'">新华的湖</view>
   </view>
 </template>
 ```

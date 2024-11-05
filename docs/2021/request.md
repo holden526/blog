@@ -1,16 +1,15 @@
 ---
 title: 请求与跨域
-date: 2021-8-10
-sidebar: auto
-categories:
-  - request
+date: 2021-08-10
 tags:
-  - 请求
+  - Request
 ---
 
-# 发送请求方法
+# 请求与跨域
 
-## 1.Ajax
+## 请求的方式
+
+### 1. Ajax
 
 *Ajax*即“**Asynchronous JavaScript And XML**”（**异步 JavaScript 和 XML**），是指一种创建交互式网页应用的网页开发技术。
 
@@ -25,19 +24,19 @@ $.ajax({
 })
 ```
 
-### **优点：**
+**优点：**
 
-- **提高了性能和速度**：**减少了客户端和服务器之间的流量传输**，同时减少了双方响应的时间，响应更快，因此提高了性能和速度
+- **提高了性能和速度**：减少了客户端和服务器之间的流量传输，同时减少了双方响应的时间，响应更快，因此提高了性能和速度
 - **交互性好**：使用 ajax，可以开发更快，更具交互性的 Web 应用程序
-- **异步调用**：Ajax 对 Web 服务器**进行异步调用**。这意味着**客户端浏览器在开始渲染之前避免等待所有数据到达**。
-- **节省带宽**：基于 Ajax 的应用程序**使用较少的服务器带宽**，因为无需重新加载完整的页面
-- **底层使用 XMLHttpRequest**
+- **异步调用**：Ajax 对 Web 服务器进行异步调用。这意味着客户端浏览器在开始渲染之前避免等待所有数据到达。
+- **节省带宽**：基于 Ajax 的应用程序使用较少的服务器带宽，因为无需重新加载完整的页面
+- **底层使用**: XMLHttpRequest
 
 - 拥有开源 JavaScript 库 ： JQuery，Prototype，Scriptaculous 等。
 
 - AJAX 通过 HTTP 协议进行通信。
 
-### 缺点：
+**缺点：**
 
 - 增加了设计和开发的时间
 - 比构建经典 Web 应用程序更复杂
@@ -46,7 +45,7 @@ $.ajax({
 - 禁用 javascript 的浏览器无法使用该应用程序
 - 由于安全限制，只能使用它来访问服务于初始页面的主机的信息。如果需要显示来自其他服务器的信息，则无法在 AJAX 中显示。
 
-## 2.axios
+### 2. axios
 
 axios **基于 promise 用于浏览器和 node.js 的 http 客户端**。
 
@@ -86,19 +85,19 @@ axios({
 });
 ```
 
-### 优点：
+**优点：**
 
-- **从 node.js 创建 http 请求**
-- **在浏览器中创建 XMLHttpRequest**
+- 从 node.js 创建 http 请求
+- 在浏览器中创建 XMLHttpRequest
 - 支持 Promise API
-- 提供了一些**并发请求的接口**
+- 提供了一些并发请求的接口
 - 支持拦截请求和响应
 - 转换请求和响应数据
 - 取消请求
 - 自动转换 JSON 数据
-- **客户端支持防御 CSRF/XSRF**
+- 客户端支持防御 CSRF/XSRF
 
-## 3.fetch
+### 3. fetch
 
 fetch 号称是 AJAX 的替代品，**是在 ES6 出现的，使用了 ES6 中的 promise 对象**。Fetch 是基于 promise 设计的。Fetch 的代码结构比起 ajax 简单多了，参数有点像 jQuery ajax。但是，一定记住**fetch 不是 ajax 的进一步封装，而是原生 js，没有使用 XMLHttpRequest 对象**。（然而问题还是有很多）
 
@@ -112,33 +111,33 @@ try {
 }
 ```
 
-### 优点：
+**优点：**
 
 - 符合关注分离，没有将输入、输出和用事件来跟踪的状态混杂在一个对象中
 - 更好更方便的写法
 - 更加底层，提供的 API 丰富（request，response）
 - 脱离了 XHR，是 ES 规范里新的实现方式
 
-### 缺点：
+**缺点：**
 
-- **fetch 只对网络请求报错，对 400，500 都当做成功的请求，需要封装去处理**
-- **fetch 默认不会带 cookie，需要添加配置项**
-- **fetch 不支持 abort,不支持超时控制**，使用**setTimeout**及**Promise.reject**和**Promise.race 结合 setTimeout**实现的超时控制**并不能阻止请求过程继续在后台执行，造成了量的浪费**
-- **fetch 没有办法原生监测请求的进度，而 XHR 可以**
+- fetch 只对网络请求报错，对 400，500 都当做成功的请求，需要封装去处理
+- fetch 默认不会带 cookie，需要添加配置项
+- fetch 不支持 abort,不支持超时控制，使用**setTimeout**及**Promise.reject**和**Promise.race 结合 setTimeout**实现的超时控制\*\*并不能阻止请求过程继续在后台执行，造成了量的浪费
+- fetch 没有办法原生监测请求的进度，而 XHR 可以
 
-# 解决跨域问题
+## 解决跨域问题
 
-## 1.cors
+### 1. cors
 
 后端配置请求头（有一定风险）
 
-## 2.jsonp
+### 2. jsonp
 
 利用 script 中的 src 引入外部资源时不受同源限制
 
 只能解决 get 请求（前端后端都要处理）
 
-## 3.代理服务器
+### 3. 代理服务器
 
 后端 nginx 或者 Vue-cli
 
@@ -197,7 +196,7 @@ module.exports = {
 1. 优点：可以配置多个代理，且可以灵活的控制请求是否走代理。
 2. 缺点：配置略微繁琐，请求资源时必须加前缀。
 
-# 创建 json-server 服务器
+### 4. 创建 json-server 服务器
 
 ```bash
 npm install -g json-server

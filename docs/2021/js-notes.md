@@ -1,16 +1,13 @@
 ---
 title: JavaScript 笔记
 date: 2021-10-15
-sidebar: auto
-categories:
-  - JavaScript
 tags:
-  - JS
+  - JavaScript
 ---
 
-## 一.JavaScript
+# JavaScript 笔记
 
-## 1.数值转换
+## 1. 数值转换
 
 ```javascript
 Boolean() // 布尔型 非0即真
@@ -25,68 +22,68 @@ JSON.stringify(json) // 把对象格式转成字符串
 isNaN()
 ```
 
-## 2.作用域
+## 2. 作用域
 
 查找变量从最近父级查找，逐层向上
 
 let 作用域为最近{}内
 
-## 3.存储数据
+## 3. 存储数据
 
 对象数据类型，键值对集合，json
 
-## 4.数组
+## 4. 数组
 
-1.设置数组长度
+### 4.1 设置数组长度
 
 ```javascript
 // 例子：数组length-1 =>作用：可以用来删除最后的元素
 arr.length = 长度
 ```
 
-2.从后面加数据
+### 4.2 从后面加数据
 
 ```javascript
 // 返回数组长度
 push（value）
 ```
 
-3.在前面加数据
+### 4.3 在前面加数据
 
 ```javascript
 // 返回长度
 unshift（value）
 ```
 
-4.删除最后一个
+### 4.4 删除最后一个
 
 ```javascript
 // 返回被删除的元素
 pop（）
 ```
 
-5.删除第一个
+### 4.5 删除第一个
 
 ```javascript
 // 返回被删除的元素
 shift（）
 ```
 
-6.数组反转
+### 4.6 数组反转
 
 ```javascript
 // 返回反转后的数组
 reverse（）
 ```
 
-7.删除若干数据
+### 4.7 删除若干数据
 
 ```javascript
 // 删除若干数据，并选择是否插入。默认值(0，0，没有) 返回新数组（被删除的数据）
 splice（开始索引，多少个，value）
 ```
 
-8.数组排序
+### 4.8 数组排序
 
 ```javascript
 // 什么都不传就两个两个换。返回排序好的数组
@@ -97,107 +94,107 @@ sort（function（a,b）{return a - b}）
 sort（function（a,b）{return b - a}）
 ```
 
-9.拼接成字符串
+### 4.9 拼接成字符串
 
 ```javascript
 // join（连接符）。将数组用连接符连接成字符串，返回字符串
 join('-') // 例如：1，2，3  =>  1-2-3
 ```
 
-10.拼接数组
+### 4.10 拼接数组
 
 ```javascript
 // concat（其他数组）将其他数组与数组拼接。返回拼接好的数组
 arr1.concat(arr2)
 ```
 
-11.截取数组
+### 4.11 截取数组
 
 ```javascript
 // 默认（0，数组长度），返回截取的新数组，包前不包后
 slice（开始索引，结束索引）
 ```
 
-11.查找 value 在数组的索引
+### 4.12 查找 value 在数组的索引
 
 ```javascript
 // 有该数据则返回第一次出现的索引。没有则返回-1
 indexOf（value）
 ```
 
-12.遍历数组
+### 4.13 遍历数组
 
 ```javascript
 // item 是数组每一个元素，index 是索引，arr是数组。参数可以不写,没有返回值
 forEach（function（item，index，arr）{}）
 ```
 
-13.映射数组
+### 4.14 映射数组
 
 ```javascript
 // 返回新的数组
 map（function（item，index，arr）{return item*10}）  // 将数组每一个元素*10
 ```
 
-14.过滤数组
+### 4.15 过滤数组
 
 ```javascript
 // 返回过滤好的新数组
 filter（function（item，index，arr）{return item>150}） // 将数组小于150的元素删除
 ```
 
-15.判断是否每一项都满足条件
+### 4.16 判断是否每一项都满足条件
 
 ```javascript
 // 返回布尔值
 every（function（item，index，arr）{return item>150}）  // 判断是否大于150
 ```
 
-16.判断是否有某一项都满足条件
+### 4.17 判断是否有某一项都满足条件
 
 ```javascript
 // 返回布尔值
 some（function（item，index，arr）{return item>150}）   // 判断是否有满足大于150的元素
 ```
 
-## 5.字符串
+## 5. 字符串
 
-1.获取对应索引位置的字符
+### 5.1 获取对应索引位置的字符
 
 ```javascript
 // 返回字符
 charAt（索引）
 ```
 
-2.将字符串的所有字母转换成小写
+### 5.2 将字符串的所有字母转换成小写
 
 ```javascript
 // 返回转好的字符串
 toLowerCase（）
 ```
 
-3.将字符串的所有字母转换成大写
+### 5.3 将字符串的所有字母转换成大写
 
 ```javascript
 // 返回转好的字符串
 toUpperCase（）
 ```
 
-4.将字符串第一个满足的内容更换
+### 5.4 将字符串第一个满足的内容更换
 
 ```javascript
 // 返回字符串。注意：第一个
 replace（换下内容，换上内容）
 ```
 
-5.去除首尾空格
+### 5.5 去除首尾空格
 
 ```javascript
 // 返回字符串
 trim（）
 ```
 
-6.按照分隔符切割组成一个数组
+### 5.6 按照分隔符切割组成一个数组
 
 ```javascript
 // 返回数组
@@ -208,7 +205,7 @@ split（/x|y/）
 split（/[.]|y/）
 ```
 
-7.截取字符串
+### 5.7 截取字符串
 
 有三个方法：
 
@@ -226,37 +223,37 @@ var res2 = substring(1, 6) // 结果12345，1是开始索引，6是结束索引�
 var res3 = slice(1, 6) // 结果12345，1是开始索引，6是结束索引。包前不包后
 ```
 
-## 6.数字常用方法
+## 6. 数字常用方法
 
-1.获取 0~1 之间的随机小数。
+### 6.1 获取 0~1 之间的随机小数。
 
 ```javascript
 // 返回小数。包前不包后，即可以获取到0，不可以获取到1
 Math.random（）
 ```
 
-2.对数字进行四舍五入取整
+### 6.2 对数字进行四舍五入取整
 
 ```javascript
 // 返回整数
 Math.round（value）
 ```
 
-3.对数字进行向上取整
+### 6.3 对数字进行向上取整
 
 ```javascript
 // 返回整数
 Math.ceil（value）
 ```
 
-4.对数字进行向下取整
+### 6.4 对数字进行向下取整
 
 ```javascript
 // 返回整数。相对于去小数
 Math.floor（value）
 ```
 
-5.对数字进行取幂运算
+### 6.5 对数字进行取幂运算
 
 ```javascript
 // 返回结果
@@ -265,7 +262,7 @@ Math.pow（底数，指数）
 Math.pow(2,5)
 ```
 
-6.对数字进行二次方根运算
+### 6.6 对数字进行二次方根运算
 
 ```javascript
 // 返回结果
@@ -274,35 +271,35 @@ Math.sqrt（value）
 Math.sqrt(4)
 ```
 
-7.对数字进行绝对值运算
+### 6.7 对数字进行绝对值运算
 
 ```javascript
 // 返回结果
 Math.abs（）
 ```
 
-8.获取若干数字中的最大值
+### 6.8 获取若干数字中的最大值
 
 ```javascript
 // 返回最大值。
 Math.max（value1，value2，...）
 ```
 
-9.获取若干数字中的最小值
+### 6.9 获取若干数字中的最小值
 
 ```javascript
 // 返回最小值。
 Math.min（value1，value2，...）
 ```
 
-10.得到一个近似 Π(派：3.14159....)的值
+### 6.10 得到一个近似 Π(派：3.14159....)的值
 
 ```javascript
 // 返回值
 Math.PI
 ```
 
-11.示例：
+### 6.11 示例：
 
 ```javascript
 // 获取0~x之间的随机整数，
@@ -313,7 +310,7 @@ var b = Math.random() * (y - x + 1)
 var result1 = Math.floor(b) + x
 ```
 
-## 7.时间常用方法
+## 7. 时间常用方法
 
 ```javascript
 var time = new Date（）
@@ -343,7 +340,7 @@ function getDiff(time1,time2){
 }
 ```
 
-## 8.BOM 操作
+## 8. BOM 操作
 
 操作浏览器
 
@@ -424,11 +421,11 @@ window.scrollTo({
 })
 ```
 
-## 9.定时器
+## 9. 定时器
 
 有返回值，返回第几个定时器，不区分定时器类型
 
-1.间隔定时器（按照指定周期毫秒，去执行指定代码）
+### 9.1 间隔定时器（按照指定周期毫秒，去执行指定代码）
 
 ```javascript
 setInterval(function () {
@@ -436,7 +433,7 @@ setInterval(function () {
 }, 1000)
 ```
 
-2.延时定时器（在固定的时间毫秒后执行一次代码）
+### 9.2 延时定时器（在固定的时间毫秒后执行一次代码）
 
 ```javascript
 setTimeout(function () {
@@ -444,7 +441,7 @@ setTimeout(function () {
 }, 1000)
 ```
 
-3.关闭定时器，不区分定时器类型
+### 9.3 关闭定时器，不区分定时器类型
 
 ```javascript
 // 语法一
@@ -453,7 +450,7 @@ clearInterval(要关闭的定时器返回值)
 clearTimeout(要关闭的定时器返回值)
 ```
 
-## 10.DOM
+## 10. DOM
 
 操作文档流相关内容的属性和方法
 
@@ -556,13 +553,13 @@ document.createElement('标签名称')
 元素.clientWidth
 ```
 
-## 11.事件类型
+## 11. 事件类型
 
-1. 图错误点：contextmenu 是右键单击
+### 11.1 图错误点：contextmenu 是右键单击
 
 事件对象，有函数提供，在函数里面用形参接收即可
 
-![avatar](https://img-blog.csdnimg.cn/9e9544f63c784cfdb18da4724ba7a3ac.png)
+![notes](../img/js-notes1.png)
 
 补充：
 
@@ -572,19 +569,19 @@ clientX 和 clientY 相对于可视窗口，鼠标的坐标信息
 
 pageX 和 pageY 相对于整个页面文档流，鼠标的坐标信息
 
-2.**浏览器相应事件的机制**
+### 11.2 **浏览器相应事件的机制**
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/fd99e782cac54e98ac4cbf5cc3d764f3.png)
+![notes](../img/js-notes2.png)
 
 先从外层传递到里层（事件捕获阶段），最后传出来（事件冒泡阶段）
 
-3.**阻止事件传播**
+### 11.3 **阻止事件传播**
 
 ```javascript
 事件对象.stopPropagation()
 ```
 
-4.**事件委托**
+### 11.4 **事件委托**
 
 使用事件对象的 target 可以知道点击的是哪个元素
 
@@ -596,7 +593,7 @@ ul.onclick = function (e) {
 }
 ```
 
-## 12.面向对象
+## 12. 面向对象
 
 创建工厂
 
@@ -624,15 +621,15 @@ Person.prototype.sayHi = function () {} //sayHi 方法名
 Person.prototype.a = 110
 ```
 
-## 13.原型链
+## 13. 原型链
 
 用 "**proto**"串联起来的对象链状结构
 
 对象访问机制：先去自己身上找，没有就去 proto 上找，逐级查找 最高级 Object 的 proto，没有就返回 undefined
 
-![1641911696643](https://img-blog.csdnimg.cn/3732ad31aee147fa822e8d6669731b25.png)
+![notes](../img/js-notes3.png)
 
-## 14.ES6
+## 14. ES6
 
 ### 14.1 新增变量命名
 
@@ -640,7 +637,7 @@ ES6 以前用 var ES6 新增 let/const
 
 var 函数作用域
 
-![1641912151862](https://img-blog.csdnimg.cn/60402213bfaf444d89e6dcd00f4bc19b.png)
+![notes](../img/js-notes4.png)
 
 ### 14.2 箭头函数
 
@@ -763,7 +760,7 @@ console.log(Person.a)
 Person.go()
 ```
 
-## 15.立即执行函数
+## 15. 立即执行函数
 
 立即执行函数前面的语句必须有分号
 
@@ -773,7 +770,7 @@ Person.go()
 })()
 ```
 
-## 16.请求接口
+## 16. 请求接口
 
 后端给予接口文档，按照接口文档写
 
@@ -815,7 +812,7 @@ loginForm.onsubmit = function (e) {
 }
 ```
 
-## 17.jQuery
+## 17. jQuery
 
 一个大型的简单的第三方类库，对 DOM 操作进行封装，引入后暴露两个全局变量 $ 和 jquery
 
@@ -833,13 +830,13 @@ $('选择器')
 $('选择器').筛选器名称()
 ```
 
-![1641972385583](https://img-blog.csdnimg.cn/17b0f03e8b484519b709c41a017a9373.png)
+![notes](../img/js-notes5.png)
 
 ### 17.3 操作文本内容
 
 $('div') = 选中 div
 
-3.1 html() 等价于原生 JS 的 innerHTML
+（1）html() 等价于原生 JS 的 innerHTML
 
 ```javascript
 // 获取
@@ -850,7 +847,7 @@ $('div').html('你要设置的内容')
 $('div').html('<h2>hello world<h2>')
 ```
 
-3.2 text() 等价于原生 JS 的 innerText
+（2）text() 等价于原生 JS 的 innerText
 
 ```javascript
 // 获取
@@ -859,7 +856,7 @@ $('div').text()
 $('div').text('hello world')
 ```
 
-3.3 val() 等价于原生 JS 中 value
+（3）val() 等价于原生 JS 中 value
 
 ```javascript
 // 获取
@@ -870,19 +867,19 @@ $('input').val('你要设置的内容')
 
 ### 17.4 操作元素类名
 
-4.1 addClass() 新增类名
+（1）addClass() 新增类名
 
 ```javascript
 $('div').addClass('要添加的类名')
 ```
 
-4.2 removeClass() 删除类名
+（2）removeClass() 删除类名
 
 ```javascript
 $('div').removeClass('要删除的类名')
 ```
 
-4.3 toggleClass() 切换类名
+（3）toggleClass() 切换类名
 
 本身有这个类名，那就是删除，如果本身没有这个类名，那就是添加
 
@@ -897,7 +894,7 @@ btn.onclick = function () {
 
 ### 17.5 操作元素样式
 
-1.css()
+（1）css()
 
 ```javascript
 // 获取，可以获取行内和非行内样式。
@@ -910,7 +907,7 @@ $('div').css('width', '300px') //设置div宽为300px
 $('div').css('width', 300)
 ```
 
-2.css 批量设置样式
+（2）css 批量设置样式
 
 ```javascript
 // 元素集合.css({ 所有要设置的样式 })
@@ -923,7 +920,7 @@ $('div').css({
 
 ### 17.6 操作元素属性
 
-1.arrt()
+（1）arrt()
 
 ```javascript
 // 一般用于操作元素的自定义属性。直接出现在元素的标签里
@@ -934,14 +931,14 @@ $('div').attr('hello')
 $('div').attr('hello') = 100
 ```
 
-2.removeAttr()
+（2）removeAttr()
 
 ```javascript
 // 删除自定义属性hello
 $('div').removeAttr('hello')
 ```
 
-3.prop()
+（3）prop()
 
 ```javascript
 // 操作元素原生属性时，会直接出现在元素标签里
@@ -956,7 +953,7 @@ $('div').prop('id') = 1
 $('div').prop('hello') = 100
 ```
 
-4.removeProp()
+（4）removeProp()
 
 ```javascript
 // 不能删除原有的自定义属性和原生属性，只能删除prop()设定的自定义属性
@@ -966,9 +963,9 @@ $('div').removeProp('hello')
 
 ### 17.7 获取元素尺寸
 
-![1641980265063](https://img-blog.csdnimg.cn/7810acfb960c4eeba7f3f8319361df7d.png)
+![notes](../img/js-notes6.png)
 
-1.width()、height()
+（1）width()、height()
 
 ```javascript
 // 获取内容区域的尺寸
@@ -976,7 +973,7 @@ $('div').width() // 300
 $('div').height() // 300
 ```
 
-2.innerWidth()、innerHeight()
+（2）innerWidth()、innerHeight()
 
 ```javascript
 // 获取内容和 padding 区域尺寸
@@ -984,7 +981,7 @@ $('div').innerWidth() // 340
 $('div').innerHeight() // 340
 ```
 
-3.outerWidth()、outerHeight()
+（3）outerWidth()、outerHeight()
 
 ```javascript
 // 获取内容、padding 和 border 区域尺寸
@@ -992,7 +989,7 @@ $('div').outerWidth() // 380
 $('div').outerHeight() // 380
 ```
 
-4.outerWidth(true)、outerHeight(true)
+（4）outerWidth(true)、outerHeight(true)
 
 ```javascript
 // 获取内容、padding 、border 和 margin 尺寸
@@ -1003,7 +1000,7 @@ $('div').outerHeight(true) // 420
 
 ### 17.8 获取元素偏移量
 
-1.offset()
+（1）offset()
 
 ```javascript
 // 获取元素相对于页面左上角的坐标位置
@@ -1011,7 +1008,7 @@ $('div').outerHeight(true) // 420
 $('div').offset()
 ```
 
-2.position()
+（2）position()
 
 ```javascript
 // 获取元素定位的位置
@@ -1022,7 +1019,7 @@ $('div').position()
 
 ### 17.9 绑定事件
 
-1.on()
+（1）on()
 
 1-1 基础绑定事件
 
@@ -1056,7 +1053,7 @@ $('div').on({
 })
 ```
 
-2.one()
+（2）one()
 
 one() 与 on() 绑定事件的方式一样，区别就是 one() 只能执行一次
 
@@ -1086,7 +1083,7 @@ $('div').one({
 })
 ```
 
-3.hover()
+（3）hover()
 
 jQuery 里面一个特殊的事件
 
@@ -1099,7 +1096,7 @@ $('div').hover(
 )
 ```
 
-4.常用事件函数
+（4）常用事件函数
 
 jQuery 把我们最常用的一些事件，单独做成了事件函数
 
@@ -1115,7 +1112,7 @@ $('div').click(function () {
 
 ### 17.10 事件的解绑和触发
 
-1.off() 事件解绑
+（1）off() 事件解绑
 
 1-1 解绑全部事件处理函数
 
@@ -1146,7 +1143,7 @@ $('div').off('click')
 $('div').off('click', B)
 ```
 
-2.trigger() 事件触发
+（2）trigger() 事件触发
 
 ```javascript
 // 语法：元素集合.trigger(事件类型)
@@ -1156,11 +1153,11 @@ $('div').trigger('click')
 
 ### 17.11 基本动画
 
-1.hide() 隐藏动画
+（1）hide() 隐藏动画
 
-2.show() 显示动画
+（2）show() 显示动画
 
-3.toggle() 切换动画
+（3）toggle() 切换动画
 
 ​ => 本身如果是显示的，就切换成隐藏
 
@@ -1191,11 +1188,11 @@ $('div').toggle(1000, 'linear', function () {
 
 基本动画相对于把宽高都同时缩小到左上角，折叠动画则是只改变高度，由下向上缩小
 
-1.slideDown() 隐藏动画
+（1）slideDown() 隐藏动画
 
-2.slideUp() 显示动画
+（2）slideUp() 显示动画
 
-3.slideToggle() 切换动画
+（3）slideToggle() 切换动画
 
 ​ => 本身如果是显示的，就切换成隐藏
 
@@ -1226,11 +1223,11 @@ $('div').slideToggle(1000, 'linear', function () {
 
 相对于改变透明度，让元素慢慢消失
 
-1.fadeIn() 隐藏动画
+（1）fadeIn() 隐藏动画
 
-2.fadeOut() 显示动画
+（2）fadeOut() 显示动画
 
-3.fadeToggle() 切换动画
+（3）fadeToggle() 切换动画
 
 ​ => 本身如果是显示的，就切换成隐藏
 
@@ -1238,7 +1235,7 @@ $('div').slideToggle(1000, 'linear', function () {
 
 以上三个函数都有三个参数，分布是运动时间、运动曲线、运动结束后的回调函数
 
-4.fadeTo(运动时间，指定透明度，运动曲线，回调函数) 改变元素的透明度为指定值
+（4）fadeTo(运动时间，指定透明度，运动曲线，回调函数) 改变元素的透明度为指定值
 
 ```javascript
 // 1.只写一个参数：运动时间，单位ms
@@ -1293,7 +1290,7 @@ $('div').animate(
 
 不停点击按钮使动画变化时，会记录次数，即使你停下来也还在继续变化直到执行完所有次数
 
-1.stop()
+（1）stop()
 
 =>当任何一个元素执行了 stop 方法后，会立即结束当前所有运动。
 
@@ -1311,7 +1308,7 @@ $('#btn').click(function () {
 })
 ```
 
-2.finish()
+（2）finish()
 
 会立即结束当前所有运动，直接去到动画的结束位置
 
@@ -1331,19 +1328,19 @@ $('#btn').click(function () {
 
 配置项：
 
-1.url：必填，表示请求地址
+（1）url：必填，表示请求地址
 
-2.method：选填，默认是 GET ，表示请求方式
+（2）method：选填，默认是 GET ，表示请求方式
 
-3.data：选填，默认是 ' ' ，表示携带给后端的参数
+（3）data：选填，默认是 ' ' ，表示携带给后端的参数
 
-5.dataType：选填，默认自动识别，表示后端返回给你的数据类型
+（4）dataType：选填，默认自动识别，表示后端返回给你的数据类型
 
-6.async：选填，默认是 true，表示是否异步
+（5）async：选填，默认是 true，表示是否异步
 
-7.success：选填，表示请求成功的回调函数
+（6）success：选填，表示请求成功的回调函数
 
-8.error：选填，表示请求失败的回调函数
+（7）error：选填，表示请求失败的回调函数
 
 ```javascript
 // 演示 发送两个数据给后端
@@ -1379,7 +1376,7 @@ $.get('http://localhost:8888/logout', { id: id }, (res) => {
 })
 ```
 
-## 18.webStorage
+## 18. webStorage
 
 存储大小 5M，不同浏览器不同，如果 getItem 找不到，则值为 NULL
 
@@ -1424,16 +1421,18 @@ $.ajax({
 
 清空：sessionStorage.clear()
 
-==区别：==
+区别：
 
 localStorage 关闭浏览器还在，除非自己删除或清空浏览器缓存
 
 sessionStorage 关闭浏览器就清空了
 
-## 19.Const 常量改变
+## 19.const 常量改变
 
-1. const 定义的 "基本数据类型" 的变量确实不能修改
+const 定义的 "基本数据类型" 的变量确实不能修改。
 
-2. const 定义的 **"**引用数据类型" 是可以的!
+const 定义的 "引用数据类型" 是可以的!
 
-# 总结：看视频写笔记养成好习惯
+## 总结
+
+看视频写笔记养成好习惯 ~

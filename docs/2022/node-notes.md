@@ -1,19 +1,18 @@
 ---
 title: Node.js 笔记
-date: 2022-4-25
-sidebar: auto
-categories:
-  - node.js
+date: 2022-04-25
 tags:
-  - node.js
+  - Node
 ---
 
-<h3>分享一下 node.js 学习笔记。已同步发布在 CSDN，获得排名太开心了！mark 一下~</h3>
+# Node.js 笔记
+
+分享一下 node.js 学习笔记。已同步发布在 CSDN，获得排名太开心了！mark 一下~
 
 ![nodejs](../img/node-notes1.jpg)
 ![nodejs](../img/node-notes2.png)
 
-## 一、fs 模块
+## 1. fs 模块
 
 引用
 
@@ -21,7 +20,7 @@ tags:
 const fs = require('fs')
 ```
 
-### 1.fs.readFile()
+### 1.1 fs.readFile()
 
 ```js
 // options 代表编码格式读取
@@ -38,7 +37,7 @@ fs.readFile('./files/11.text', 'utf8', function (err, data) {
 })
 ```
 
-### 2.fs.writeFile()
+### 1.2 fs.writeFile()
 
 没有该文件就创建，但是不能创建目录
 
@@ -58,9 +57,9 @@ fs.writeFile('./files/11.text', 'hello', function (err) {
 })
 ```
 
-### 3.文件路径问题
+### 1.3 文件路径问题
 
-### （1）\_\_dirname
+（1）\_\_dirname
 
 表示当前 `js` 的目录
 
@@ -75,7 +74,7 @@ fs.readFile(__dirname + '/files/1.txt', 'uft8', function (err, data) {
 })
 ```
 
-### （2）path 模块
+（2）path 模块
 
 ```js
 const path = require('path')
@@ -97,13 +96,13 @@ var fullName2 = path.basename(fpath, '.html') // index.html
 var fext = path.extname(fpath) // .html
 ```
 
-## 二、http 模块
+## 2. http 模块
 
 ```js
 const http = require('http')
 ```
 
-### 1.http.createServer()
+### 2.1 http.createServer()
 
 创建 web 服务器实例
 
@@ -111,7 +110,7 @@ const http = require('http')
 const server = http.createServer()
 ```
 
-### 2.server.on()
+### 2.2 server.on()
 
 为服务器实例绑定 request 事件，监听客户端发送的请求
 
@@ -125,7 +124,7 @@ server.on('request', (req, res) => {
 })
 ```
 
-### 3.server.listen()
+### 2.3 server.listen()
 
 启动 web 服务器监听端口
 
@@ -135,7 +134,7 @@ server.on('request', (req, res) => {
 server.listen(80, () => {})
 ```
 
-### 4.简单路由演示
+### 2.4 简单路由演示
 
 ```js
 const http = require('http')
@@ -159,9 +158,9 @@ server.listen(80, () => {
 })
 ```
 
-## 三、模块化
+## 3. 模块化
 
-### 1.加载模块
+### 3.1 加载模块
 
 ```js
 // 加载内置模块
@@ -172,7 +171,7 @@ const custom = require('./custom.js')
 const moment = require('moment')
 ```
 
-### 2.模块作用域
+### 3.2 模块作用域
 
 导入模块时，里面的变量及函数只能有该模块 js 能访问。好处：防止变量污染
 
@@ -192,15 +191,15 @@ const custom = require('./test')
 console.log(custom) // 输出:{} 访问不了里面的变量和函数
 ```
 
-### 3.向外共享模块作用域中的成员
+### 3.3 向外共享模块作用域中的成员
 
 简称暴露
 
-#### （1）module 对象
+（1）module 对象
 
 每个 .js 自定义模块中都有一个 module 对象，导入模块时，其实是导入 module.exports 指向的对象。默认值为 {}
 
-#### （2）module.exports
+（2）module.exports
 
 在 module.exports 对象上挂载属性方法
 
@@ -218,7 +217,7 @@ const custom = require('./test')
 console.log(custom) // {name:lhd,sayHello:[Function]}
 ```
 
-#### （3）exports
+（3）exports
 
 简化 module.exports。默认情况下 exports 和 module.exports 指向同一个对象。最终结果以 module.exports 指向的对象为准
 
@@ -236,33 +235,33 @@ const custom = require('./test')
 console.log(custom) // {name:lhd,sayHello:[Function]}
 ```
 
-#### （4）同时使用注意事项
+（4）同时使用注意事项
 
 使用 require() 模块时，得到的永远是 module.exports 指向的对象
 
 建议只用一种方式，以防混淆
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/71e987bd2dfc4119baae65bc03094bb7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBARERESExf,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
+![node](../img/node-notes3.png)
 
-#### （5）CommonJS 规范
+（5）CommonJS 规范
 
 - 每个模块内部，module 变量代表当前模块。
 - module 变量是一个对像，它的 exports 属性（即 module.exports)是对外的接口。
 - 加载某个模块，其实是加载该模块的 module.exports 属性。require(0 方法用于加载模块。
 
-## 四、npm 与 包
+## 4. npm 与 包
 
-### 1.什么是包
+### 4.1 什么是包
 
 Node.js 中第三方模块又叫做 `包`。
 
-### 2.包共享平台
+### 4.2 包共享平台
 
 包是由第三方个人或团队开发出来，免费开源
 
 [www.npmjs.com](www.npmjs.com)
 
-### 3.安装包
+### 4.3 安装包
 
 在包共享平台中，每个包都有会使用说明
 
@@ -279,7 +278,7 @@ npm install 包名称@x.xx.x			// x.xx.x为版本
 # 第一个x代表大版本，第二个代表功能版本，第三个代表 Bug 修复版本
 ```
 
-### 4.切换下包镜像源
+### 4.4 切换下包镜像源
 
 下载包速度慢，可以使用镜像服务器
 
@@ -292,7 +291,7 @@ npm config set registry=https://registry.npm.taobao.org/
 npm config get registry
 ```
 
-### 5.nrm
+### 4.5 nrm
 
 为了更方便的切换下包的镜像源，我们可以安装 `nrm`，可快速查看和切换镜像源
 
@@ -305,7 +304,7 @@ nrm ls
 nrm use taobao
 ```
 
-### 6.安装完包
+### 4.6 安装完包
 
 初次装包完成后，在项目文件夹下多一个叫做 `node modules` 的文件夹和 `package-lock.json` 的配置文件。不要手动修改里面的东西，npm 包管理工具会自动维护。
 
@@ -313,13 +312,13 @@ nrm use taobao
 
 `package-lock.json` 配置文件用来记录 `node modules` 目录下的晦一个包的下载信息，例如包的名字、版本号、下载地址等。
 
-### 7.dependencies
+### 4.7 dependencies
 
 作用：在 `package.json` 中记录核心依赖包信息
 
 正常安装默认为核心依赖包
 
-### 8.devDependencies
+### 4.8 devDependencies
 
 作用：在 `package.json` 中记录开发依赖包信息
 
@@ -331,7 +330,7 @@ npm i 包名称 -D
 npm install 包名称 --save-dev
 ```
 
-### 9.共享代码
+### 4.9 共享代码
 
 由于第三方包(node_modules)体积过大，不方便分享代码，所以共享时应剔除 `node_modules`
 
@@ -347,7 +346,7 @@ npm install
 npm i
 ```
 
-### 10.卸载包
+### 4.10 卸载包
 
 ```bash
 # 会自动处理 package.json
@@ -355,7 +354,7 @@ npm uninstall 包名称
 npm uni	包名称
 ```
 
-### 11.模块加载机制
+### 4.11 模块加载机制
 
 模块在第一次加载后会被缓存。这也意味着多次调用 require0 不会导致模块的代码被执行多次。
 注意：不论是内置模块、用户自定义模块、还是第三方模块，它们都会优先从缓存中加载，从而提高模块的加载效率。
@@ -366,18 +365,18 @@ npm uni	包名称
 - 加载第三方模块时，会先从父级目录寻找 `node_modules` ，如果父级没有则依次往上寻找。
 - 把目录当作模块标识符加载时，会在被加载的目录下查找 `package.json` 并寻找 main 属性，作为加载的入口。如果没有或者无法解析，则会加载目录下的 index.js 文件。
 
-## 五、Express
+## 5. Express
 
 Web 开发框架。封装 http 内置模块的第三方包
 
-### 1.安装
+### 5.1 安装
 
 ```bash
 npm i express
 npm i express@4.17.1
 ```
 
-### 2.创建基本的 Web 服务器
+### 5.2 创建基本的 Web 服务器
 
 ```js
 // 导入express
@@ -391,7 +390,7 @@ app.listen(80, () => {
 })
 ```
 
-### 3.监听 GET 请求
+### 5.3 监听 GET 请求
 
 ```js
 // req：请求对象（包含了与请求相关的属性和方法）
@@ -401,7 +400,7 @@ app.get('请求url', function (req, res) {
 })
 ```
 
-### 4.监听 POST 请求
+### 5.4 监听 POST 请求
 
 ```js
 // req：请求对象（包含了与请求相关的属性和方法）
@@ -411,7 +410,7 @@ app.post('请求url', function (req, res) {
 })
 ```
 
-### 5.把内容响应给客户端
+### 5.5 把内容响应给客户端
 
 res.send()
 
@@ -421,7 +420,7 @@ app.get('/user', (req, res) => {
 })
 ```
 
-### 6.获取 URL 中携带的查询参数
+### 5.6 获取 URL 中携带的查询参数
 
 req.query
 
@@ -431,7 +430,7 @@ app.get('/', (req, res) => {
 })
 ```
 
-### 7.获取 URL 中的动态参数
+### 5.7 获取 URL 中的动态参数
 
 通过 req.params 对象，可以访问到 URL 中，通过 `:` 匹配到的动态参数
 
@@ -446,7 +445,7 @@ app.get('/user/:id/:name', (req, res) => {
 })
 ```
 
-### 8.托管静态资源
+### 5.8 托管静态资源
 
 通过 express.static() 创建静态资源服务器。可将图片、`css` 文件、`js` 文件对外开放访问。
 
@@ -460,20 +459,20 @@ app.use(express.static('./public'))
 app.use('/public', express.static('./public'))
 ```
 
-### 9.nodemon
+### 5.9 nodemon
 
 类似热更新的工具
 
 编写调试 Node.js 项目时，如果修改了代码则需要重新启动项目才可以使用，使用 `nodemon` 工具修改代码时可以自动帮我们重启项目，方便开发
 
-#### （1）安装
+（1）安装
 
 ```bash
 // 安装为全局可用工具
 npm i nodemon -g
 ```
 
-#### （2）使用
+（2）使用
 
 ```bash
 // 原本启动
@@ -482,7 +481,7 @@ node app.js
 nodemon app.js
 ```
 
-## 六、Express 路由
+## 6. Express 路由
 
 在 Express 中，路由指的是客户端的请求与服务器处理函数之间的映射关系。
 Express 中的路由分 3 部分组成，分别是请求的类型、请求的 URL 地址、处理函数。
@@ -492,7 +491,7 @@ Express 中的路由分 3 部分组成，分别是请求的类型、请求的 UR
 app.METHOD(PATH, HANDLER)
 ```
 
-### 1.普通路由
+### 6.1 普通路由
 
 挂载到 app 上
 
@@ -506,7 +505,7 @@ app.post('/', (req, res) => {
 })
 ```
 
-### 2.模块化路由
+### 6.2 模块化路由
 
 为了方便对路由进行模块化管理，Express 不建议将路由直接挂载到 app 上，而是推荐将路由抽离为单独的模块。
 
@@ -557,29 +556,29 @@ app.listen(80, () => {
 app.use('/api', userRouter)
 ```
 
-## 七、Express 中间件
+## 7. Express 中间件
 
 请求到达 Express 服务器之后，可连续调用多个中间件，从而对这次请求进行预处理。
 
 和 vue 的路由守卫一样，next()代表放行
 
-### 1.过程
+### 7.1 过程
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/d6d392150465436eb2ba745a633855c5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBARERESExf,size_18,color_FFFFFF,t_70,g_se,x_16#pic_center)
+![node](../img/node-notes4.png)
 
-### 2.中间件格式
+### 7.2 中间件格式
 
 本质上就是一个 function 处理函数，格式如下：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/88384972861b4652b8b712ae826fed30.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBARERESExf,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
+![node](../img/node-notes5.png)
 
-### 3.next() 函数
+### 7.3 next() 函数
 
 next() 函数是实现多个中间件连续调用的关键，它表示把流转关系转交给下一个中间件或者路由。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/6de682b5655042e2bd0a7e5d7443135b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBARERESExf,size_18,color_FFFFFF,t_70,g_se,x_16#pic_center)
+![node](../img/node-notes6.png)
 
-### 4.定义中间件函数
+### 7.4 定义中间件函数
 
 ```js
 // mw 指向的就是一个中间件函数
@@ -589,7 +588,7 @@ const mw = function(req.res,next){
 }
 ```
 
-### 5.全局生效的中间件
+### 7.5 全局生效的中间件
 
 只要有请求到达服务器，必先经过 mw 中间件函数处理。相对于 vue 前置守卫，拦截器
 
@@ -613,7 +612,7 @@ app.use(function (req, res, next) {
 })
 ```
 
-### 6.中间件作用
+### 7.6 中间件作用
 
 多个中间件之间，共享同一份 req 和 res。基于这样的特性，我们可以在上游的中间件中，统一为 req 或 res 对象添加自定义的属性或方法，供下游的中间件或路由进行使用。
 
@@ -628,7 +627,7 @@ app.get('/user', (req, res) => {
 })
 ```
 
-### 7.多个中间件
+### 7.7 多个中间件
 
 按注册顺序排，且必须在路由上方。多个中间件共享 req 和 res。
 
@@ -655,7 +654,7 @@ app.listen(80, () => {
 })
 ```
 
-### 8.局部生效的中间件
+### 7.8 局部生效的中间件
 
 ```js
 const mw = function (req, res, next) {
@@ -670,7 +669,7 @@ app.get('/user', (req, res) => {
 })
 ```
 
-### 9.多个局部中间件
+### 7.9 多个局部中间件
 
 ```js
 // mw1与mw2 为中间件函数，两种方式等价
@@ -682,13 +681,13 @@ app.get('/', [mw1, mw2], (req, res) => {
 })
 ```
 
-### 10.中间件的分类
+### 7.10 中间件的分类
 
-#### （1）应用级别的中间件
+（1）应用级别的中间件
 
 通过 app.use() 或者 app.get() 或 app.post() ,绑定到 app 实例上的中间件。
 
-#### （2）路由级别的中间件
+（2）路由级别的中间件
 
 绑定到 express.Router() 实例上的中间件。
 
@@ -705,7 +704,7 @@ router.use((req, res, next) => {
 app.use('/', router)
 ```
 
-#### （3）错误级别的中间件
+（3）错误级别的中间件
 
 专门用来捕获项目中发生的异常错误，从而防止项目崩溃。
 
@@ -725,7 +724,7 @@ app.use((err, req, res, next) => {
 })
 ```
 
-#### （4）Express 内置中间件
+（4）Express 内置中间件
 
 express@4.16.0版本开始，内置了 3 个常用的中间件
 
@@ -767,7 +766,7 @@ app.post('/book', (req, res) => {
 })
 ```
 
-#### （5）第三方中间件
+（5）第三方中间件
 
 非官方内置，由第三方开发出来的中间件叫第三方中间件，可用按需加载和配置
 
@@ -786,7 +785,7 @@ const parser = require('body-parser')
 app.use(parser.urlencoded({ extended: false }))
 ```
 
-### 11.自定义中间件
+### 7.11 自定义中间件
 
 自定义一个解析请求体数据的中间件并使用
 
@@ -821,9 +820,10 @@ app.listen(80, () => {
 ```
 
 测试结果：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/98681f72c7c44ec094a7a08f409ed8dc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBARERESExf,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
 
-### 12.封装自定义中间件
+![node](../img/node-notes7.png)
+
+### 7.12 封装自定义中间件
 
 ```js
 // test.js
@@ -837,9 +837,9 @@ const test = require('./test') // 导入自定义中间件
 app.use(test) // 注册
 ```
 
-## 八、CORS 中间件
+## 8. CORS 中间件
 
-### 1. 基本使用
+### 8.1 基本使用
 
 安装
 
@@ -855,9 +855,9 @@ const cors = require('cors') // 导入
 app.use(cors()) // 配置中间件，需在路由之前
 ```
 
-### 2. CORS 响应头部
+### 8.2 CORS 响应头部
 
-#### （1）Access-Control-Allow-Origin
+（1）Access-Control-Allow-Origin
 
 响应头部可以携带一个 `Access-Control-Allow-Origin` 字段，语法如下
 
@@ -878,7 +878,7 @@ res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1')
 res.setHeader('Access-Control-Allow-Origin', '*')
 ```
 
-#### （2）Access-Control-Allow-Headers
+（2）Access-Control-Allow-Headers
 
 默认情况下，CORS 仅支持客户端向服务器发送如下 9 个请求头：
 
@@ -894,7 +894,7 @@ Accept、Accept-Language、Content-Language、DPR、Downlink、Sava-Data、Viewp
 res.setHeader('Access-Control-Allow-Headers', 'Content-Type,X-Custom-Header')
 ```
 
-#### （3）Access-Control-Allow-Methods
+（3）Access-Control-Allow-Methods
 
 默认情况下，CORS 仅支持客户端发起 GET、POST、HEAD 请求。
 如果客户端希望通过 PUT、DELETE 等方式请求服务器的资源，则需要在服务器端，通过`Access-Control-Alow-Methods` 来指明实际请求所允许使用的 HTTP 方法。
@@ -908,16 +908,16 @@ res.setHeader('Access-Control-Allow-Methods', 'POST,GET,DELETE,HEAD')
 res.setHeader('Access-Control-Allow-Methods', '*')
 ```
 
-### 3.CORS 请求分类
+### 8.3 CORS 请求分类
 
-#### （1）简单请求
+（1）简单请求
 
 同时满足以下两大条件的请求，就属于简单请求：
 
 - 请求方式：GET、POST、HEAD 三者之一
 - HTTP 头部信急不超过以下几种字段：无自定义头部字段、Accept、Accept-Language、Content-Language、DPR、Downlink、Save-Data、Viewport-Width、Width、Content-Type(只有三个值 application/x-www-form-urlencoded 、multipart/form-data、text/plain)
 
-#### （2）预检请求
+（2）预检请求
 
 只要符合以下任何一个条件的请求，都需要进行预检请求：
 
@@ -927,12 +927,12 @@ res.setHeader('Access-Control-Allow-Methods', '*')
 
 在浏览器与服务器正式通信之前，浏览器会先发送 OPTION 请求进行预检，以获知服务器是香允许该实际请求，所以这一次的 OPTION 请求称为“预检请求”。服务器成功响应预检请求后，才会发送真正的情求，并且携带真实数据。
 
-#### （3）简单请求与预检请求区别
+（3）简单请求与预检请求区别
 
 简单请求的特点：客户端与服务器之间只会发生一次请求。
 预检请求的特点：客户端与服务器之间会发生两次请求，OPTION 预检请求成功之后，才会发起真正的请求。
 
-## 九、JSONP
+## 9. JSONP
 
 概念：浏览器端通过 `<script>` 标签的 `src` 属性，请求服务器上的数据，同时，服务器返回一个函数的调用。这种请求数据的方式叫做 JSONP。
 
@@ -941,7 +941,7 @@ res.setHeader('Access-Control-Allow-Methods', '*')
 - JSONP 不属于真正的 Ajax 请求，因为它没有使用 `XMLHttpRequest` 这个对象，
 - JSONP 仅支持 GET 请求，不支持 POST、PUT、DELETE 等请求。
 
-### 1.实现 JSONP 接口
+### 9.1 实现 JSONP 接口
 
 步骤：
 
@@ -976,7 +976,7 @@ $.ajax({
 })
 ```
 
-## 十、MySQL
+## 10. MySQL
 
 安装模块
 
@@ -984,7 +984,7 @@ $.ajax({
 npm i mysql -y
 ```
 
-### 1.基本使用
+### 10.1 基本使用
 
 ```js
 // 1.导入 MySQL 模块
@@ -1005,7 +1005,7 @@ db.query('SELECT 1',(err,results)=>
 })
 ```
 
-### 2.查询数据
+### 10.2 查询数据
 
 ```js
 const strSql = 'select * from test' // test是我的数据库表
@@ -1015,7 +1015,7 @@ db.query(strSql, (err, results) => {
 })
 ```
 
-### 3.插入数据
+### 10.3 插入数据
 
 ```js
 const strSql = 'insert into test(name) value (?) ' // test是我的数据库表 ?代表占位符
@@ -1026,7 +1026,7 @@ db.query(strSql, [user.name], (err, results) => {
 })
 ```
 
-### 4.简单封装
+### 10.4 简单封装
 
 我以自己的思路封装一下
 
@@ -1086,22 +1086,23 @@ app.listen(80, () => {
 })
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/dcc1d220f423495f9ccb5cb702168ae2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBARERESExf,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/bf1af12c21214e2da511dae6a410000a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBARERESExf,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
+![node](../img/node-notes8.png)
 
-## 十一、前后端身份认证
+![node](../img/node-notes9.png)
 
-### 1. Session
+## 11. 前后端身份认证
+
+### 11.1 Session
 
 中间件，配合 cookie 使用，默认不支持跨域
 
-#### （1）安装
+（1）安装
 
 ```bash
 npm i express-session
 ```
 
-#### （2）使用
+（2）使用
 
 ```js
 var session = require('express-session')
@@ -1115,7 +1116,7 @@ app.use(
 )
 ```
 
-#### （3）存储 session 数据
+（3）存储 session 数据
 
 ```js
 app.post('/api/login', (req, res) => {
@@ -1131,7 +1132,7 @@ app.post('/api/login', (req, res) => {
 })
 ```
 
-#### （4）读取 session 数据
+（4）读取 session 数据
 
 ```js
 //获取用户姓名的接口
@@ -1144,7 +1145,7 @@ app.get('/api/username',(req,res)=>{
 })
 ```
 
-#### （5）清空 session 数据
+（5）清空 session 数据
 
 ```js
 //退出登录的接口
@@ -1158,7 +1159,7 @@ app.post('/api/logout',(req,res)=>
 })
 ```
 
-## 2. JWT
+### 11.2 JWT
 
 JSON Web Token ，支持跨域认证 , 通常由三部分组成 ：header （头部）、Playload （有效荷载，加密信息）、Signature（签名）。由 . 分割
 
@@ -1166,7 +1167,7 @@ JSON Web Token ，支持跨域认证 , 通常由三部分组成 ：header （头
 Header.Playload.Signature
 ```
 
-#### （1）安装
+（1）安装
 
 ```bash
 # jsonwebtoken 用于生成 JWT 字符串
@@ -1174,7 +1175,7 @@ Header.Playload.Signature
 npm i jsonwebtoken express-jwt
 ```
 
-#### （2）导入
+（2）导入
 
 ```js
 //1,导入用于生成 JWT 字符串的包
@@ -1183,7 +1184,7 @@ const createJWT = require('jsonwebtoken')
 var { expressjwt: jwt } = require('express-jwt')
 ```
 
-#### （3）定义 Secret 密钥
+（3）定义 Secret 密钥
 
 为了保证 JWT 字符串的安全性，防止 JWT 字符串在网络传输过程中被别人破解，我们需要专门定义一个用于加密和解密的 secret 密钥：
 
@@ -1195,7 +1196,7 @@ var { expressjwt: jwt } = require('express-jwt')
 const secretKey = 'dddhl ^_^'
 ```
 
-#### （4）登录后生成 JWT 字符串
+（4）登录后生成 JWT 字符串
 
 ```js
 // 登录接口
@@ -1212,7 +1213,7 @@ app.post('/api/login', function (req, res) {
 })
 ```
 
-#### （5）将 JWT 解析还原成 JSON 对象
+（5）将 JWT 解析还原成 JSON 对象
 
 请求时，请在 Authorization 字段将 token 发送到服务器
 
@@ -1227,7 +1228,7 @@ app.use(
 )
 ```
 
-#### （6）获取解析还原的 JSON 对象
+（6）获取解析还原的 JSON 对象
 
 解析完成后，req.auth = 解析出来的对象
 
@@ -1242,7 +1243,7 @@ app.get('/admin/getinfo',(req,res)=>{
 })
 ```
 
-#### （7）处理 token 过期
+（7）处理 token 过期
 
 ```js
 app.use(function (err, req, res, next) {
@@ -1253,7 +1254,7 @@ app.use(function (err, req, res, next) {
 })
 ```
 
-#### （8）完整演示
+（8）完整演示
 
 请求登录时发送 username ,不用 token。
 
@@ -1320,7 +1321,8 @@ app.listen(80, () => {
 
 登录后生成 token：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/6197e69e271144d0b07220311ca13653.png#pic_center)
+![node](../img/node-notes10.png)
 
 获取解析后的 token 数据：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/a7795ac96d3a4c3988e128be997591cc.png#pic_center)
+
+![node](../img/node-notes11.png)

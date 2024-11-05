@@ -1,7 +1,22 @@
 import { defineConfig } from 'vitepress'
 import { pagefindPlugin } from 'vitepress-plugin-pagefind'
+import { generateSidebar } from 'vitepress-sidebar'
 import path from 'path'
 const fileAndStyles: Record<string, string> = {}
+
+const autoSidebar = () => {
+  let result: any = generateSidebar({
+    documentRootPath: '/docs',
+    collapseDepth: 2,
+    useTitleFromFrontmatter: true,
+    sortMenusByFrontmatterDate: true,
+    sortMenusOrderByDescending: true,
+  })
+  result.forEach((year) => {
+    year.items.reverse()
+  })
+  return result
+}
 
 export default defineConfig({
   title: '山不让尘，川不辞盈',
@@ -46,16 +61,18 @@ export default defineConfig({
     }
   },
   themeConfig: {
+    outline: [2, 6],
+    outlineTitle: '文章目录',
     nav: [{ text: '主页', link: '/' }],
-    sidebar: [
-      {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/2024/api-examples' },
-        ],
-      },
-    ],
+    sidebar: autoSidebar(),
     socialLinks: [{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }],
+  },
+  markdown: {
+    headers: {
+      level: [1, 2, 3],
+    },
+    toc: {
+      level: [1, 2, 3],
+    },
   },
 })

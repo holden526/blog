@@ -1,32 +1,28 @@
 ---
 title: 十个常用工具库
-date: 2022-3-19
-sidebar: auto
-categories:
-  - npm库
+date: 2022-03-19
 tags:
-  - 插件
   - 工具
 ---
+
+# 十个常用工具库
 
 ## 前言
 
 平时做项目经常用到的小工具库，可提高开发效率，分享一下
 
-<hr>
-
-## 一、Moment.js
+## 1. Moment.js
 
 JavaScript 日期处理类库
 
-### 1、安装
+### 1.1 安装
 
 ```bash
 npm install moment --save   # npm
 yarn add moment             # Yarn
 ```
 
-### 2、使用
+### 1.2 使用
 
 更多使用方法请看官网：[官网地址](http://momentjs.cn/)
 
@@ -40,19 +36,17 @@ moment().format('YYYY [escaped] YYYY') // 2022 escaped 2022
 moment().format() // 2022-03-19T15:52:08+08:00
 ```
 
-<hr>
-
-## 二、dayjs
+## 2. dayjs
 
 一个极简的处理时间和日期的 JavaScript 库，和 Moment.js 的 API 设计保持一样, 但体积仅有 2KB。
 
-### 1、安装
+### 2.1 安装
 
 ```bash
 npm install dayjs
 ```
 
-### 2、使用
+### 2.2 使用
 
 更多使用方法请看官网：[官网地址](https://dayjs.fenxianglu.cn/)
 
@@ -66,19 +60,17 @@ dayjs().format('YYYY-MM-DD HH:mm:ss') // 2020-09-08 13:47:12
 dayjs(1318781876406).format('YYYY-MM-DD HH:mm:ss') // 2011-10-17 00:17:56
 ```
 
-<hr>
-
-## 三、nanoid
+## 3. nanoid
 
 生成 uuid
 
-### 1、安装
+### 3.1 安装
 
 ```bash
 npm i nanoid
 ```
 
-### 2、使用
+### 3.2 使用
 
 ```javascript
 // 导入
@@ -89,20 +81,18 @@ let id1 = nanoid() //=> "V1StGXR8_Z5jdHi6B-myT"
 let id2 = nanoid(5)
 ```
 
-<hr>
-
-## 四、animate.css
+## 4. animate.css
 
 强大的跨平台的预设 css3 动画库，内置了很多典型的 css3 动画，兼容性好使用方便
 
-### 1、安装
+### 4.1 安装
 
 ```bash
 npm install animate.css --save
 yarn add animate.css
 ```
 
-### 2、使用
+### 4.2 使用
 
 更多使用方法请看官网：[官网地址](https://animate.style/)
 
@@ -124,19 +114,17 @@ import 'animate.css'
 </transition-group>
 ```
 
-<hr>
-
-## 五、animejs
+## 5 animejs
 
 一个轻量的 JavaScript 动画库， 拥有简单而强大的 API。 可对 CSS 属性、 SVG、 DOM 和 JavaScript 对象进行动画。
 
-### 1、安装
+### 5.1 安装
 
 ```bash
 npm install animejs
 ```
 
-### 2、使用
+### 5.2 使用
 
 更多使用方法请看官网：[官网地址](https://www.animejs.cn/)
 
@@ -155,19 +143,17 @@ anime({
 })
 ```
 
-<hr>
-
-## 六、nprogress
+## 6. nprogress
 
 请求进度条。这是一个类似 youtube、Medium 等网站上的小进度条插件。纳米级的进度条，涓涓细流动画告诉你的用户，一些事情正在发生！
 
-### 1、安装
+### 6.1 安装
 
 ```bash
 npm install --save nprogress
 ```
 
-### 2、使用
+### 6.2 使用
 
 更多使用方法请看官网：[官网地址](https://madewith.cn/23)
 
@@ -184,19 +170,17 @@ nprogress.done()
 }
 ```
 
-<hr>
-
-## 七、qs
+## 7. qs
 
 [qs](https://github.com/ljharb/qs)是一个流行的查询参数序列化和解析库。可以将一个普通的 object 序列化成一个查询字符串，或者反过来将一个查询字符串解析成一个 object，而且支持复杂的嵌套。
 
-### 1、安装
+### 7.1 安装
 
 ```bash
 npm install qs
 ```
 
-### 2、使用
+### 7.2 使用
 
 [npm 库地址](https://www.npmjs.com/package/qs)
 
@@ -209,19 +193,17 @@ qs.parse('user=tom&age=22') // => { user: "tom", age: "22" }
 qs.stringify({ user: 'tom', age: '22' }) // => user=tom&age=22
 ```
 
-<hr>
-
-## 八、flv.js
+## 8. flv.js
 
 哔哩哔哩开源的播放器
 
-### 1、安装
+### 8.1 安装
 
 ```bash
 npm install --save flv.js
 ```
 
-### 2、使用
+### 8.2 使用
 
 [github 文档地址](https://github.com/bilibili/flv.js/blob/master/docs/api.md)
 
@@ -245,19 +227,17 @@ if (flvjs.isSupported()) {
 }
 ```
 
-<hr>
-
-## 九、uniq
+## 9. uniq
 
 数组去重
 
-### 1、安装
+### 9.1 安装
 
 ```ba
 npm install uniq
 ```
 
-### 2、使用
+### 9.2 使用
 
 [npm 库地址](https://www.npmjs.com/package/uniq)
 
@@ -268,19 +248,17 @@ require('uniq')(arr)
 console.log(arr) // 1,2,3,5
 ```
 
-<hr>
-
-## 十、element-resize-detector
+## 10. element-resize-detector
 
 监听元素大小变化，一般用于解决折叠侧边栏时 Echarts 无法 resize
 
-### 1、安装
+### 10.1 安装
 
 ```bash
 npm install element-resize-detector --save
 ```
 
-### 2、使用
+### 10.2 使用
 
 [npm 地址](https://www.npmjs.com/package/element-resize-detector)
 

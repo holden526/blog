@@ -1,14 +1,13 @@
 ---
-title: 模块化
-date: 2021-9-1
-sidebar: auto
-categories:
-  - es6
+title: ES6模块化
+date: 2021-09-01
 tags:
-  - '模块化'
+  - JavaScrpit
 ---
 
-## 1.浏览器端模块化规范
+# ES6模块化
+
+## 1. 浏览器端模块化规范
 
 AMD
 
@@ -22,7 +21,7 @@ CMD
 Sea.js(http://seajs.github.io/seajs/docs/)
 ```
 
-## 2.服务器端模块化规范
+## 2. 服务器端模块化规范
 
 node 中的 CommonJs
 
@@ -32,7 +31,7 @@ node 中的 CommonJs
 
 ③ 模块成员导入：require( ' 模块标识符 ' )
 
-## 3.大一统的模块化规范 - ES6 模块化
+## 3. 大一统的模块化规范 - ES6 模块化
 
 ① 每个 js 文件都是应该独立的模块
 
@@ -42,12 +41,14 @@ node 中的 CommonJs
 
 ### 3.1 Node.js 中通过 babel 体验 ES6 模块化
 
-①
-
 ```javascript
 npm install --save-dev @babel/core
 ```
 
+① ......
+
 ② 导入模块成员使用 import 关键字
 
 ③ 暴露模块成员使用 export 关键字
+
+内容缺失......

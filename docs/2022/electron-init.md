@@ -1,12 +1,11 @@
 ---
-title: 快速搭建Vue3+element-Plus+electron桌面应用
-date: 2022-4-28
-sidebar: auto
-categories:
-  - electron
+title: 快速搭建Electron桌面应用
+date: 2022-04-28
 tags:
-  - electron
+  - Electron
 ---
+
+# 快速搭建Electron桌面应用
 
 ## 前言
 
@@ -19,26 +18,26 @@ tags:
 使用了这些： Vue3 + Vue-Cli + electron + sass + element-Plus + vuex + vue-router
 
 入选 csdn 热榜第八嘿嘿<br>
-![e](../img/electron-init.png)
+![electron](../img/electron-init1.png)
 
-## 一、创建 Vue3 项目
+## 1. 创建 Vue3 项目
 
 项目路径不能有中文！
 
-### 1.使用脚手架安装
+### 1.1 使用脚手架安装
 
 ```bash
 # demo 为项目名字，可以自己定，不能有大写字母和中文
 vue create demo
 ```
 
-### 2.选择 Vue3
+### 1.2 选择 Vue3
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/506e96ea21b64b62a1c934da07d2adad.png#pic_center)
+![electron](../img/electron-init2.png)
 
-### 3.创建完毕后测试一下
+### 1.3 创建完毕后测试一下
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/35cc1c1cb1904d8fa70607a7ab3d77df.png#pic_center)
+![electron](../img/electron-init3.png)
 
 进入项目目录
 
@@ -48,10 +47,10 @@ npm run serve
 
 看到这个界面说明创建成功咯~
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/da809be82516401c998281d3d61a57e3.png#pic_center)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/35247685d9fc432fb1cc48d69efeabb9.png#pic_center)
+![electron](../img/electron-init4.png)
+![electron](../img/electron-init5.png)
 
-### 4.安装 router
+### 1.4 安装 router
 
 #### （1）安装
 
@@ -91,17 +90,17 @@ createApp(App).use(router).mount('#app')
 
 在 App.vue 中加入 `<router-view /> ` 就可以测试是否安装成功啦 （把原本组件的代码删掉）
 
-### 5.安装 Vuex（按需安装）
+## 2. 安装 Vuex（按需安装）
 
 PS : Vuex 和 sass 都可以不安装，不影响 electron 使用。
 
-#### （1）安装
+### 2.1 安装
 
 ```bash
 npm i vuex -s
 ```
 
-#### （2）创建 store 文件
+### 2.2 创建 store 文件
 
 在项目的 `src `目录下创建 `store/index.js` 。内容如下：
 
@@ -118,14 +117,14 @@ export default createStore({
 })
 ```
 
-#### （3）main.js 注册
+### 2.3 main.js 注册
 
 ```js
 import store from './store'
 createApp(App).use(store).use(router).mount('#app')
 ```
 
-#### （4）测试
+### 2.4 测试
 
 `HelloWorld.vue` 。控制台有输出就可以了噢
 
@@ -140,27 +139,27 @@ export default {
 }
 ```
 
-### 6.安装 Sass（按需安装）
+## 3. 安装 Sass（按需安装）
 
-#### （1）安装
+### 3.1 安装
 
 ```bash
 npm i node-sass sass-loader style-loader -d
 ```
 
-#### （2）测试
+### 3.2 测试
 
 组件中 `<style lang="scss" scoped> ` 不报错即可
 
-### 7.element-Plus（按需安装）
+## 4. element-Plus（按需安装）
 
-#### （1）安装
+### 4.1 安装
 
 ```bash
 npm install element-plus --save
 ```
 
-#### （2）按需加载
+### 4.2 按需加载
 
 ```bash
 npm install -D unplugin-vue-components unplugin-auto-import
@@ -189,13 +188,13 @@ module.exports = defineConfig({
 })
 ```
 
-### （3）测试
+### 4.3 测试
 
 随便去拿一个组件测试即可，比如按钮。
 
-## 二、安装 Electron
+## 5. 安装 Electron
 
-### 1.安装
+### 5.1 安装
 
 在项目的终端输入以下命令
 
@@ -204,23 +203,23 @@ vue add electron-builder
 ```
 
 这里我选择的是目前最新版 13.0.0
-![在这里插入图片描述](https://img-blog.csdnimg.cn/de6f3431f66347ecb135e3f5ae4897af.png#pic_center)
+![electron](../img/electron-init6.png)
 
-### 2.启动项目测试
+### 5.2 启动项目测试
 
 ```ba
 npm run electron:serve
 ```
 
 看到这里就已经成功咯~
-![在这里插入图片描述](https://img-blog.csdnimg.cn/55a6bbf9412b421d9dc143e5dd83ff43.png#pic_center)
+![electron](../img/electron-init7.png)
 
-### 3.注释掉 DevTools 检测
+### 5.3 注释掉 DevTools 检测
 
 如果应用没安装 devTools 会自动安装，但是又慢又卡，直接在 `background.js` 注释掉
-![在这里插入图片描述](https://img-blog.csdnimg.cn/ed873f1a6437492eb9e9ded2b9d8c5a1.png#pic_center)
+![electron](../img/electron-init8.png)
 
-### 4.配置热加载
+### 5.4 配置热加载
 
 每次写代码都要重启太麻烦，建议配置热加载
 
@@ -240,7 +239,7 @@ try {
 } catch (_) {}
 ```
 
-## 三、打包
+## 6. 打包
 
 项目目录不能有中文，而且打包速度是真滴慢，用科学上网好点，也可以提前下载对应的文件到本地。
 
@@ -255,9 +254,9 @@ npm run electron:build
 绿色版：`dist_electron/win-unpacked`
 
 打开康康：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/ea3da992d58d4f5094078703f1515835.png#pic_center)
+![electron](../img/electron-init9.png)
 
-## 四、结尾
+## 7. 结尾
 
 到这里就可以像开发网页一样开发软件咯~ 完结撒花~
 

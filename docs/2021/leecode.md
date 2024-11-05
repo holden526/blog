@@ -1,12 +1,11 @@
 ---
-title: 前端 LeeCode 笔记
+title: LeeCode 笔记
 date: 2021-12-22
-sidebar: auto
-categories:
-  - LeeCode
 tags:
   - LeeCode
 ---
+
+# LeeCode 笔记
 
 记录我 LeeCode 刷题使用的好用知识点，查漏补缺
 
@@ -68,7 +67,7 @@ var multiply = function (num1, num2) {
 }
 ```
 
-### 3.LeeCode 第 168 题：Excel 表列名称
+### 3. LeeCode 第 168 题：Excel 表列名称
 
 将数字转换为 ASCII 码
 
@@ -79,7 +78,7 @@ var num = 65
 String.fromCharCode(num) // A
 ```
 
-### 4.LeeCode 第 171 题：Excel 表列名称
+### 4. LeeCode 第 171 题：Excel 表列名称
 
 将数字转换为 ASCII 码
 
@@ -89,3 +88,5 @@ String.fromCharCode(num) // A
 var a = 'A'
 a.charCodeAt() // 64
 ```
+
+## 未完待续

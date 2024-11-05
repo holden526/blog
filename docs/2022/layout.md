@@ -1,15 +1,11 @@
 ---
 title: 前端常用的响应式布局方法
-date: 2022-3-19
-sidebar: auto
-categories:
-  - 响应式
-  - 布局
+date: 2022-03-19
 tags:
-  - flex
-  - 媒体查询
-  - rem
+  - 响应式
 ---
+
+# 前端常用的响应式布局方法
 
 ## 前言
 
@@ -17,9 +13,7 @@ tags:
 
 最近写的项目都有考虑响应式，接下来我来分享一下我用过的响应式处理方案，有错请多多指教！
 
-<hr>
-
-## 1.媒体查询
+## 1. 媒体查询
 
 概念：为不同尺寸的屏幕设置不同的 CSS 样式
 
@@ -33,7 +27,7 @@ tags:
 | device-width  |    设备屏幕的宽度    |
 | device-height |    设备屏幕的高度    |
 
-### （1）用法一
+### 1.1 用法一
 
 ```css
 /* 屏幕小于 300 px */
@@ -58,7 +52,7 @@ tags:
 }
 ```
 
-### （2）用法二
+### 1.2 用法二
 
 条件执行内联样式
 
@@ -76,7 +70,7 @@ tags:
 </style>
 ```
 
-### （3）用法三
+### 1.3 用法三
 
 条件引入外部样式表
 
@@ -88,13 +82,13 @@ tags:
 
 <hr>
 
-## 2.flex 弹性布局
+## 2. flex 弹性布局
 
 Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。任何一个容器都可以指定为 Flex 布局。
 
 注意：Webkit 内核的浏览器，必须加上-webkit 前缀。（Chrome、Safari、etc）
 
-### （1）交叉轴与主轴
+### 1.1 交叉轴与主轴
 
 采用 Flex 布局的元素，称为 Flex 容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称”项目”。
 
@@ -104,9 +98,9 @@ Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模�
 
 单个项目占据的主轴空间叫做 main size，占据的交叉轴空间叫做 cross size。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/c266d428354e4f35a702b075eec98c8f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBARERESExf,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
+![layout](../img/layout1.png)
 
-### （2）容器属性
+### 1.2 容器属性
 
 详细讲解可以看这里：[菜鸟教程 Flex](https://www.runoob.com/w3cnote/flex-grammar.html)
 
@@ -119,7 +113,7 @@ Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模�
 |   align-items   |                          定义项目在交叉轴上如何对齐                          |           flex-start / flex-end / center / baseline / stretch           |
 |  align-content  | 定义多根轴线的对齐方式（相对于把整个容器看成整体）。只有一根轴线时，不起作用 | flex-start / flex-end / center / space-between / space-around / stretch |
 
-### （3）项目属性
+### 1.3 项目属性
 
 |   属性名    |                                        作用                                        |                           可选值                           |
 | :---------: | :--------------------------------------------------------------------------------: | :--------------------------------------------------------: |
@@ -142,13 +136,13 @@ flex 的特殊写法
 
 <hr>
 
-## 3.rem 布局
+## 3. rem 布局
 
 概念：指相对于根元素的字体大小的单位
 
 区别：em（指相对于父级的字体大小的单位）
 
-### （1）用法
+### 3.1 用法
 
 ```css
 html {
@@ -159,7 +153,7 @@ div {
 }
 ```
 
-### (2) 动态适配
+### 3.2 动态适配
 
 可以加监听动态修改
 
@@ -168,17 +162,16 @@ div {
 // 假设设计稿是iphone6 16px
 let baseDevice = 375 // iphone6 设备宽度
 let baseFontSize = 16 // 设计稿 16px
-let htmlWidth =
-  document.documentElement.clientWidth || document.body.clientWidth
+let htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
 let htmlDom = document.documentElement
 htmlDom.style.fontSize = (htmlWidth / baseDevice) * 16 + 'px'
 ```
 
 <hr>
 
-## 4.自适应布局
+## 4. 自适应布局
 
-### （1）不同的设备使用不同的页面
+### 4.1 不同的设备使用不同的页面
 
 ```
 (function(){
@@ -192,11 +185,11 @@ htmlDom.style.fontSize = (htmlWidth / baseDevice) * 16 + 'px'
 })()
 ```
 
-### （2）局部伸缩
+### 4.2 局部伸缩
 
 例子：两端宽度不变，中间宽度随浏览器宽度改变
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/b6687d36ad3d4fd4b63a555e9eb319de.gif#pic_center)
+![layout](../img/layout2.gif)
 
 ```html
 <style>
@@ -228,7 +221,7 @@ htmlDom.style.fontSize = (htmlWidth / baseDevice) * 16 + 'px'
 
 <hr>
 
-## 5.百分比布局
+## 5. 百分比布局
 
 使用百分比作为单位进行布局，可以很好的自适应全部设备，百分比参考的是父级元素的宽度，无父元素则相对于浏览器窗口的宽度。（缺点是计算困难）
 
@@ -245,7 +238,7 @@ htmlDom.style.fontSize = (htmlWidth / baseDevice) * 16 + 'px'
 
 <hr>
 
-## 6.grid 布局
+## 6. grid 布局
 
 与 flex 类似，但是功能更强大，暂无实例，可以取康康好的文章
 

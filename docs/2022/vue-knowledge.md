@@ -1,10 +1,8 @@
 ---
 title: Vue 面试知识点
-date: 2022-2-11
-sidebar: auto
-categories:
-  - Vue
+date: 2022-02-11
 tags:
+  - Vue
   - 面试题
 ---
 

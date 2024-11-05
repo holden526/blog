@@ -1,14 +1,13 @@
 ---
 title: JavaScript 面试知识点
-date: 2022-2-14
-sidebar: auto
-categories:
-  - JavaScript
+date: 2022-02-14
 tags:
-  - 面试
+  - JavaScript
 ---
 
-## 1、JavaScript 有几种数据类型？
+# JavaScript 面试知识点
+
+## 1. JavaScript 有几种数据类型？
 
 - number：数字类型
 - string：字符串类型
@@ -19,7 +18,7 @@ tags:
 - symbol：symbol 类型
 - bigint：大数字类型
 
-## 2、JavaScript 最大安全数字与最小安全数字？
+## 2. JavaScript 最大安全数字与最小安全数字？
 
 ```
 console.log(Number.MAX_SAFE_INTEGER)
@@ -28,12 +27,12 @@ console.log(Number.MIN_SAFE_INTEGER)
 // -9007199254740991
 ```
 
-## 3、深拷贝与浅拷贝的区别？
+## 3. 深拷贝与浅拷贝的区别？
 
 - 浅拷贝：只拷贝第一层，深层的依然是引用，改变深层会影响原对象
 - 深拷贝：每一层都拷贝了，改变数据不会影响原对象
 
-## 4、闭包是什么？
+## 4. 闭包是什么？
 
 闭包是一个函数，是一个能让外部访问到函数内部的函数
 
@@ -56,13 +55,13 @@ console.log(b()) // 1
 console.log(b()) // 2
 ```
 
-## 5、原型链是什么呀？
+## 5. 原型链是什么呀？
 
 原型链是一条引用的链，实例的隐式原型指向构造函数的显式原型，可以使用`A instanceof B`来判断 B 是否在 A 的原型链上。
 
 ![a](../img/js-knowledeg.png)
 
-## 6、什么是变量提升？函数提升？
+## 6. 什么是变量提升？函数提升？
 
 - 变量提升
 
@@ -97,12 +96,12 @@ function fun() {}
 console.log(fun) // 'Sunshie_Lin'
 ```
 
-## 7、isNaN 与 Number.isNaN 的区别？
+## 7. isNaN 与 Number.isNaN 的区别？
 
 - `isNaN`：除了判断 NaN 为 true 外，还会把不能转成数字判断为 true，例如'dasd'
 - `Number.isNaN`：只会判断 NaN 为 true
 
-## 8、解决遍历对象时，把原型上的属性遍历出来了咋办？
+## 8. 解决遍历对象时，把原型上的属性遍历出来了咋办？
 
 使用`hasOwnProperty`判断
 
@@ -119,7 +118,7 @@ for (const key in person) {
 } // name
 ```
 
-## 9、valueOf 与 toString？
+## 9. valueOf 与 toString？
 
 - `valueOf`比较偏向于计算，`toString`偏向于显示
 - 对象转换时，优先调用`toString`
@@ -127,13 +126,13 @@ for (const key in person) {
 - 正常情况下，优先调用`toString`
 - 运算操作符情况下优先调用`valueOf`
 
-## 10、JavaScript 变量在内存中具体存储形式？
+## 10. JavaScript 变量在内存中具体存储形式？
 
 - `基本数据类型`：存在栈内存里
 - `引用数据类型`：指针存栈内存，指向堆内存中一块地址，内容存在堆内存中
 - 也有说法说其实 JavaScript 所有数据都存堆内存中，我也比较赞同这种说法
 
-## 11、讲一讲 JavaScript 的装箱和拆箱？
+## 11. 讲一讲 JavaScript 的装箱和拆箱？
 
 **装箱：把基本数据类型转化为对应的引用数据类型的操作**
 
@@ -174,7 +173,7 @@ console.log( typeof objNum.toString() ); // string
 console.log( typeof objStr.toString() ); // string
 ```
 
-## 12、null 和 undefined 的异同点有哪些？
+## 12. null 和 undefined 的异同点有哪些？
 
 **相同点**
 
@@ -188,57 +187,57 @@ console.log( typeof objStr.toString() ); // string
 - 2、null 转数字为 0，undefined 转数字为 NaN
 - 3、null === undefined 为 false
 
-## 13、如何判断数据类型？
+## 13. 如何判断数据类型？
 
 - `typeof`：能判断 string、number、undefined、boolean、function、object（null 是 object）
 - `Object.prototype.toString.call()`：能判断大部分数据类型
 - `instanceOf`
 
-## 14、为什么 typeof null 是 object？
+## 14. 为什么 typeof null 是 object？
 
 不同数据类型底层都是用二进制来表示的，二进制前三位为`000`则会被判断为 object，而 null 二进制全是 0，所以被判断成 object
 
-## 15、== 与 === 的区别？
+## 15. == 与 === 的区别？
 
 - `==`：比较过程会进行隐式转换
 - `===`：值相同，类型相同才会为 true
 
-## 16、JavaScript 的隐式转换规则？
+## 16. JavaScript 的隐式转换规则？
 
 - `转string类型`：+（字符串连接符）
 - `转number类型`：++/--(自增自减运算符) + - \* / %(算术运算符) > < >= <= == != === !== (关系运算符)
 - `转boolean`：!（逻辑非运算符)
 
-## 17、双等号左右两边的转换规则？
+## 17. 双等号左右两边的转换规则？
 
 - 1、null == undefined 为 true
 - 2、如果有一个操作数是布尔值，则在比较相等性之前先将其转换为数值——false 转换为 0，而 true 转换为 1；
 - 3、如果一个操作数是字符串，另一个操作数是数值，在比较相等性之前先将字符串转换为数值
 - 4、如果一个操作数是对象，另一个操作数不是，则调用对象的 toString()方法，用得到的基本类型值按照前面的规则进行比较
 
-## 18、undefined >= undefined 为什么是 false ？
+## 18. undefined >= undefined 为什么是 false ？
 
 隐式转换，变成`NaN >= NaN`，`NaN`不等于自身也不大于自身
 
-## 19、null >= null 为什么是 true？
+## 19. null >= null 为什么是 true？
 
 隐式转换，变成`0 >= 0`，为 true
 
-## 20、[] == ![] 为什么是 true ？
+## 20. [] == ![] 为什么是 true ？
 
 - 第一步：转为`[] == false`
 - 第二步：转为`[] == 0`
 - 第三步：转为`'' == 0`
 - 第四步：转为`0 == 0`
 
-## 21、0.1 + 0.2 === 0.3，对吗？
+## 21. 0.1 + 0.2 === 0.3，对吗？
 
 不对，JavaScript 存在`精度丢失`问题，由于有些小数无法用二进制表示，所以只能取近似值，解决方法有：
 
 - 先转大数，再变小数
 - 使用`toFixed`
 
-## 22、什么是匿名函数？
+## 22. 什么是匿名函数？
 
 匿名函数，就是没有名字的函数，比如：
 
@@ -248,7 +247,7 @@ console.log( typeof objStr.toString() ); // string
 })(2, 3)
 ```
 
-## 23、绑定点击事件有几种方式？
+## 23. 绑定点击事件有几种方式？
 
 三种
 
@@ -256,14 +255,14 @@ console.log( typeof objStr.toString() ); // string
 - `<xxx onclick=""></xxx>`
 - `xxx.addEventListener('click', function(){}, false)`
 
-## 24、addEventListener 的第三个参数是干嘛的？
+## 24. addEventListener 的第三个参数是干嘛的？
 
 决定事件是`捕获阶段`执行还是`冒泡阶段`执行
 
 - `true`：捕获
 - `false`：默认，冒泡
 
-## 25、函数声明和函数表达式的区别？
+## 25. 函数声明和函数表达式的区别？
 
 - `函数声明`：享受函数提升
 - `函数表达式`：归类于变量声明，享受变量提升
@@ -278,24 +277,24 @@ function fun () {}
 console.log(fun) // fun (name) {}
 ```
 
-## 26、JavaScript 的事件流模型有哪些？
+## 26. JavaScript 的事件流模型有哪些？
 
 - `事件冒泡`：由最具体的元素接收，并往上传播
 - `事件捕获`：由最不具体的元素接收，并往下传播
 - `DOM事件流`：事件捕获 -> 目标阶段 -> 事件冒泡
 
-## 27、Ajax、Axios、Fetch 有啥区别？
+## 27. Ajax、Axios、Fetch 有啥区别？
 
 - `Ajax`：是对 XMLHttpRequest(XHR)的封装
 - `Axios`：是基于 Promise 对 XHR 对象的封装
 - `Fetch`：是 window 的一个方法，基于 Promise，与 XHR 无关，不兼容 IE
 
-## 28、load、$(document).ready、DOMContentLoaded 的区别？
+## 28. load、$(document).ready、DOMContentLoaded 的区别？
 
 - `$(document).ready、DOMContentLoaded`：DOM 树构建完毕，但还没有请求静态资源
 - `load`：静态资源请求完毕
 
-## 29、如何阻止事件冒泡？
+## 29. 如何阻止事件冒泡？
 
 ```
 function stopBubble(e) {
@@ -307,7 +306,7 @@ function stopBubble(e) {
 }
 ```
 
-## 30、如何阻止事件默认行为？
+## 30. 如何阻止事件默认行为？
 
 ```
 function stopDefault(e) {
@@ -319,14 +318,14 @@ function stopDefault(e) {
 }
 ```
 
-## 31、什么是事件委托？
+## 31. 什么是事件委托？
 
 当子元素都需要绑定相同事件时，可以将事件绑在父元素上，优点有：
 
 - 绑定在父元素，则只需绑定一次，节省性能
 - 后续新增的子元素也可以触发父元素绑定的事件
 
-## 32、如何实现数组去重？
+## 32. 如何实现数组去重？
 
 ```
 // 使用 Map 去重
@@ -348,7 +347,7 @@ function quchong (arr) {
 }
 ```
 
-## 33、Set 与 Array 的区别是什么？
+## 33. Set 与 Array 的区别是什么？
 
 - Set 使用 has 判断有无元素，数组使用索引
 - Set 添加元素使用方法 add，数组用 push、unshift
@@ -360,7 +359,7 @@ function quchong (arr) {
 - Set 可以使用 keys、value 方法，转数组
 - Set 自带 forEach 方法进行遍历
 
-## 34、Map 与 Object 的区别是什么？
+## 34. Map 与 Object 的区别是什么？
 
 - Map 使用 set 设置属性，对象使用 obj[key] = value
 - Map 使用 get 获取属性值，对象使用 obj[key]
@@ -370,14 +369,14 @@ function quchong (arr) {
 - Map 和对象都可以使用 entries 方法转数组键值对
 - Map 自带 forEach 方法进行遍历
 
-## 35、NaN 是什么？有什么特点？
+## 35. NaN 是什么？有什么特点？
 
 - typeof NaN 为 number
 - NaN 不等于自身，不大于自身，不小于自身
 - NaN 可以使用`Number.isNaN`判断
 - NaN 是假值，转布尔值为 false
 
-## 36、处理异步的方法有哪些？
+## 36. 处理异步的方法有哪些？
 
 - 回调函数
 - Promise
@@ -385,7 +384,7 @@ function quchong (arr) {
 - 发布订阅
 - async/await
 
-## 37、JavaScript 继承方式有几种？
+## 37. JavaScript 继承方式有几种？
 
 前置工作
 
@@ -405,7 +404,7 @@ Animal.prototype.eat = function(food) {
 };
 ```
 
-### 1、原型链继承
+### 1. 原型链继承
 
 核心：将父类的实例作为子类的原型
 
@@ -433,7 +432,7 @@ console.log(cat instanceof Cat); //true
 - 3、创建子实例时，无法向父类构造函数传参
 - 4、不支持多继承
 
-### 2、构造继承
+### 2. 构造继承
 
 核心：使用父类的构造器来增强子类实例，等于是复制父类的实例属性给子类（没用到原型）
 
@@ -459,7 +458,7 @@ console.log(cat instanceof Cat); // true
 - 2、是能继承父类的实例属性和方法，不能继承原型属性/方法
 - 3、无法实现函数复用，每个子类都有父类实例函数的副本，影响性能
 
-### 3、实例继承
+### 3. 实例继承
 
 核心：为父类实例添加新特性，作为子类实例返回
 
@@ -483,7 +482,7 @@ console.log(cat instanceof Cat); // false
 - 1、实例是父类的实例，不是子类的实例
 - 2、不支持多继承
 
-### 4、拷贝继承
+### 4. 拷贝继承
 
 核心：就一个一个拷贝
 
@@ -509,7 +508,7 @@ console.log(cat instanceof Cat); // true
 - 1、效率低，内存占用高（因为要拷贝父类的属性）
 - 2、无法获取父类不可枚举方法（不可枚举方法，不能使用 for in 访问到）
 
-### 5、组合继承
+### 5. 组合继承
 
 核心：通过父类构造，继承父类的属性并保留传参的优点，然后通过将父类实例作为子类原型，实现函数复用
 
@@ -538,7 +537,7 @@ console.log(cat instanceof Cat); // true
 - 5、函数可复用 缺点：
 - 1、调用了两次父类构造函数，生成了两份实例（子类实例将子类原型上的那份屏蔽了）
 
-### 6、寄生组合继承
+### 6. 寄生组合继承
 
 核心：通过寄生方式，砍掉父类的实例属性，这样，在调用两次父类的构造时，就不会初始化两次实例方法/属性，避免`继承组合`的缺点
 
@@ -566,7 +565,7 @@ console.log(cat instanceof Cat); //true
 - 1、堪称完美 缺点：
 - 1、实现复杂
 
-## 38、创建一个对象的方式有哪几种？
+## 38. 创建一个对象的方式有哪几种？
 
 - new Object
 
@@ -601,7 +600,7 @@ function Person(name) {
 const person = new Person('Sunshine_Lin')
 ```
 
-## 39、this 指向的四种情况？
+## 39. this 指向的四种情况？
 
 - new 操作符
 
@@ -640,7 +639,7 @@ fn() // 浏览器window，node里global
 
 ```
 const obj = {
-  name: '林三心',
+  name: 'test',
   fn: () => {
     console.log(this.name)
   }
@@ -652,7 +651,7 @@ console.log(obj.fn()) // undefined
 
 ```
 const obj1 = {
-  name: '林三心',
+  name: 'test',
   sayName: function() {
     console.log(this.name)
   }
@@ -669,7 +668,7 @@ const fn = obj1.sayName.bind(obj2)
 fn() // Sunshin_Lin
 ```
 
-## 40、数组的常用方法有哪些？
+## 40. 数组的常用方法有哪些？
 
 | 方法    | 作用                           | 是否影响原数组 |
 | ------- | ------------------------------ | -------------- |
@@ -704,17 +703,17 @@ fn() // Sunshin_Lin
 | Math.pow(num, m)     | 对 num 取 m 次幂  |
 | Math.random() \* num | 取 0-num 的随机数 |
 
-## 42、哪些因素导致内存泄漏？如何解决？
+## 42. 哪些因素导致内存泄漏？如何解决？
 
 后面出一篇文章专门讲
 
-## 43、讲讲 JavaScript 的垃圾回收机制
+## 43. 讲讲 JavaScript 的垃圾回收机制
 
 看这篇文章
 
 [赠你 13 张图，助你 20 分钟打败了「V8 垃圾回收机制」！！！](http://mp.weixin.qq.com/s?__biz=Mzg2NjY2NTcyNg==&mid=2247483683&idx=1&sn=973b0280aa9c6eb1678ea530ee4d2381&chksm=ce4614b2f9319da402278b86e63f44e818e832ecbaafdada344ba979de3df4443a8ed53b0cb1&scene=21#wechat_redirect)
 
-## 44、JS 中有哪些不同类型的弹出框？
+## 44. JS 中有哪些不同类型的弹出框？
 
 在 JS 中有三种类型的弹出框可用，分别是：
 
@@ -731,12 +730,12 @@ console.log(n);
 // YYYY-MM-DDTHH:mm:ss.sssZ
 ```
 
-## 46、如何在 JS 中编码和解码 URL
+## 46. 如何在 JS 中编码和解码 URL
 
 - 编码：encodeURI()
 - 解码：decodeURI()
 
-## 47、什么是 BOM？有哪些 api？
+## 47. 什么是 BOM？有哪些 api？
 
 BOM 就是`browser object model`，`浏览器对象模型`
 
@@ -747,7 +746,7 @@ BOM 就是`browser object model`，`浏览器对象模型`
 | window.innerWidth  | 获取浏览器窗口的宽度 |                                                                                                                                                                                                                                                                                           |
 | window.location    | 操作刷新按钮和地址栏 | location.host：获取域名和端口 location.hostname：获取主机名 location.port：获取端口号 location.pathname：获取 url 的路径 location.search：获取?开始的部分 location.href：获取整个 url location.hash：获取#开始的部分 location.origin：获取当前域名 location.navigator：获取当前浏览器信息 |
 
-## 48、BOM 和 DOM 的关系
+## 48. BOM 和 DOM 的关系
 
 **BOM**全称 Browser Object Model，即浏览器对象模型，主要处理浏览器窗口和框架。
 
@@ -757,7 +756,7 @@ JS 是通过访问**BOM**（Browser Object Model）对象来访问、控制、�
 
 可以说，BOM 包含了 DOM(对象)，浏览器提供出来给予访问的是 BOM 对象，从 BOM 对象再访问到 DOM 对象，从而 js 可以操作浏览器以及浏览器读取到的文档。
 
-## 49、JS 中的 substr()和 substring()函数有什么区别
+## 49. JS 中的 substr()和 substring()函数有什么区别
 
 substr() 函数的形式为 substr(startIndex,length)。它从 startIndex 返回子字符串并返回'length'个字符数。
 
@@ -773,6 +772,6 @@ var s = "hello";
 ( s.substring(1,4) == "ell" ) // true
 ```
 
-## 50、解释一下 "use strict" ?
+## 50. 解释一下 "use strict" ?
 
 “use strict”是 Es5 中引入的 js 指令。使用“use strict”指令的目的是强制执行严格模式下的代码。在严格模式下，咱们不能在不声明变量的情况下使用变量。早期版本的 js 忽略了“use strict”。

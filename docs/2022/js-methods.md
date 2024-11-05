@@ -1,17 +1,15 @@
 ---
 title: JavaScript 手写方法
-date: 2022-2-9
-sidebar: auto
-categories:
-  - JavaScript
+date: 2022-02-09
 tags:
-  - JS
-  - 封装方法
+  - JavaScript
 ---
+
+# JavaScript 手写方法
 
 ## 大厂手写题
 
-### 1、实现原生 AJAX 封装
+### 1. 实现原生 AJAX 封装
 
 ```
 const ajax = {
@@ -39,7 +37,7 @@ const ajax = {
 }
 ```
 
-### 2、实现 new 过程
+### 2. 实现 new 过程
 
 ```
 function myNew(fn, ...args) {
@@ -53,7 +51,7 @@ function myNew(fn, ...args) {
 }
 ```
 
-### 3、打乱一个数组
+### 3. 打乱一个数组
 
 ```
 // 方法1
@@ -73,7 +71,7 @@ const shuffle = (arr) => {
 }
 ```
 
-### 4、防抖函数
+### 4. 防抖函数
 
 ```
 function debounce(fn, delay = 200) {
@@ -92,7 +90,7 @@ function debounce(fn, delay = 200) {
 }
 ```
 
-### 5、节流函数
+### 5. 节流函数
 
 ```
 function throttle(fn, delay = 200) {
@@ -111,7 +109,7 @@ function throttle(fn, delay = 200) {
 }
 ```
 
-### 6、数组去重
+### 6. 数组去重
 
 ```
 // 方法1
@@ -134,7 +132,7 @@ const quchong = (arr) => {
 }
 ```
 
-### 7、setTimeout 实现 setInterval
+### 7. setTimeout 实现 setInterval
 
 ```
 const mySetInterval = (fn, delay) => {
@@ -153,7 +151,7 @@ const mySetInterval = (fn, delay) => {
 }
 ```
 
-### 8、setInterval 实现 setTimeout
+### 8. setInterval 实现 setTimeout
 
 ```
 const mySetTimeout = (fn, delay) => {
@@ -164,7 +162,7 @@ const mySetTimeout = (fn, delay) => {
 }
 ```
 
-### 9、compose 函数
+### 9. compose 函数
 
 ```
 function fn1(x) {
@@ -195,7 +193,7 @@ const a = compose(fn1, fn2, fn3, fn4)
 console.log(a(1)); // 1+2+3+4=11
 ```
 
-### 10、curring 函数
+### 10. curring 函数
 
 ```
 const add = (a, b, c) => a + b + c;
@@ -216,9 +214,9 @@ const a = currying(add, 1);
 console.log(a(2)(3)) // 1 + 2 + 3=6
 ```
 
-### 11、LRU 算法
+### 11. LRU 算法
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/TZL4BdZpLdhZtq6QIIcbqvEExAwZM0OvXV9pxQQX9iaIDegK2J9xAwcZNz4B3kls1yOj5hchzgjegTwhxM3V4lw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](../img/js-methods.png)
 
 ```
 class LRUCache {
@@ -250,7 +248,7 @@ class LRUCache {
 }
 ```
 
-### 12、发布订阅模式
+### 12. 发布订阅模式
 
 ```
 class EventEmitter {
@@ -304,7 +302,7 @@ class EventEmitter {
 }
 ```
 
-### 13、DOM 转 对象
+### 13. DOM 转 对象
 
 ```
 const dom2tree = (node) => {
@@ -316,7 +314,7 @@ const dom2tree = (node) => {
 }
 ```
 
-### 14、对象 转 DOM
+### 14. 对象 转 DOM
 
 ```
 function _render(vnode) {
@@ -341,7 +339,7 @@ function _render(vnode) {
 }
 ```
 
-### 15、判断对象环引用
+### 15. 判断对象环引用
 
 ```
 const cycleDetector = (obj) => {
@@ -368,7 +366,7 @@ const cycleDetector = (obj) => {
 }
 ```
 
-### 16、计算对象的层数
+### 16. 计算对象的层数
 
 ```
 const loopGetLevel = (obj) => {
@@ -394,7 +392,7 @@ const loopGetLevel = (obj) => {
 }
 ```
 
-### 17、对象的扁平化
+### 17. 对象的扁平化
 
 ```
 const flatten = obj => {
@@ -421,7 +419,7 @@ const flatten = obj => {
 }
 ```
 
-### 18、(a == 1 && a == 2 && a == 3)
+### 18. (a == 1 && a == 2 && a == 3)
 
 ```
 // 第一种方法
@@ -448,7 +446,7 @@ Object.defineProperty(window, 'a', {
 console.log(a == 1 && a == 2 && a == 3) // true
 ```
 
-### 19、Promise 并发器
+### 19. Promise 并发器
 
 题目描述：
 
@@ -463,7 +461,7 @@ addTask(400,"4");
 
 整个的完整执行流程：
 
-一开始1、2两个任务开始执行
+一开始1. 2两个任务开始执行
 500ms时，2任务执行完毕，输出2，任务3开始执行
 800ms时，3任务执行完毕，输出3，任务4开始执行
 1000ms时，1任务执行完毕，输出1，此时只剩下4任务在执行
@@ -509,7 +507,7 @@ class Scheduler {
 }
 ```
 
-### 20、lazyMan 函数
+### 20. lazyMan 函数
 
 要求：
 
@@ -592,7 +590,7 @@ const LazyMan = (name) => {
 }
 ```
 
-### 21、add 函数
+### 21. add 函数
 
 要求：实现一个 add 方法 使计算结果能够满足如下预期：
 
@@ -621,7 +619,7 @@ function add(...args1) {
 }
 ```
 
-### 22、深拷贝
+### 22. 深拷贝
 
 ```
 const tagMap = {
@@ -696,7 +694,7 @@ const deepClone = (target, map = new Map()) => {
 }
 ```
 
-### 23、计算 LocalStorage 总容量
+### 23. 计算 LocalStorage 总容量
 
 ```
 let str = '0123456789'
@@ -733,7 +731,7 @@ const computedTotal = () => {
 })()
 ```
 
-### 24、实现 async/await
+### 24. 实现 async/await
 
 ```
 const toAsync = (fn) => {
@@ -769,7 +767,7 @@ const toAsync = (fn) => {
 
 ## 数组方法
 
-### 27、forEach
+### 27. forEach
 
 ```
 Array.prototype.sx_forEach = (cb) => {
@@ -779,7 +777,7 @@ Array.prototype.sx_forEach = (cb) => {
 }
 ```
 
-### 28、map
+### 28. map
 
 ```
 Array.prototype.sx_map = (cb) => {
@@ -791,7 +789,7 @@ Array.prototype.sx_map = (cb) => {
 }
 ```
 
-### 29、filter
+### 29. filter
 
 ```
 Array.prototype.sx_filter = function (cb) {
@@ -803,7 +801,7 @@ Array.prototype.sx_filter = function (cb) {
 }
 ```
 
-### 30、every
+### 30. every
 
 ```
 Array.prototype.sx_every = function (cb) {
@@ -816,7 +814,7 @@ Array.prototype.sx_every = function (cb) {
 }
 ```
 
-### 31、some
+### 31. some
 
 ```
 Array.prototype.sx_some = function (cb) {
@@ -829,7 +827,7 @@ Array.prototype.sx_some = function (cb) {
 }
 ```
 
-### 32、reduce
+### 32. reduce
 
 ```
 Array.prototype.sx_reduce = function (cb, ...args) {
@@ -847,7 +845,7 @@ Array.prototype.sx_reduce = function (cb, ...args) {
 }
 ```
 
-### 33、findIndex
+### 33. findIndex
 
 ```
 Array.prototype.sx_findIndex = function (cb) {
@@ -860,7 +858,7 @@ Array.prototype.sx_findIndex = function (cb) {
 }
 ```
 
-### 34、find
+### 34. find
 
 ```
 Array.prototype.sx_find = function (cb) {
@@ -873,7 +871,7 @@ Array.prototype.sx_find = function (cb) {
 }
 ```
 
-### 35、fill
+### 35. fill
 
 ```
 Array.prototype.sx_fill = function (value, start = 0, end) {
@@ -885,7 +883,7 @@ Array.prototype.sx_fill = function (value, start = 0, end) {
 }
 ```
 
-### 36、include
+### 36. include
 
 ```
 Array.prototype.sx_include = function (value, start = 0) {
@@ -899,7 +897,7 @@ Array.prototype.sx_include = function (value, start = 0) {
 }
 ```
 
-### 37、join
+### 37. join
 
 ```
 Array.prototype.sx_join = function (str = ',') {
@@ -912,7 +910,7 @@ Array.prototype.sx_join = function (str = ',') {
 }
 ```
 
-### 38、flat
+### 38. flat
 
 ```
 Array.prototype.sx_flat = function (num = Infinity) {
@@ -926,7 +924,7 @@ Array.prototype.sx_flat = function (num = Infinity) {
 }
 ```
 
-### 39、splice
+### 39. splice
 
 ```
 Array.prototype.sx_splice = function (start, length, ...values) {
@@ -959,7 +957,7 @@ Array.prototype.sx_splice = function (start, length, ...values) {
 
 ## 对象方法
 
-### 40、entries
+### 40. entries
 
 ```
 Object.prototype.sx_entries = function (obj) {
@@ -971,7 +969,7 @@ Object.prototype.sx_entries = function (obj) {
 }
 ```
 
-### 41、fromEntries
+### 41. fromEntries
 
 ```
 Object.prototype.sx_fromEntries = function (arr) {
@@ -984,7 +982,7 @@ Object.prototype.sx_fromEntries = function (arr) {
 }
 ```
 
-### 42、keys
+### 42. keys
 
 ```
 Object.prototype.sx_keys = function (obj) {
@@ -996,7 +994,7 @@ Object.prototype.sx_keys = function (obj) {
 }
 ```
 
-### 43、values
+### 43. values
 
 ```
 Object.prototype.sx_values = function (obj) {
@@ -1008,7 +1006,7 @@ Object.prototype.sx_values = function (obj) {
 }
 ```
 
-### 44、instanceOf
+### 44. instanceOf
 
 ```
 const instanceOf = function (parent, children) {
@@ -1024,7 +1022,7 @@ const instanceOf = function (parent, children) {
 }
 ```
 
-### 45、is
+### 45. is
 
 ```
 Object.prototype.sx_is = function (x, y) {
@@ -1038,7 +1036,7 @@ Object.prototype.sx_is = function (x, y) {
 }
 ```
 
-### 46、assign
+### 46. assign
 
 ```
 Object.prototype.sx_assign = function (target, ...args) {
@@ -1060,7 +1058,7 @@ Object.prototype.sx_assign = function (target, ...args) {
 
 ## Promise 方法
 
-### 47、all
+### 47. all
 
 ```
 Promise.sx_all = (promises) => {
@@ -1083,7 +1081,7 @@ Promise.sx_all = (promises) => {
 }
 ```
 
-### 48、race
+### 48. race
 
 ```
 Promise.sx_race = (promises) => {
@@ -1100,7 +1098,7 @@ Promise.sx_race = (promises) => {
 }
 ```
 
-### 49、allSettled
+### 49. allSettled
 
 ```
 Promise.sx_allSettled = (promises) => {
@@ -1129,7 +1127,7 @@ Promise.sx_allSettled = (promises) => {
 }
 ```
 
-### 50、any
+### 50. any
 
 ```
 Promise.sx_any = (promises) => {
@@ -1150,7 +1148,7 @@ Promise.sx_any = (promises) => {
 }
 ```
 
-### 51、finally
+### 51. finally
 
 ```
 Promise.prototype.sx_finally = function (fn) {
@@ -1166,7 +1164,7 @@ Promise.prototype.sx_finally = function (fn) {
 
 ## 函数
 
-### 52、call
+### 52. call
 
 ```
 Function.prototype.sx_call = function(obj, ...args) {
@@ -1179,7 +1177,7 @@ Function.prototype.sx_call = function(obj, ...args) {
 }
 ```
 
-### 53、apply
+### 53. apply
 
 ```
 Function.prototype.sx_apply = function(obj, args) {
@@ -1192,7 +1190,7 @@ Function.prototype.sx_apply = function(obj, args) {
 }
 ```
 
-### 54、bind
+### 54. bind
 
 ```
 Function.prototype.sx_bind = function(obj, ...args) {
@@ -1219,7 +1217,7 @@ Function.prototype.sx_bind = function(obj, ...args) {
 
 ## 字符串
 
-### 55、slice
+### 55. slice
 
 ```
 String.prototype.sx_slice = function (start = 0, end) {
@@ -1236,7 +1234,7 @@ String.prototype.sx_slice = function (start = 0, end) {
 }
 ```
 
-### 56、substr
+### 56. substr
 
 ```
 String.prototype.sx_substr = function (start = 0, length) {
@@ -1253,7 +1251,7 @@ String.prototype.sx_substr = function (start = 0, length) {
 }
 ```
 
-### 57、substring
+### 57. substring
 
 ```
 String.prototype.sx_sunstring = function (start = 0, end) {

@@ -1,12 +1,11 @@
 ---
 title: CSS 图片处理技巧
-date: 2021-7-14
-sidebar: auto
-categories:
-  - CSS
+date: 2021-07-14
 tags:
-  - 图片
+  - CSS
 ---
+
+# CSS 图片处理技巧
 
 ## 1. Object-fit : cover
 

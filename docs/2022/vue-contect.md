@@ -1,12 +1,8 @@
 ---
 title: Vue 组件间通信的6种方式
-date: 2022-1-6
-sidebar: auto
-categories:
-  - Vue
+date: 2022-01-06
 tags:
-  - Vue2
-  - Vue3
+  - Vue
 ---
 
 ## （1）props
