@@ -6,6 +6,10 @@
   --border-color: #f2f3f5;
   --grey-color: #86909c;
   --black-color: #3c3c43;
+  table img {
+    display: block;
+    margin: auto;
+  }
 }
 
 .dark {
