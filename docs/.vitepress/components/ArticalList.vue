@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { NTimeline, NTimelineItem, NIcon } from 'naive-ui'
+import dayjs from 'dayjs'
 import { EmailOutlined } from '@vicons/material'
 // @ts-ignore
 import { data as posts } from "../utils/posts.data"
@@ -23,19 +24,31 @@ console.log(posts)
       </section>
       <section class="right-wrapper">
         <n-timeline size="large">
-          <n-timeline-item content="啊" />
-          <n-timeline-item type="success" title="成功" content="哪里成功" time="2018-04-03 20:46" />
-          <n-timeline-item type="error" content="哪里错误" time="2018-04-03 20:46" />
-          <n-timeline-item type="warning" title="警告" content="哪里警告" time="2018-04-03 20:46" />
-          <n-timeline-item type="info" title="信息" content="是的" time="2018-04-03 20:46" />
+          <n-timeline-item v-for="item in posts">
+            <template #icon>
+              <div class="icon">
+                <p>{{ dayjs(item.frontmatter.date).format('YYYY-MM-DD') }}</p>
+                <div class="dot"></div>
+              </div>
+            </template>
+            <template #default>
+              <div class="card">
+                <div class="title">{{ item.frontmatter.title }}</div>
+                <div class="tags">
+                  <div class="tagItem" v-for="tagItem in item.frontmatter.tags">
+                    {{ tagItem }}
+                  </div>
+                </div>
+                <div class="info">{{ item.frontmatter.date }}</div>
+              </div>
+            </template>
+          </n-timeline-item>
         </n-timeline>
       </section>
     </div>
     <div class="bottom">
       本站总访问量
-
       <span id="busuanzi_value_site_pv" class="font-bold">--</span> 次
-
       本站访客数
       <span id="busuanzi_value_site_uv" class="font-bold">--</span> 人次
     </div>
@@ -46,7 +59,7 @@ console.log(posts)
 .artical-list {
   width: 100%;
   height: 100%;
-  color: var(--black-color);
+  color: var(--black-color-1);
 
   .top {
     width: 100%;
@@ -55,12 +68,13 @@ console.log(posts)
 
     .left-wrapper {
       margin-top: 3vh;
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--border-color-1);
       width: 250px;
       height: 300px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      border-radius: var(--border-radius);
 
       p {
         margin: 0;
@@ -69,8 +83,9 @@ console.log(posts)
       .avatar {
         width: 100px;
         border-radius: 100%;
-        margin-top: 40px;
         user-select: none;
+        cursor: auto;
+        margin: 40px 0 0 0;
       }
 
       .name {
@@ -80,7 +95,7 @@ console.log(posts)
 
       .text {
         font-size: 14px;
-        color: var(--grey-color);
+        color: var(--grey-color-1);
         user-select: none;
       }
 
@@ -96,11 +111,71 @@ console.log(posts)
     }
 
     .right-wrapper {
-      margin-left: 2vw;
+      margin-left: 150px;
       margin-top: 3vh;
-      border: 1px solid;
-      width: calc(100% - 250px - 2vw);
+      width: calc(100% - 250px - 150px);
       min-width: 300px;
+
+      :deep(.n-timeline-item-timeline__line) {
+        background-color: var(--grey-color-2);
+      }
+
+      .icon {
+        width: 6px;
+        height: 6px;
+        position: relative;
+
+        p {
+          position: absolute;
+          margin: 0;
+          width: 130px;
+          left: -140px;
+          top: -2px;
+          font-size: 12px;
+          line-height: 12px;
+          height: 12px;
+          text-align: right;
+        }
+
+        .dot {
+          width: 100%;
+          height: 100%;
+          border-radius: 100%;
+          background-color: var(--blue-color-1);
+        }
+
+      }
+
+      .card {
+        width: 100%;
+        height: 120px;
+        color: var(--black-color-1);
+        border: 1px solid var(--border-color-1);
+        border-radius: var(--border-radius);
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        .title {
+          font-size: 20px;
+          font-weight: 700;
+          cursor: pointer;
+        }
+
+        .tags {
+          display: flex;
+
+          .tagItem {
+            color: var(--grey-color-1);
+          }
+        }
+
+        .info {
+          font-size: 14px;
+          color: var(--grey-color-1);
+        }
+      }
     }
   }
 
@@ -114,17 +189,28 @@ console.log(posts)
 
 @media (max-width: 650px) {
   .artical-list {
-    flex-direction: column;
+    .top {
+      flex-direction: column;
 
-    .left-wrapper {
-      min-width: 300px;
-      width: 100%;
+      .left-wrapper {
+        min-width: 300px;
+        width: 100%;
+
+      }
+
+      .right-wrapper {
+        margin-left: 0;
+        width: 100%;
+
+        .icon {
+          p {
+            display: none;
+          }
+        }
+      }
     }
 
-    .right-wrapper {
-      margin-left: 0;
-      width: 100%;
-    }
+
   }
 }
 </style>

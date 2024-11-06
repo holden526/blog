@@ -1,7 +1,6 @@
 ---
 title: axios简单封装
 date: 2021-11-19
-sidebar: auto
 tags:
   - Axios
 ---

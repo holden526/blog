@@ -1,7 +1,6 @@
 ---
 title: Git 常用命令
 date: 2021-10-15
-sidebar: auto
 tags:
   - Git
 ---

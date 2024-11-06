@@ -1,9 +1,13 @@
 @import './rewrite.css';
 
 :root {
-  --border-color: #f2f3f5;
-  --grey-color: #86909c;
-  --black-color: #3c3c43;
+  --border-color-1: rgb(242, 243, 245);
+  --black-color-1: rgb(60, 60, 67);
+  --grey-color-1: rgb(134, 144, 156);
+  --grey-color-2: rgb(229, 230, 235);
+  --blue-color-1: rgb(22, 93, 255);
+
+  --border-radius: 8px;
   img {
     display: block;
     margin: auto;
@@ -12,7 +16,9 @@
 }
 
 .dark {
-  --border-color: rgba(255, 255, 255, 0.08);
-  --grey-color: rgba(255, 255, 255, 0.5);
-  --black-color: rgba(255, 255, 255, 0.9);
+  --border-color-1: rgba(255, 255, 255, 0.08);
+  --black-color-1: rgba(255, 255, 255, 0.9);
+  --grey-color-1: rgba(255, 255, 255, 0.5);
+  --grey-color-2: rgb(72, 72, 73);
+  --blue-color-1: rgb(60, 126, 255);
 }
