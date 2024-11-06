@@ -9,6 +9,7 @@ import './styles/global.css'
 import 'viewerjs/dist/viewer.min.css'
 import imageViewer from 'vitepress-plugin-image-viewer'
 import vImageViewer from 'vitepress-plugin-image-viewer/lib/vImageViewer.vue'
+import 'virtual:group-icons.css'
 const { Layout } = DefaultTheme
 
 const CssRenderStyle = defineComponent({

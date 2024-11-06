@@ -15,9 +15,25 @@ tags:
 
 打开终端安装全局安装 TypeScript
 
-```bash
-npm i typescript -g
+::: code-group
+
+```sh [npm]
+npm install -g typescript
 ```
+
+```sh [yarn]
+yarn global add typescript
+```
+
+```sh [pnpm]
+pnpm add -g typescript
+```
+
+```sh [bun]
+bun add -g typescript
+```
+
+:::
 
 ### 1.2 TS 文件转换成 JS
 

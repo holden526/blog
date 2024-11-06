@@ -194,7 +194,7 @@ new Vue({
 - 语法: `const xxx = ref(initValue)`
   - 创建一个包含响应式数据的**引用对象（reference 对象，简称 ref 对象）**。
   - JS 中操作数据： `xxx.value`
-  - 模板中读取数据: 不需要.value，直接：`<div>{xxx}</div>`
+  - 模板中读取数据: 不需要.value，直接 `xxx`
 - 备注：
   - 接收的数据可以是：基本类型、也可以是对象类型。
   - 基本类型的数据：响应式依然是靠`Object.defineProperty()`的`get`与`set`完成的。

@@ -14,9 +14,25 @@ axios 二次封装接口，方便管理所有接口，提高可维护性
 
 ## 1. 安装 axios
 
-```bash
-npm i axios
+::: code-group
+
+```sh [npm]
+npm install axios
 ```
+
+```sh [yarn]
+yarn add axios
+```
+
+```sh [pnpm]
+pnpm add axios
+```
+
+```sh [bun]
+bun add axios
+```
+
+:::
 
 ## 2. request.js
 

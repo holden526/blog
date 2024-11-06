@@ -67,7 +67,9 @@ Vue.config.productionTip = false
 
 用于标签体内容
 
+```text
 语法：{{你要动态变化的数据}}
+```
 
 ```javascript
 // 示例：创建 Vue 实例，定义数据name
@@ -684,14 +686,23 @@ trim：输入首尾空格过滤
 
 ## 13. 过滤器(Vue3 已移除)
 
-过滤器 :
 定义：对要显示的数据进行特定格式化后再显示（适用于一些简单逻辑的处理）
-语法： 1.注册过滤器：Vue.filter(name,callback）或 new Vue{filters:{}} 2.使用过滤器：{{ xxx | 过滤器名}} 或 v-bind:属性 = "xxx | 过滤器名"
-备注： 1.过滤器也可以接收额外参数、多个过滤器也可以串联
 
-​ 2.并没有改变原本的数据，是产生新的对应的数据
+```text
+语法：
 
-​ 3.全局过滤器要写在 Vue 实例前面
+（1）注册过滤器：Vue.filter(name,callback）或 new Vue{filters:{}}
+
+（2）使用过滤器：{{ xxx | 过滤器名}} 或 v-bind:属性 = "xxx | 过滤器名"
+
+备注：
+
+（1）过滤器也可以接收额外参数、多个过滤器也可以串联
+
+​（2）并没有改变原本的数据，是产生新的对应的数据
+
+​（3）全局过滤器要写在 Vue 实例前面
+```
 
 ## 14. 内置指令
 
@@ -715,7 +726,7 @@ trim：输入首尾空格过滤
 
 ### 14.3 v-cloak
 
-​ 1.本质是一个特殊属性，Vue 实例创建完毕并接管容器后，会删掉 v-cloak 属性。 2.使用 css 配合 v-cloak 可以解决网速慢时页面展示出{{xxx}}的问题。
+​ 1.本质是一个特殊属性，Vue 实例创建完毕并接管容器后，会删掉 v-cloak 属性。 2.使用 css 配合 v-cloak 可以解决网速慢时页面展示出xxx的问题。
 
 ```javascript
 // css
@@ -878,10 +889,10 @@ new Vue({
 (2).可以使用 name 配置项指定组件在开发者工具中呈现的名字。
 
 ​ 2.关于组件标签：
-第一种写法：<myinfo></myinfo>
-第二种写法：<myinfo/>
+第一种写法：`<myinfo></myinfo>`
+第二种写法：`<myinfo/>`
 
-​ 备注：不用使用脚手架时，<myinfo/>会导致后续组件不能渲染。
+​ 备注：不用使用脚手架时，`<myinfo/>`会导致后续组件不能渲染。
 
 ​ 3.一个简写方式：
 
@@ -930,7 +941,7 @@ new Vue({
 关于 VueComponent:
 1.school 组件本质是一个名为 VueComponent 的构造函数，且不是程序员定义的，是 Vue.extend 生成的。
 
-​ 2.我们只需要写<school/>或<school></school>, Vue 解析是会帮我们创建 school 组件的实例对象，即 Vue 帮我们执行的：new VueComponent(options)。
+​ 2.我们只需要写`<school/>`或`<school></school>`, Vue 解析是会帮我们创建 school 组件的实例对象，即 Vue 帮我们执行的：new VueComponent(options)。
 
 ​ 3.特别注意：每次调用 Vue.extend，返回的都是一个全新的 VueComponent！！！！
 
@@ -961,9 +972,25 @@ VueComponent.prototype.__proto__Vue.prototype
 
 第一步（仅第一次执行）：全局按照@Vue/cli
 
-```javascript
+::: code-group
+
+```sh [npm]
 npm install -g @vue/cli
 ```
+
+```sh [yarn]
+yarn global add @vue/cli
+```
+
+```sh [pnpm]
+pnpm add -g @vue/cli
+```
+
+```sh [bun]
+bun add -g @vue/cli
+```
+
+:::
 
 第二步：切换你要创建项目的目录，然后用命令创建项目
 
@@ -974,9 +1001,25 @@ vue create xxxx
 
 第三步：启动项目
 
-```javascript
+::: code-group
+
+```sh [npm]
 npm run serve
 ```
+
+```sh [yarn]
+yarn serve
+```
+
+```sh [pnpm]
+pnpm run serve
+```
+
+```sh [bun]
+bun run serve
+```
+
+:::
 
 备注：
 
@@ -1219,12 +1262,14 @@ pubsub(第三方库)
 1. 一种组件间通信的方式，适用于任意组件间通信。
 
 2. 使用步骤:
+
    （1）安装 pubsub
 
-​ `npm i pubsub-js`
-（2）引入
+   `npm i pubsub-js`
 
-​ ` import pubsub from 'pubsub-js'`
+   （2）引入
+
+   ​ `import pubsub from 'pubsub-js'`
 
 3. 接收数据：A 组件想接收数据，则在 A 组件中订阅消息，订阅的回调留在 A 组件自身。
 
@@ -1444,9 +1489,25 @@ module.exports = {
 
 （1）安装
 
-```javascript
+::: code-group
+
+```sh [npm]
 npm install vuex
 ```
+
+```sh [yarn]
+yarn add vuex
+```
+
+```sh [pnpm]
+pnpm add vuex
+```
+
+```sh [bun]
+bun add vuex
+```
+
+:::
 
 （2）创建 `src/store/index.js` 也可以 `src/Vuex/store.js`
 
@@ -1711,9 +1772,25 @@ export default new Vuex.store({
 
 （1）安装 vue-router，命令：
 
-```js
-npm i vue-router
+::: code-group
+
+```sh [npm]
+npm install vue-router
 ```
+
+```sh [yarn]
+yarn add vue-router
+```
+
+```sh [pnpm]
+pnpm add vue-router
+```
+
+```sh [bun]
+bun add vue-router
+```
+
+:::
 
 （2）应用插件:
 

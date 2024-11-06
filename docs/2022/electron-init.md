@@ -41,9 +41,25 @@ vue create demo
 
 进入项目目录
 
-```bash
+::: code-group
+
+```sh [npm]
 npm run serve
 ```
+
+```sh [yarn]
+yarn serve
+```
+
+```sh [pnpm]
+pnpm run serve
+```
+
+```sh [bun]
+bun run serve
+```
+
+:::
 
 看到这个界面说明创建成功咯~
 
@@ -54,9 +70,25 @@ npm run serve
 
 #### （1）安装
 
-```bash
-npm i vue-router@4
+::: code-group
+
+```sh [npm]
+npm install vue-router@4
 ```
+
+```sh [yarn]
+yarn add vue-router@4
+```
+
+```sh [pnpm]
+pnpm add vue-router@4
+```
+
+```sh [bun]
+bun add vue-router@4
+```
+
+:::
 
 #### （2）创建路由文件
 
@@ -96,9 +128,25 @@ PS : Vuex 和 sass 都可以不安装，不影响 electron 使用。
 
 ### 2.1 安装
 
-```bash
-npm i vuex -s
+::: code-group
+
+```sh [npm]
+npm install vuex -s
 ```
+
+```sh [yarn]
+yarn add vuex
+```
+
+```sh [pnpm]
+pnpm add vuex
+```
+
+```sh [bun]
+bun add vuex
+```
+
+:::
 
 ### 2.2 创建 store 文件
 
@@ -143,9 +191,25 @@ export default {
 
 ### 3.1 安装
 
-```bash
-npm i node-sass sass-loader style-loader -d
+::: code-group
+
+```sh [npm]
+npm install node-sass sass-loader style-loader -d
 ```
+
+```sh [yarn]
+yarn add node-sass sass-loader style-loader --dev
+```
+
+```sh [pnpm]
+pnpm add node-sass sass-loader style-loader -D
+```
+
+```sh [bun]
+bun add node-sass sass-loader style-loader --dev
+```
+
+:::
 
 ### 3.2 测试
 
@@ -155,15 +219,47 @@ npm i node-sass sass-loader style-loader -d
 
 ### 4.1 安装
 
-```bash
+::: code-group
+
+```sh [npm]
 npm install element-plus --save
 ```
 
-### 4.2 按需加载
+```sh [yarn]
+yarn add element-plus
+```
 
-```bash
+```sh [pnpm]
+pnpm add element-plus
+```
+
+```sh [bun]
+bun add element-plus
+```
+
+:::
+
+### 4.2 自动导入
+
+::: code-group
+
+```sh [npm]
 npm install -D unplugin-vue-components unplugin-auto-import
 ```
+
+```sh [yarn]
+yarn add -D unplugin-vue-components unplugin-auto-import
+```
+
+```sh [pnpm]
+pnpm add -D unplugin-vue-components unplugin-auto-import
+```
+
+```sh [bun]
+bun add -d unplugin-vue-components unplugin-auto-import
+```
+
+:::
 
 在项目的 `webpack.config.js` 添加代码。完整示例如下：
 
@@ -198,7 +294,7 @@ module.exports = defineConfig({
 
 在项目的终端输入以下命令
 
-```b
+```bash
 vue add electron-builder
 ```
 
@@ -207,9 +303,25 @@ vue add electron-builder
 
 ### 5.2 启动项目测试
 
-```ba
+::: code-group
+
+```sh [npm]
 npm run electron:serve
 ```
+
+```sh [yarn]
+yarn electron:serve
+```
+
+```sh [pnpm]
+pnpm run electron:serve
+```
+
+```sh [bun]
+bun run electron:serve
+```
+
+:::
 
 看到这里就已经成功咯~
 ![electron](../img/electron-init7.png)
@@ -225,9 +337,25 @@ npm run electron:serve
 
 #### （1）安装插件：
 
-```bash
+::: code-group
+
+```sh [npm]
 npm install electron-reloader --save-dev
 ```
+
+```sh [yarn]
+yarn add electron-reloader --dev
+```
+
+```sh [pnpm]
+pnpm add electron-reloader -D
+```
+
+```sh [bun]
+bun add electron-reloader --dev
+```
+
+:::
 
 #### （2）在 electron 入口文件加入此代码
 
@@ -243,9 +371,25 @@ try {
 
 项目目录不能有中文，而且打包速度是真滴慢，用科学上网好点，也可以提前下载对应的文件到本地。
 
-```ba
+::: code-group
+
+```sh [npm]
 npm run electron:build
 ```
+
+```sh [yarn]
+yarn electron:build
+```
+
+```sh [pnpm]
+pnpm run electron:build
+```
+
+```sh [bun]
+bun run electron:build
+```
+
+:::
 
 打包完成后在项目的 `dist_electron` 文件夹里有安装包和绿色免安装版
 

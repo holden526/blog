@@ -7,8 +7,6 @@ tags:
 
 # 十个常用工具库
 
-## 前言
-
 平时做项目经常用到的小工具库，可提高开发效率，分享一下
 
 ## 1. Moment.js
@@ -17,10 +15,25 @@ JavaScript 日期处理类库
 
 ### 1.1 安装
 
-```bash
-npm install moment --save   # npm
-yarn add moment             # Yarn
+::: code-group
+
+```sh [npm]
+npm install moment --save
 ```
+
+```sh [yarn]
+yarn add moment
+```
+
+```sh [pnpm]
+pnpm add moment
+```
+
+```sh [bun]
+bun add moment
+```
+
+:::
 
 ### 1.2 使用
 
@@ -42,9 +55,25 @@ moment().format() // 2022-03-19T15:52:08+08:00
 
 ### 2.1 安装
 
-```bash
+::: code-group
+
+```sh [npm]
 npm install dayjs
 ```
+
+```sh [yarn]
+yarn add dayjs
+```
+
+```sh [pnpm]
+pnpm add dayjs
+```
+
+```sh [bun]
+bun add dayjs
+```
+
+:::
 
 ### 2.2 使用
 
@@ -66,9 +95,25 @@ dayjs(1318781876406).format('YYYY-MM-DD HH:mm:ss') // 2011-10-17 00:17:56
 
 ### 3.1 安装
 
-```bash
-npm i nanoid
+::: code-group
+
+```sh [npm]
+npm install nanoid
 ```
+
+```sh [yarn]
+yarn add nanoid
+```
+
+```sh [pnpm]
+pnpm add nanoid
+```
+
+```sh [bun]
+bun add nanoid
+```
+
+:::
 
 ### 3.2 使用
 
@@ -87,10 +132,25 @@ let id2 = nanoid(5)
 
 ### 4.1 安装
 
-```bash
+::: code-group
+
+```sh [npm]
 npm install animate.css --save
+```
+
+```sh [yarn]
 yarn add animate.css
 ```
+
+```sh [pnpm]
+pnpm add animate.css
+```
+
+```sh [bun]
+bun add animate.css
+```
+
+:::
 
 ### 4.2 使用
 
@@ -120,9 +180,25 @@ import 'animate.css'
 
 ### 5.1 安装
 
-```bash
+::: code-group
+
+```sh [npm]
 npm install animejs
 ```
+
+```sh [yarn]
+yarn add animejs
+```
+
+```sh [pnpm]
+pnpm add animejs
+```
+
+```sh [bun]
+bun add animejs
+```
+
+:::
 
 ### 5.2 使用
 
@@ -149,9 +225,25 @@ anime({
 
 ### 6.1 安装
 
-```bash
+::: code-group
+
+```sh [npm]
 npm install --save nprogress
 ```
+
+```sh [yarn]
+yarn add nprogress
+```
+
+```sh [pnpm]
+pnpm add nprogress
+```
+
+```sh [bun]
+bun add nprogress
+```
+
+:::
 
 ### 6.2 使用
 
@@ -176,9 +268,25 @@ nprogress.done()
 
 ### 7.1 安装
 
-```bash
+::: code-group
+
+```sh [npm]
 npm install qs
 ```
+
+```sh [yarn]
+yarn add qs
+```
+
+```sh [pnpm]
+pnpm add qs
+```
+
+```sh [bun]
+bun add qs
+```
+
+:::
 
 ### 7.2 使用
 
@@ -199,9 +307,25 @@ qs.stringify({ user: 'tom', age: '22' }) // => user=tom&age=22
 
 ### 8.1 安装
 
-```bash
+::: code-group
+
+```sh [npm]
 npm install --save flv.js
 ```
+
+```sh [yarn]
+yarn add flv.js
+```
+
+```sh [pnpm]
+pnpm add flv.js
+```
+
+```sh [bun]
+bun add flv.js
+```
+
+:::
 
 ### 8.2 使用
 
@@ -233,9 +357,25 @@ if (flvjs.isSupported()) {
 
 ### 9.1 安装
 
-```ba
+::: code-group
+
+```sh [npm]
 npm install uniq
 ```
+
+```sh [yarn]
+yarn add uniq
+```
+
+```sh [pnpm]
+pnpm add uniq
+```
+
+```sh [bun]
+bun add uniq
+```
+
+:::
 
 ### 9.2 使用
 
@@ -254,9 +394,25 @@ console.log(arr) // 1,2,3,5
 
 ### 10.1 安装
 
-```bash
+::: code-group
+
+```sh [npm]
 npm install element-resize-detector --save
 ```
+
+```sh [yarn]
+yarn add element-resize-detector
+```
+
+```sh [pnpm]
+pnpm add element-resize-detector
+```
+
+```sh [bun]
+bun add element-resize-detector
+```
+
+:::
 
 ### 10.2 使用
 

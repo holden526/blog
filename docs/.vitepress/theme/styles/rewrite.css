@@ -1,0 +1,61 @@
+.VPNav {
+  border-bottom: 1px solid #f2f3f5;
+}
+
+.dark {
+  .VPNav {
+    border-bottom: 1px solid #000;
+  }
+}
+
+:root {
+  .vp-doc .custom-block {
+    padding: 8px 16px;
+  }
+
+  .vp-doc .custom-block :first-child:first-child {
+    margin: 8px 0;
+  }
+
+  .VPMenuGroup > .title {
+    font-size: 0.7em;
+  }
+
+  /* 链接 */
+
+  .vp-doc a {
+    background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center
+      bottom / 100% 2px;
+    text-decoration: none;
+    transition: 0.2s;
+  }
+
+  .vp-doc a:hover {
+    border-radius: 0.2em;
+    background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center
+      bottom / 100% 100%;
+  }
+
+  .vp-doc strong {
+    background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center
+      bottom / 100% 40%;
+  }
+
+  .vp-doc s {
+    opacity: 0.6;
+  }
+
+  /* 文章目录hover */
+  .VPDocOutlineItem.root > li > a,
+  .VPDocOutlineItem.nested > li > a {
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+  }
+  .VPDocOutlineItem.root > li > a:first-child:hover,
+  .VPDocOutlineItem.root > li > a:first-child.active,
+  .VPDocOutlineItem.nested li > a:hover,
+  .VPDocOutlineItem.nested li > a.active {
+    background-color: var(--grayA3);
+  }
+}

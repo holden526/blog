@@ -1,6 +1,4 @@
-.VPNav {
-  border-bottom: 1px solid #f2f3f5;
-}
+@import './rewrite.css';
 
 :root {
   --border-color: #f2f3f5;
@@ -17,7 +15,4 @@
   --border-color: rgba(255, 255, 255, 0.08);
   --grey-color: rgba(255, 255, 255, 0.5);
   --black-color: rgba(255, 255, 255, 0.9);
-  .VPNav {
-    border-bottom: 1px solid #000;
-  }
 }

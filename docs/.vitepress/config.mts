@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 import { pagefindPlugin } from 'vitepress-plugin-pagefind'
 import { generateSidebar } from 'vitepress-sidebar'
+import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import path from 'path'
 const fileAndStyles: Record<string, string> = {}
 
@@ -23,7 +24,7 @@ export default defineConfig({
   description: 'A VitePress Site',
   lang: 'zh-CN',
   vite: {
-    plugins: [pagefindPlugin()],
+    plugins: [pagefindPlugin(), groupIconVitePlugin()],
     ssr: {
       noExternal: ['naive-ui', 'date-fns', 'vueuc'],
     },
@@ -63,11 +64,18 @@ export default defineConfig({
   themeConfig: {
     outline: [2, 6],
     outlineTitle: '文章目录',
+    docFooter: {
+      prev: '上一篇',
+      next: '下一篇',
+    },
     nav: [{ text: '主页', link: '/' }],
     sidebar: autoSidebar(),
     socialLinks: [{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }],
   },
   markdown: {
+    config(md) {
+      md.use(groupIconMdPlugin)
+    },
     headers: {
       level: [1, 2, 3],
     },

@@ -198,9 +198,25 @@ module.exports = {
 
 ### 4. 创建 json-server 服务器
 
-```bash
+::: code-group
+
+```sh [npm]
 npm install -g json-server
 ```
+
+```sh [yarn]
+yarn global add json-server
+```
+
+```sh [pnpm]
+pnpm add -g json-server
+```
+
+```sh [bun]
+bun add -g json-server
+```
+
+:::
 
 创建 db.json 文件
 
