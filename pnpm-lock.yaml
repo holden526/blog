@@ -14,6 +14,9 @@ importers:
       pagefind:
         specifier: ^1.1.1
         version: 1.1.1
+      viewerjs:
+        specifier: ^1.11.6
+        version: 1.11.6
       vitepress-plugin-pagefind:
         specifier: ^0.4.10
         version: 0.4.10(pagefind@1.1.1)
@@ -27,18 +30,30 @@ importers:
       '@vicons/material':
         specifier: ^0.12.0
         version: 0.12.0
+      busuanzi.pure.js:
+        specifier: ^1.0.3
+        version: 1.0.3
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
       sass:
         specifier: ^1.80.6
         version: 1.80.6
+      vite:
+        specifier: ^5.4.10
+        version: 5.4.10(@types/node@22.8.7)(sass@1.80.6)
       vitepress:
         specifier: ^1.4.1
         version: 1.4.1(@algolia/client-search@4.24.0)(@types/node@22.8.7)(async-validator@4.2.5)(postcss@8.4.47)(sass@1.80.6)(search-insights@2.17.2)
+      vitepress-plugin-image-viewer:
+        specifier: ^1.1.5
+        version: 1.1.5
       vitepress-sidebar:
         specifier: ^1.29.0
         version: 1.29.0
+      vue:
+        specifier: ^3.5.12
+        version: 3.5.12
 
 packages:
 
@@ -715,6 +730,9 @@ packages:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
     engines: {node: '>=8'}
 
+  busuanzi.pure.js@1.0.3:
+    resolution: {integrity: sha512-tPULdyx+8NNb9geZYDpktKmHAYx9f2LEOBaHyWCaM7iPEMIa/43KgYAUluuU7YG9UFSOFpj4dO7Nj2Vlu3V9Rg==}
+
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
 
@@ -1140,6 +1158,9 @@ packages:
   vfile@6.0.3:
     resolution: {integrity: sha512-KzIbH/9tXat2u30jf+smMwFCsno4wHVdNmzFyL+T/L3UGqqk6JKfVqOFOZEpZSHADH1k40ab6NUIXZq422ov3Q==}
 
+  viewerjs@1.11.6:
+    resolution: {integrity: sha512-TlhdSp2oEOLFXvEp4psKaeTjR5zBjTRcM/sHUN8PkV1UWuY8HKC8n7GaVdW5Xqnwdr/F1OmzLik1QwDjI4w/nw==}
+
   vite@5.4.10:
     resolution: {integrity: sha512-1hvaPshuPUtxeQ0hsVH3Mud0ZanOLwVTneA1EgbAM5LhaZEqyPWGRQ7BtaMvUrTDeEaC8pxtj6a6jku3x4z6SQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
@@ -1170,6 +1191,9 @@ packages:
         optional: true
       terser:
         optional: true
+
+  vitepress-plugin-image-viewer@1.1.5:
+    resolution: {integrity: sha512-XnAb7bhqRCJB3JsKmah6oTDMTQNUQmLID+SME9Zwg/IWbYT+zySt2HuHHeTJlfHMmYpFBhvu8ayvBM0Fu3hdVQ==}
 
   vitepress-plugin-pagefind@0.4.10:
     resolution: {integrity: sha512-z+zsB0FPiUPujVNWcCjMjNlXIaDdC7HSvMBVkv7Evm6aC7I/MI6QN6ff8ZuKfe34tNY3S54tLrqvHbD6TjZo5Q==}
@@ -1850,6 +1874,8 @@ snapshots:
       fill-range: 7.1.1
     optional: true
 
+  busuanzi.pure.js@1.0.3: {}
+
   ccount@2.0.1: {}
 
   character-entities-html4@2.1.0: {}
@@ -2322,6 +2348,8 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.2
 
+  viewerjs@1.11.6: {}
+
   vite@5.4.10(@types/node@22.8.7)(sass@1.80.6):
     dependencies:
       esbuild: 0.21.5
@@ -2331,6 +2359,10 @@ snapshots:
       '@types/node': 22.8.7
       fsevents: 2.3.3
       sass: 1.80.6
+
+  vitepress-plugin-image-viewer@1.1.5:
+    dependencies:
+      viewerjs: 1.11.6
 
   vitepress-plugin-pagefind@0.4.10(pagefind@1.1.1):
     dependencies:
