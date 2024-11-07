@@ -6,12 +6,20 @@
   --grey-color-1: rgb(134, 144, 156);
   --grey-color-2: rgb(229, 230, 235);
   --blue-color-1: rgb(22, 93, 255);
-
   --border-radius: 8px;
+  p {
+    margin: 0;
+  }
   img {
     display: block;
     margin: auto;
     cursor: pointer;
+  }
+  .vp-doc {
+    h2:first-of-type {
+      margin: 10px 0 16px;
+      padding-top: 15px;
+    }
   }
 }
 
