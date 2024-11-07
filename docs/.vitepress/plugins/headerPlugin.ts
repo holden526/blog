@@ -2,9 +2,9 @@ import { Plugin } from 'vite'
 import { getReadingTime } from '../utils/getReadingTime'
 import fs from 'fs'
 
-export function ReadingTimePlugin(): Plugin {
+export function HeaderPlugin(): Plugin {
   return {
-    name: 'reading-time-plugin',
+    name: 'header-plugin',
     enforce: 'pre',
     async transform(code, id) {
       if (!id.match(/\.md\b/)) return null
@@ -15,9 +15,9 @@ export function ReadingTimePlugin(): Plugin {
       // 获取阅读时间和字数
       const { readTime, words } = getReadingTime(code)
 
-      // 插入阅读时间、字数和最近更新时间到文章中
+      // 插入组件到文章中
       code = insertReadingTimeAndWords(
-        `<ReadingTime readTime="${readTime}" words="${words}" lastUpdated="${lastUpdated}" />`,
+        `<ArticleHeader readTime="${readTime}" words="${words}" lastUpdated="${lastUpdated}" />`,
         code
       )
       return code
@@ -29,10 +29,10 @@ export function ReadingTimePlugin(): Plugin {
 function getLastUpdatedTime(filePath: string): string {
   const stats = fs.statSync(filePath)
   const lastModifiedTime = stats.mtime
-  return lastModifiedTime.toLocaleString() // 格式化成字符串
+  return lastModifiedTime.toLocaleString()
 }
 
-// 插入阅读时间、字数和最近更新时间到第一个一级标题后
+// 插入目标字符串到第一个一级标题后
 function insertReadingTimeAndWords(target: string, source: string) {
   const headerRegex = /(^#\s.+$)/m
   return source.replace(headerRegex, `$1\n\n${target}`)

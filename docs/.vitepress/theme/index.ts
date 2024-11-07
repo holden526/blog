@@ -9,7 +9,7 @@ import './styles/global.css'
 import 'viewerjs/dist/viewer.min.css'
 import imageViewer from 'vitepress-plugin-image-viewer'
 import vImageViewer from 'vitepress-plugin-image-viewer/lib/vImageViewer.vue'
-import ReadingTime from '../components/ReadingTime.vue'
+import ArticleHeader from '../components/ArticleHeader.vue'
 import 'virtual:group-icons.css'
 const { Layout } = DefaultTheme
 
@@ -60,7 +60,7 @@ export default {
   },
   enhanceApp: ({ app, router }) => {
     app.component('vImageViewer', vImageViewer)
-    app.component('ReadingTime', ReadingTime)
+    app.component('ArticleHeader', ArticleHeader)
     if ((import.meta as any).env.SSR) {
       const { collect } = setup(app)
       app.provide('css-render-collect', collect)
