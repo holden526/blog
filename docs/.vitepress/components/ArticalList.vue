@@ -152,10 +152,9 @@ console.log(posts)
         color: var(--black-color-1);
         border: 1px solid var(--border-color-1);
         border-radius: var(--border-radius);
-        padding: 10px;
+        padding: 15px;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
 
         .title {
           font-size: 20px;
@@ -187,7 +186,7 @@ console.log(posts)
 
 }
 
-@media (max-width: 650px) {
+@media (max-width: 730px) {
   .artical-list {
     .top {
       flex-direction: column;
@@ -195,7 +194,6 @@ console.log(posts)
       .left-wrapper {
         min-width: 300px;
         width: 100%;
-
       }
 
       .right-wrapper {
@@ -208,6 +206,10 @@ console.log(posts)
           }
         }
       }
+    }
+
+    .bottom {
+      min-width: 300px;
     }
 
 

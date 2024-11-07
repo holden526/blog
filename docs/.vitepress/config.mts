@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 import { pagefindPlugin } from 'vitepress-plugin-pagefind'
 import { generateSidebar } from 'vitepress-sidebar'
 import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
+import { ReadingTimePlugin } from './plugins/ReadingTimePlugin'
 import path from 'path'
 const fileAndStyles: Record<string, string> = {}
 
@@ -24,7 +25,7 @@ export default defineConfig({
   description: 'A VitePress Site',
   lang: 'zh-CN',
   vite: {
-    plugins: [pagefindPlugin(), groupIconVitePlugin()],
+    plugins: [pagefindPlugin(), groupIconVitePlugin(), ReadingTimePlugin()],
     ssr: {
       noExternal: ['naive-ui', 'date-fns', 'vueuc'],
     },
