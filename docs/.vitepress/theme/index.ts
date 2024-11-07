@@ -11,7 +11,7 @@ import imageViewer from 'vitepress-plugin-image-viewer'
 import vImageViewer from 'vitepress-plugin-image-viewer/lib/vImageViewer.vue'
 import ArticleHeader from '../components/ArticleHeader.vue'
 import 'virtual:group-icons.css'
-const { Layout } = DefaultTheme
+import MyLayout from './MyLayout.vue'
 
 const CssRenderStyle = defineComponent({
   setup() {
@@ -43,7 +43,7 @@ const NaiveUIProvider = defineComponent({
       { abstract: true, inlineThemeDisabled: true },
       {
         default: () => [
-          h(Layout, null, { default: this.$slots.default?.() }),
+          h(MyLayout, null, { default: this.$slots.default?.() }),
           (import.meta as any).env.SSR ? [h(CssRenderStyle), h(VitepressPath)] : null,
         ],
       }
