@@ -260,7 +260,7 @@ Node.js 中第三方模块又叫做 `包`。
 
 包是由第三方个人或团队开发出来，免费开源
 
-[www.npmjs.com](www.npmjs.com)
+[www.npmjs.com](https://www.npmjs.com)
 
 ### 4.3 安装包
 
