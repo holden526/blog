@@ -8,7 +8,7 @@ import { data as posts } from "../utils/posts.data"
 const router = useRouter()
 const list = posts.sort((a: any, b: any) => dayjs(b.frontmatter.date).unix() - dayjs(a.frontmatter.date).unix())
 const jump = (path: string) => {
-  router.go(path)
+  router.go(process.env.NODE_ENV === 'production' ? '/blog/' : '' + path)
 }
 </script>
 
