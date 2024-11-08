@@ -1,6 +1,7 @@
 ---
 title: 请求与跨域
 date: 2021-08-10
+info: 日常学习随笔
 tags:
   - Request
 ---

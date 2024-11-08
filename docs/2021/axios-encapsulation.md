@@ -1,6 +1,7 @@
 ---
 title: axios简单封装
 date: 2021-11-19
+info: 简单封装 axios，统一管理 API 请求。通过配置基础路径、请求与响应拦截器，简化了接口调用流程
 tags:
   - Axios
 ---

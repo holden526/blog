@@ -1,6 +1,7 @@
 ---
 title: Vue2 笔记
 date: 2021-11-05
+info: 万字学习笔记
 tags:
   - Vue
 ---

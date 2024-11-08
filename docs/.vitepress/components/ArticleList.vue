@@ -1,16 +1,19 @@
 <script setup lang="ts">
-import { NTimeline, NTimelineItem, NIcon } from 'naive-ui'
+import { NTimeline, NTimelineItem, NIcon, NBackTop, NTag } from 'naive-ui'
+import { useRouter } from 'vitepress'
 import dayjs from 'dayjs'
-import { EmailOutlined } from '@vicons/material'
+import { EmailOutlined, DiscountOutlined } from '@vicons/material'
 // @ts-ignore
 import { data as posts } from "../utils/posts.data"
-
-console.log(posts)
+const router = useRouter()
+const list = posts.sort((a: any, b: any) => dayjs(b.frontmatter.date).unix() - dayjs(a.frontmatter.date).unix())
+const jump = (path: string) => {
+  router.go(path)
+}
 </script>
 
 <template>
   <div class="artical-list">
-
     <section class="left-wrapper">
       <img class="avatar" src="@/public/assets/avatar.jpg" alt="avatar">
       <p class="name">holden</p>
@@ -24,7 +27,7 @@ console.log(posts)
     </section>
     <section class="right-wrapper">
       <n-timeline size="large">
-        <n-timeline-item v-for="item in posts">
+        <n-timeline-item v-for="item in list">
           <template #icon>
             <div class="icon">
               <p>{{ dayjs(item.frontmatter.date).format('YYYY-MM-DD') }}</p>
@@ -32,19 +35,24 @@ console.log(posts)
             </div>
           </template>
           <template #default>
-            <div class="card">
+            <div class="card" @click="jump(item.url)">
               <div class="title">{{ item.frontmatter.title }}</div>
               <div class="tags">
-                <div class="tagItem" v-for="tagItem in item.frontmatter.tags">
+                <n-tag :bordered="false" type="info" v-for="tagItem in item.frontmatter.tags">
                   {{ tagItem }}
-                </div>
+                  <template #icon>
+                    <n-icon :size="16" :component="DiscountOutlined" />
+                  </template>
+                </n-tag>
               </div>
-              <div class="info">{{ item.frontmatter.date }}</div>
+              <div class="info">{{ item.frontmatter.info ?? '无简介' }}</div>
+              <div class="date">{{ dayjs(item.frontmatter.date).format('YYYY-MM-DD') }}</div>
             </div>
           </template>
         </n-timeline-item>
       </n-timeline>
     </section>
+    <n-back-top :right="10" />
   </div>
 </template>
 
@@ -56,6 +64,8 @@ console.log(posts)
   display: flex;
 
   .left-wrapper {
+    position: sticky;
+    top: 92px;
     margin-top: 3vh;
     border: 1px solid var(--border-color-1);
     width: 250px;
@@ -109,6 +119,10 @@ console.log(posts)
       background-color: var(--grey-color-2);
     }
 
+    .card {
+      cursor: pointer;
+    }
+
     .icon {
       width: 6px;
       height: 6px;
@@ -137,13 +151,14 @@ console.log(posts)
 
     .card {
       width: 100%;
-      height: 120px;
+      min-height: 120px;
       color: var(--black-color-1);
       border: 1px solid var(--border-color-1);
       border-radius: var(--border-radius);
       padding: 15px;
       display: flex;
       flex-direction: column;
+      justify-content: space-around;
 
       .title {
         font-size: 20px;
@@ -152,16 +167,27 @@ console.log(posts)
       }
 
       .tags {
+        width: 100%;
         display: flex;
+        flex-wrap: wrap;
 
-        .tagItem {
-          color: var(--grey-color-1);
+        .n-tag {
+          margin-right: 10px;
         }
       }
 
-      .info {
+      .info,
+      .date {
         font-size: 14px;
         color: var(--grey-color-1);
+        margin-top: 5px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      .date {
+        display: none;
       }
     }
   }
@@ -170,12 +196,12 @@ console.log(posts)
 
 @media (max-width: 730px) {
   .artical-list {
-
     flex-direction: column;
 
     .left-wrapper {
       min-width: 300px;
       width: 100%;
+      position: static;
     }
 
     .right-wrapper {
@@ -186,6 +212,16 @@ console.log(posts)
         p {
           display: none;
         }
+      }
+    }
+
+    .card {
+      .date {
+        display: block !important;
+      }
+
+      .info {
+        display: none !important;
       }
     }
   }

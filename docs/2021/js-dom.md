@@ -1,6 +1,7 @@
 ---
 title: JavaScript DOM 常用知识点
 date: 2021-10-11
+info: JavaScript DOM 随笔，记录常用方法及示例
 tags:
   - JavaScript
 ---

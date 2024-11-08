@@ -1,6 +1,7 @@
 ---
 title: Vue 面试知识点
 date: 2022-02-11
+info: 面试题笔记
 tags:
   - Vue
   - 面试题

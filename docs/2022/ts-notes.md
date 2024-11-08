@@ -1,6 +1,7 @@
 ---
 title: TypeScript 基础知识点笔记
 date: 2022-01-05
+info: 日常学习随笔
 tags:
   - TypeScript
 ---

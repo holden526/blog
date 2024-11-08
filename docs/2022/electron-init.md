@@ -1,6 +1,7 @@
 ---
 title: 快速搭建Electron桌面应用
 date: 2022-04-28
+info: 快速搭建一个基于 Vue3 和 Electron 的桌面应用
 tags:
   - Electron
 ---

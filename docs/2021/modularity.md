@@ -1,6 +1,7 @@
 ---
 title: ES6模块化
 date: 2021-09-01
+info: 日常学习随笔
 tags:
   - JavaScrpit
 ---

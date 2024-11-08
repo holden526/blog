@@ -1,6 +1,7 @@
 ---
 title: Vue3 笔记
 date: 2021-11-15
+info: 日常学习笔记
 tags:
   - Vue
 ---

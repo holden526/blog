@@ -1,6 +1,7 @@
 ---
 title: JavaScript 手写方法
 date: 2022-02-09
+info: 面试常用手写方法
 tags:
   - JavaScript
 ---

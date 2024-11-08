@@ -1,6 +1,7 @@
 ---
 title: Node.js 笔记
 date: 2022-04-25
+info: 分享一下 node.js 学习笔记。已同步发布在 CSDN，获得排名太开心了！mark 一下~
 tags:
   - Node
 ---

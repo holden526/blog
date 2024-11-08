@@ -1,6 +1,7 @@
 ---
 title: JavaScript 笔记
 date: 2021-10-15
+info: 日常学习笔记
 tags:
   - JavaScript
 ---

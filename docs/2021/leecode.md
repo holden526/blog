@@ -1,6 +1,7 @@
 ---
 title: LeeCode 笔记
 date: 2021-12-22
+info: 学习笔记
 tags:
   - LeeCode
 ---

@@ -1,6 +1,7 @@
 ---
 title: JavaScript 面试知识点
 date: 2022-02-14
+info: 常用面试题笔记
 tags:
   - JavaScript
 ---

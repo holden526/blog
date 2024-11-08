@@ -1,6 +1,7 @@
 ---
 title: Vue 组件间通信的6种方式
 date: 2022-01-06
+info: 日常学习笔记
 tags:
   - Vue
 ---

@@ -1,6 +1,7 @@
 ---
 title: uniapp 小程序自定义顶部标题
 date: 2022-04-08
+info: 功能学习笔记
 tags:
   - uniapp
   - wechat
