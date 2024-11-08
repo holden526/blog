@@ -8,13 +8,7 @@ import { data as posts } from "../utils/posts.data"
 const router = useRouter()
 const list = posts.sort((a: any, b: any) => dayjs(b.frontmatter.date).unix() - dayjs(a.frontmatter.date).unix())
 const jump = (path: string) => {
-  try {
-    console.log(import.meta.env.MODE === 'production' ? '/blog/' : '' + path)
-    router.go(import.meta.env.MODE === 'production' ? '/blog/' : '' + path)
-    console.log('noe')
-  } catch (error) {
-    console.log(error)
-  }
+  router.go(import.meta.env.MODE === 'production' ? '/blog' : '' + path)
 }
 </script>
 
