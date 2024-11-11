@@ -5,13 +5,13 @@ import { defineComponent, h, inject } from 'vue'
 import { NConfigProvider } from 'naive-ui'
 import { setup } from '@css-render/vue3-ssr'
 import { useRoute } from 'vitepress'
-import './styles/global.css'
-import 'viewerjs/dist/viewer.min.css'
 import imageViewer from 'vitepress-plugin-image-viewer'
 import vImageViewer from 'vitepress-plugin-image-viewer/lib/vImageViewer.vue'
 import ArticleHeader from '../components/ArticleHeader.vue'
-import 'virtual:group-icons.css'
 import MyLayout from './MyLayout.vue'
+import './styles/global.css'
+import 'viewerjs/dist/viewer.min.css'
+import 'virtual:group-icons.css'
 
 const CssRenderStyle = defineComponent({
   setup() {

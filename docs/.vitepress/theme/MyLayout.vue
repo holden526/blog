@@ -1,9 +1,26 @@
 <script setup>
 import DefaultTheme from 'vitepress/theme'
-import { watch, nextTick } from 'vue'
-import { useRoute } from 'vitepress'
+import { watch, nextTick, onMounted } from 'vue'
+import { useRoute, useData, inBrowser } from 'vitepress'
+import Giscus from '@giscus/vue'
 const { Layout } = DefaultTheme
+const { isDark, page } = useData()
 const route = useRoute()
+
+onMounted(() => {
+  hideSpecificSidebarItem()
+})
+
+watch(isDark, (dark) => {
+  if (!inBrowser) return
+
+  const iframe = document.querySelector('giscus-widget')?.shadowRoot?.querySelector('iframe')
+
+  iframe?.contentWindow?.postMessage(
+    { giscus: { setConfig: { theme: dark ? 'dark' : 'light' } } },
+    'https://giscus.app'
+  )
+})
 
 watch(
   () => route.path,
@@ -39,6 +56,25 @@ function hideSpecificSidebarItem() {
           <span id="busuanzi_value_site_uv" class="font-bold">--</span> 人次
         </div>
         <p>前端狗都不如 © 2024-2024 holden</p>
+      </div>
+    </template>
+    <template #doc-after>
+      <div style="margin-top: 24px">
+        <Giscus
+          :key="page.filePath"
+          repo="lee-holden/blog"
+          repo-id="R_kgDONLMmMw"
+          category="Announcements"
+          category-id="DIC_kwDONLMmM84CkKCl"
+          mapping="title"
+          strict="0"
+          reactions-enabled="1"
+          emit-metadata="0"
+          input-position="top"
+          :theme="isDark ? 'dark' : 'light'"
+          lang="zh-CN"
+          crossorigin="anonymous"
+        />
       </div>
     </template>
   </Layout>
