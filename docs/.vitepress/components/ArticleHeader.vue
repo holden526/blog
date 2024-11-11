@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import { AccessTimeFilled, ArticleOutlined, BorderColorOutlined, UpdateOutlined, DiscountOutlined } from '@vicons/material'
+import {
+  AccessTimeFilled,
+  ArticleOutlined,
+  BorderColorOutlined,
+  UpdateOutlined,
+  DiscountOutlined,
+} from '@vicons/material'
 import { NIcon, NTag } from 'naive-ui'
 import { useData } from 'vitepress'
 import dayjs from 'dayjs'
@@ -13,26 +19,36 @@ defineProps<{
 
 <template>
   <div class="header">
-    <section class='info'>
+    <section class="info">
       <div class="read">
         <NIcon :size="20">
           <AccessTimeFilled />
-        </NIcon> 阅读时间:<p>{{ readTime }}</p>分钟
+        </NIcon>
+        阅读时间:
+        <p>{{ readTime }}</p>
+        分钟
       </div>
       <div class="words">
         <NIcon :size="20">
           <ArticleOutlined />
-        </NIcon> 文章字数:<p>{{ words }}</p>字
+        </NIcon>
+        文章字数:
+        <p>{{ words }}</p>
+        字
       </div>
       <div class="write">
         <NIcon :size="18">
           <BorderColorOutlined />
-        </NIcon> 发布日期:<p>{{ dayjs(frontmatter.date).format('YYYY-MM-DD') }}</p>
+        </NIcon>
+        发布日期:
+        <p>{{ dayjs(frontmatter.date).format('YYYY-MM-DD') }}</p>
       </div>
       <div class="update">
         <NIcon :size="20">
           <UpdateOutlined />
-        </NIcon> 最近更新:<p>{{ dayjs(lastUpdated).format('YYYY-MM-DD') }}</p>
+        </NIcon>
+        最近更新:
+        <p>{{ dayjs(lastUpdated).format('YYYY-MM-DD') }}</p>
       </div>
     </section>
     <section class="tags">

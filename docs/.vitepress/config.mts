@@ -14,10 +14,10 @@ const autoSidebar = () => {
     sortMenusByFrontmatterDate: true,
     sortMenusOrderByDescending: true,
   })
-  result.forEach((year) => {
-    year.items.reverse()
-  })
-  return result
+  return result.map((year) => ({
+    ...year,
+    items: year.items.reverse(),
+  }))
 }
 
 export default defineConfig({
@@ -69,7 +69,11 @@ export default defineConfig({
       prev: '上一篇',
       next: '下一篇',
     },
-    nav: [{ text: '主页', link: '/' }],
+    nav: [
+      { text: '主页', link: '/' },
+      { text: '闲聊', link: '/pages/comment' },
+      { text: '关于', link: '/pages/about' },
+    ],
     sidebar: autoSidebar(),
     socialLinks: [{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }],
   },

@@ -1,7 +1,32 @@
 <script setup>
 import DefaultTheme from 'vitepress/theme'
-
+import { watch, nextTick } from 'vue'
+import { useRoute } from 'vitepress'
 const { Layout } = DefaultTheme
+const route = useRoute()
+
+watch(
+  () => route.path,
+  (_, oldPath) => {
+    if (oldPath === '/') {
+      nextTick(() => {
+        hideSpecificSidebarItem()
+      })
+    }
+  }
+)
+
+// 隐藏pages
+function hideSpecificSidebarItem() {
+  const sidebarItems = document.querySelectorAll('#VPSidebarNav > .group')
+  sidebarItems.forEach((item, index) => {
+    const textContent = item.querySelector('.text')?.textContent.trim()
+    if (textContent === 'pages') {
+      item.style.display = 'none'
+      sidebarItems[index + 1].style.borderTop = 'none'
+    }
+  })
+}
 </script>
 
 <template>
@@ -10,8 +35,7 @@ const { Layout } = DefaultTheme
       <div class="bottom">
         <div>
           本站总访问量
-          <span id="busuanzi_value_site_pv" class="font-bold">--</span> 次
-          本站访客数
+          <span id="busuanzi_value_site_pv" class="font-bold">--</span> 次 本站访客数
           <span id="busuanzi_value_site_uv" class="font-bold">--</span> 人次
         </div>
         <p>前端狗都不如 © 2024-2024 holden</p>

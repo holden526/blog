@@ -4,9 +4,19 @@ import { useRouter } from 'vitepress'
 import dayjs from 'dayjs'
 import { EmailOutlined, DiscountOutlined } from '@vicons/material'
 // @ts-ignore
-import { data as posts } from "../utils/posts.data"
+import { data as posts } from '../utils/posts.data'
 const router = useRouter()
-const list = posts.sort((a: any, b: any) => dayjs(b.frontmatter.date).unix() - dayjs(a.frontmatter.date).unix())
+const list = posts
+  .filter((item) => !item.url.includes('/pages/'))
+  .map((item) => ({
+    ...item,
+    unixDate: dayjs(item.frontmatter.date).unix(),
+  }))
+  .sort((a, b) => b.unixDate - a.unixDate)
+  .map((item) => {
+    const { unixDate, ...rest } = item
+    return rest
+  })
 const jump = (path: string) => {
   router.go(path)
 }
@@ -15,7 +25,7 @@ const jump = (path: string) => {
 <template>
   <div class="artical-list">
     <section class="left-wrapper">
-      <img class="avatar" src="@/public/assets/avatar.jpg" alt="avatar">
+      <img class="avatar" src="@/public/assets/avatar.jpg" alt="avatar" />
       <p class="name">holden</p>
       <p class="text">快不快乐有天总过去</p>
       <div class="email">
@@ -146,7 +156,6 @@ const jump = (path: string) => {
         border-radius: 100%;
         background-color: var(--blue-color-1);
       }
-
     }
 
     .card {
@@ -191,7 +200,6 @@ const jump = (path: string) => {
       }
     }
   }
-
 }
 
 @media (max-width: 730px) {
