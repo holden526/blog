@@ -55,7 +55,7 @@ function hideSpecificSidebarItem() {
           <span id="busuanzi_value_site_pv" class="font-bold">--</span> 次 本站访客数
           <span id="busuanzi_value_site_uv" class="font-bold">--</span> 人次
         </div>
-        <p>前端狗都不如 © 2024-2024 holden</p>
+        <p>前端狗都不如 © 2021-2024 holden</p>
       </div>
     </template>
     <template #doc-after>

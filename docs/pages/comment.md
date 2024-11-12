@@ -1,4 +1,6 @@
 ---
+title: 闲聊
+date: 2024-11-12
 layout: doc
 prev: false
 next: false
@@ -13,5 +15,3 @@ next: false
 不过，写文章的目的本来就不是为了写，而是记录成长历程
 
 无论写得多烂，至少也都是这个阶段的一次进步
-
-<Footer />

@@ -1,12 +1,13 @@
 ---
-title: 关于我
+title: 推荐
 date: 2024-11-12
 layout: doc
 prev: false
 next: false
+sidebar: false
 ---
 
-# 关于我
+# 推荐
 
 ##
 

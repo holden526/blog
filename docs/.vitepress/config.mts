@@ -24,6 +24,7 @@ export default defineConfig({
   title: '山不让尘，川不辞盈',
   description: 'A VitePress Site',
   lang: 'zh-CN',
+  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
   vite: {
     plugins: [pagefindPlugin(), groupIconVitePlugin(), HeaderPlugin()],
     ssr: {
@@ -73,9 +74,20 @@ export default defineConfig({
       { text: '主页', link: '/' },
       { text: '闲聊', link: '/pages/comment' },
       { text: '关于', link: '/pages/about' },
+      {
+        text: '推荐',
+        items: [
+          {
+            items: [
+              { text: '实用网页', link: '/pages/webPage' },
+              { text: '工具插件', link: '/pages/tools' },
+            ],
+          },
+        ],
+      },
     ],
     sidebar: autoSidebar(),
-    socialLinks: [{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/lee-holden/blog' }],
   },
   markdown: {
     config(md) {
