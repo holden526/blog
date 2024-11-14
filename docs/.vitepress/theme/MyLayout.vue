@@ -1,14 +1,17 @@
 <script setup>
 import DefaultTheme from 'vitepress/theme'
-import { watch, nextTick, onMounted } from 'vue'
+import { watch, nextTick, onMounted, ref } from 'vue'
 import { useRoute, useData, inBrowser } from 'vitepress'
 import Giscus from '@giscus/vue'
+import Loading from '../components/Loading.vue'
 const { Layout } = DefaultTheme
 const { isDark, page } = useData()
 const route = useRoute()
+const loading = ref(true)
 
 onMounted(() => {
   hideSpecificSidebarItem()
+  loading.value = false
 })
 
 watch(isDark, (dark) => {
@@ -47,7 +50,8 @@ function hideSpecificSidebarItem() {
 </script>
 
 <template>
-  <Layout>
+  <Loading v-show="loading" />
+  <Layout v-show="!loading">
     <template #layout-bottom>
       <div class="bottom">
         <div>
