@@ -7,9 +7,6 @@
   --grey-color-2: rgb(229, 230, 235);
   --blue-color-1: rgb(22, 93, 255);
   --border-radius: 8px;
-  p {
-    margin: 0;
-  }
   img {
     display: block;
     margin: auto;
