@@ -9,11 +9,13 @@ export function HeaderPlugin(): Plugin {
     async transform(code, id) {
       if (!id.match(/\.md\b/)) return null
 
+      const cleanContent = cleanMarkdownContent(code)
+
       // 获取文件的最近更新时间
       const lastUpdated = getLastUpdatedTime(id)
 
       // 获取阅读时间和字数
-      const { readTime, words } = getReadingTime(code)
+      const { readTime, words } = getReadingTime(cleanContent)
 
       // 插入组件到文章中
       code = insertReadingTimeAndWords(
@@ -36,4 +38,9 @@ function getLastUpdatedTime(filePath: string): string {
 function insertReadingTimeAndWords(target: string, source: string) {
   const headerRegex = /(^#\s.+$)/m
   return source.replace(headerRegex, `$1\n\n${target}`)
+}
+
+// 去掉 Frontmatter
+function cleanMarkdownContent(content: string): string {
+  return content.replace(/^---[\s\S]+?---\n+/g, '').trim()
 }

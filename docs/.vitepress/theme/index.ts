@@ -56,11 +56,14 @@ export default {
   Layout: NaiveUIProvider,
   setup() {
     const route = useRoute()
+    // 图片放大
     imageViewer(route)
   },
   enhanceApp: ({ app, router }) => {
+    // 全局组件
     app.component('vImageViewer', vImageViewer)
     app.component('ArticleHeader', ArticleHeader)
+    // css-render
     if ((import.meta as any).env.SSR) {
       const { collect } = setup(app)
       app.provide('css-render-collect', collect)

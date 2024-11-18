@@ -333,22 +333,26 @@ export default defineConfig({
 
 #### （1）安装
 
+图标库：[xicons material](https://xicons.org/#/)
+
+时间库：[dayjs](https://day.js.org/zh-CN/)
+
 ::: code-group
 
 ```sh [npm]
-npm install -D @css-render/vue3-ssr naive-ui
+npm install -D @css-render/vue3-ssr naive-ui @vicons/material dayjs
 ```
 
 ```sh [yarn]
-yarn add -D @css-render/vue3-ssr naive-ui
+yarn add -D @css-render/vue3-ssr naive-ui @vicons/material dayjs
 ```
 
 ```sh [pnpm]
-pnpm add -D @css-render/vue3-ssr naive-ui
+pnpm add -D @css-render/vue3-ssr naive-ui @vicons/material dayjs
 ```
 
 ```sh [bun]
-bun add -d @css-render/vue3-ssr naive-ui
+bun add -d @css-render/vue3-ssr naive-ui @vicons/material dayjs
 ```
 
 :::
@@ -565,9 +569,7 @@ export default defineConfig({
 
 默认首页是`docs/index.md`
 
-### 6.1 自定义首页组件
-
-#### （1）配置
+### 6.1 自定义组件
 
 由于想自己写首页样式，所以仅保留 `layout: home`
 
@@ -603,70 +605,1203 @@ import ArticleList from './.vitepress/components/ArticleList.vue'
 <ArticleList />
 ```
 
-#### （2）调整
-
 此时首页会白屏，因为自定义组件没有内容
 
 ![效果图](../img/blog-change7.png)
 
-自定义组件时，顶部导航栏的下边框可以加入一个细线
+### 6.2 设置文章信息
 
-`.vitepress/components/ArticleList.vue` 文件
+首先得了解 [vitepress frontmatter](https://vitepress.dev/zh/guide/frontmatter) . 文章可以在顶部自定义信息，如标题、描述、作者、标签、时间等，自定义信息后，可使用各种api访问
 
-```vue
-<style>
-.VPNavBar.home.top {
-  border-bottom: 1px solid #f2f3f5;
-}
+- 在 docs文件夹下新建 2023、2024 、pages 文件夹，移入示例文章
 
-.dark {
-  .VPNavBar.home.top {
-    border-bottom: 1px solid #000;
-  }
-}
-</style>
-```
+  此项目的是以文件夹的名称按年份排序，个人习惯，可根据个人需求调整
 
-#### （3）设置文章信息
+  ![文件夹](../img/blog-change8.png)
 
-首先得了解 [vitepress frontmatter](https://vitepress.dev/zh/guide/frontmatter)
+- frontmatter 可自定义key，我的配置如下（`每个文章都需要配置`）：
 
-指的是文章可以在顶部自定义信息，如标题、描述、作者、标签、时间等，自定义信息后，可使用各种api访问
+  ```md
+  ---
+  title: vitepress博客搭建
+  date: 2024-11-12
+  info: 个人博客技术栈更新，快速搭建一个vitepress自定义博客
+  tags:
+    - vitepress
+    - vuepress
+  ---
+  ```
 
-frontmatter 可自定义key，我的配置如下（`每个文章都需要配置`）：
+- 示例md
 
-```md
----
-title: vitepress博客搭建
-date: 2024-11-12
-info: 个人博客技术栈更新，快速搭建一个vitepress自定义博客
-tags:
-  - vitepress
-  - vuepress
----
-```
+  `next/pre` 指的是文章底部的下一篇/上一篇
 
-#### （4）首页获取文章列表
+  `sidebar` 指的是左侧文章列表
+
+  ::: code-group
+
+  ```md [about.md]
+  ---
+  title: 关于我
+  date: 2024-11-12
+  prev: false
+  next: false
+  ---
+
+  # 关于我
+
+  这里是关于我页面
+  ```
+
+  ```md [webPage.md]
+  ---
+  title: 实用网页
+  date: 2024-11-12
+  prev: false
+  next: false
+  sidebar: false
+  ---
+
+  # 实用网页
+
+  这里是实用网页页面
+  ```
+
+  :::
+
+### 6.3 首页获取文章列表
 
 官方文档：[vitepress createcontentloader](https://vitepress.dev/zh/guide/data-loading#createcontentloader)
 
 VitePress 提供了一个 createContentLoader 辅助函数，可通过它获取到匹配的文章列表信息
 
-新建 `.vitepress/utils/posts.data.ts` 文件
+- ESM模式 `package.json`
+
+  ```json
+  "type": "module"
+  ```
+
+- 新建 `.vitepress/utils/posts.data.ts` 文件
+
+  ```ts
+  import { createContentLoader } from 'vitepress'
+
+  export default createContentLoader('../docs/*/*.md' /* options */)
+  ```
+
+- 在主页组件中引入并打印
+
+  `.vitepress/components/ArticleList.vue` 此处用了类型忽略
+
+  ```ts
+  // @ts-ignore
+  import { data as posts } from '../utils/posts.data'
+  console.log(posts)
+  ```
+
+  <img src="../img/blog-change9.png" style="border:1px solid #efefef" />
+
+### 6.4 时间线展示文章
+
+此处可以自行设计，我使用的是时间线展示。
+
+- 首先，需要定义一些暗色和亮色的公共样式
+
+  官方文档：[vitepress 自定义css](https://vitepress.dev/zh/guide/extending-default-theme#customizing-css)
+
+  新建 `.vitepress/theme/styles/global.css` & `.vitepress/theme/styles/rewrite.css` 文件
+
+  此处是区分重写样式和个人自定义的样式，可根据个人需求调整
+  ::: code-group
+
+  ```css [global.css]
+  @import './rewrite.css';
+
+  :root {
+    --border-color-1: rgb(242, 243, 245);
+    --black-color-1: rgb(60, 60, 67);
+    --grey-color-1: rgb(134, 144, 156);
+    --grey-color-2: rgb(229, 230, 235);
+    --blue-color-1: rgb(22, 93, 255);
+    --border-radius: 8px;
+    img {
+      display: block;
+      margin: auto;
+      cursor: pointer;
+    }
+    .vp-doc {
+      h2:first-of-type {
+        margin: 10px 0 16px;
+        padding-top: 15px;
+      }
+    }
+    .VPHome {
+      margin-bottom: 23px;
+    }
+  }
+
+  .dark {
+    --border-color-1: rgba(255, 255, 255, 0.08);
+    --black-color-1: rgba(255, 255, 255, 0.9);
+    --grey-color-1: rgba(255, 255, 255, 0.5);
+    --grey-color-2: rgb(72, 72, 73);
+    --blue-color-1: rgb(60, 126, 255);
+  }
+  ```
+
+  ```css [rewrite.css]
+  .VPNavBar.home.top {
+    border-bottom: 1px solid #f2f3f5;
+  }
+
+  .dark {
+    .VPNavBar.home.top {
+      border-bottom: 1px solid #000;
+    }
+  }
+
+  :root {
+    .vp-doc .custom-block {
+      padding: 8px 16px;
+    }
+
+    .vp-doc .custom-block :first-child:first-child {
+      margin: 8px 0;
+    }
+
+    .VPMenuGroup > .title {
+      font-size: 0.7em;
+    }
+
+    /* 链接 */
+
+    .vp-doc a {
+      background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center
+        bottom / 100% 2px;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .vp-doc a:hover {
+      border-radius: 0.2em;
+      background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center
+        bottom / 100% 100%;
+    }
+
+    .vp-doc strong {
+      background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center
+        bottom / 100% 40%;
+    }
+
+    .vp-doc s {
+      opacity: 0.6;
+    }
+
+    /* 文章目录hover */
+    .VPDocOutlineItem.root > li > a,
+    .VPDocOutlineItem.nested > li > a {
+      padding-left: 5px;
+      padding-right: 5px;
+      border-radius: 5px;
+    }
+    .VPDocOutlineItem.root > li > a:first-child:hover,
+    .VPDocOutlineItem.root > li > a:first-child.active,
+    .VPDocOutlineItem.nested li > a:hover,
+    .VPDocOutlineItem.nested li > a.active {
+      background-color: var(--grayA3);
+    }
+  }
+  ```
+
+  :::
+
+- 导入样式
+
+  官方文档：[vitepress 自定义主题](https://vitepress.dev/zh/guide/custom-theme)
+
+  新建 `.vitepress/theme/index.ts` 文件
+
+  ```ts
+  import './styles/global.css'
+  // ...
+  ```
+
+- 主页设计
+
+  不多解释，放置一个头像 `docs/public/assets/avatar.jpg` 即可。
+
+  注意：此处深色区域，过滤了 `/pages/` 路径下的文章，因为该路径下的文件是作为独立页面展示的，参考博客中的`关于我/闲聊`。
+
+  ```vue{9-19}
+  <script setup lang="ts">
+  import { NTimeline, NTimelineItem, NIcon, NBackTop, NTag } from 'naive-ui'
+  import { useRouter } from 'vitepress'
+  import dayjs from 'dayjs'
+  import { EmailOutlined, DiscountOutlined } from '@vicons/material'
+  // @ts-ignore
+  import { data as posts } from '../utils/posts.data'
+  const router = useRouter()
+  const list = posts
+    .filter((item) => !item.url.includes('/pages/'))
+    .map((item) => ({
+      ...item,
+      unixDate: dayjs(item.frontmatter.date).unix(),
+    }))
+    .sort((a, b) => b.unixDate - a.unixDate)
+    .map((item) => {
+      const { unixDate, ...rest } = item
+      return rest
+    })
+  const jump = (path: string) => {
+    router.go(path)
+  }
+  </script>
+
+  <template>
+    <div class="artical-list">
+      <section class="left-wrapper">
+        <img class="avatar" src="/assets/avatar.jpg" alt="avatar" />
+        <p class="name">holden</p>
+        <p class="text">快不快乐有天总过去</p>
+        <div class="email">
+          <NIcon :size="23">
+            <EmailOutlined />
+          </NIcon>
+          holden.lee@aliyun.com
+        </div>
+      </section>
+      <section class="right-wrapper">
+        <n-timeline size="large">
+          <n-timeline-item v-for="item in list">
+            <template #icon>
+              <div class="icon">
+                <p>{{ dayjs(item.frontmatter.date).format('YYYY-MM-DD') }}</p>
+                <div class="dot"></div>
+              </div>
+            </template>
+            <template #default>
+              <div class="card" @click="jump(item.url)">
+                <div class="title">{{ item.frontmatter.title }}</div>
+                <div class="tags">
+                  <n-tag :bordered="false" type="info" v-for="tagItem in item.frontmatter.tags">
+                    {{ tagItem }}
+                    <template #icon>
+                      <n-icon :size="16" :component="DiscountOutlined" />
+                    </template>
+                  </n-tag>
+                </div>
+                <div class="info">{{ item.frontmatter.info ?? '无简介' }}</div>
+                <div class="date">{{ dayjs(item.frontmatter.date).format('YYYY-MM-DD') }}</div>
+              </div>
+            </template>
+          </n-timeline-item>
+        </n-timeline>
+      </section>
+      <n-back-top :right="10" />
+    </div>
+  </template>
+
+  <style scoped lang="scss">
+  .artical-list {
+    width: 100%;
+    height: 100%;
+    color: var(--black-color-1);
+    display: flex;
+
+    .left-wrapper {
+      position: sticky;
+      top: 92px;
+      margin-top: 3vh;
+      border: 1px solid var(--border-color-1);
+      width: 250px;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-radius: var(--border-radius);
+
+      p {
+        margin: 0;
+      }
+
+      .avatar {
+        width: 100px;
+        border-radius: 100%;
+        user-select: none;
+        cursor: auto;
+        margin: 40px 0 0 0;
+      }
+
+      .name {
+        font-size: 20px;
+        margin: 10px 0;
+      }
+
+      .text {
+        font-size: 14px;
+        color: var(--grey-color-1);
+        user-select: none;
+      }
+
+      .email {
+        width: 100%;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+    }
+
+    .right-wrapper {
+      margin-left: 150px;
+      margin-top: 3vh;
+      width: calc(100% - 250px - 150px);
+      min-width: 300px;
+
+      :deep(.n-timeline-item-timeline__line) {
+        background-color: var(--grey-color-2);
+      }
+
+      .card {
+        cursor: pointer;
+      }
+
+      .icon {
+        width: 6px;
+        height: 6px;
+        position: relative;
+
+        p {
+          position: absolute;
+          margin: 0;
+          width: 130px;
+          left: -140px;
+          top: -2px;
+          font-size: 12px;
+          line-height: 12px;
+          height: 12px;
+          text-align: right;
+        }
+
+        .dot {
+          width: 100%;
+          height: 100%;
+          border-radius: 100%;
+          background-color: var(--blue-color-1);
+        }
+      }
+
+      .card {
+        width: 100%;
+        min-height: 120px;
+        color: var(--black-color-1);
+        border: 1px solid var(--border-color-1);
+        border-radius: var(--border-radius);
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        .title {
+          font-size: 20px;
+          font-weight: 700;
+          cursor: pointer;
+        }
+
+        .tags {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+
+          .n-tag {
+            margin-right: 10px;
+          }
+        }
+
+        .info,
+        .date {
+          font-size: 14px;
+          color: var(--grey-color-1);
+          margin-top: 5px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        .date {
+          display: none;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 730px) {
+    .artical-list {
+      flex-direction: column;
+
+      .left-wrapper {
+        min-width: 300px;
+        width: 100%;
+        position: static;
+      }
+
+      .right-wrapper {
+        margin-left: 0;
+        width: 100%;
+
+        .icon {
+          p {
+            display: none;
+          }
+        }
+      }
+
+      .card {
+        .date {
+          display: block !important;
+        }
+
+        .info {
+          display: none !important;
+        }
+      }
+    }
+  }
+  </style>
+  ```
+
+- 效果图
+
+  ![图](../img/blog-change10.png)
+
+## 7. 文章侧边栏
+
+官方文档：[vitepress 侧边栏](https://vitepress.dev/zh/reference/default-theme-sidebar)
+
+正常情况下，需要手动配置侧边栏
 
 ```ts
-import { createContentLoader } from 'vitepress'
-
-export default createContentLoader('../docs/*/*.md' /* options */)
+export default {
+  themeConfig: {
+    sidebar: [
+      {
+        text: 'Guide',
+        items: [
+          { text: 'Introduction', link: '/introduction' },
+          { text: 'Getting Started', link: '/getting-started' },
+          ...
+        ]
+      }
+    ]
+  }
+}
 ```
 
-在主页组件中引入
+### 7.1 使用插件
 
-`.vitepress/components/ArticleList.vue` 此处用了类型忽略
+插件可以自动生成侧边栏并且根据文章名称日期排序
+
+[vitepress-sidebar](https://vitepress-sidebar.cdget.com/)
+
+::: code-group
+
+```sh [npm]
+npm i -D vitepress-sidebar
+```
+
+```sh [yarn]
+yarn add -D vitepress-sidebar
+```
+
+```sh [pnpm]
+pnpm add -D vitepress-sidebar
+```
+
+```sh [bun]
+bun add -D vitepress-sidebar
+```
+
+:::
+
+`.vitepress/config.mts` 文件，具体配置请看官方文档
 
 ```ts
-// @ts-ignore
-import { data as posts } from '../utils/posts.data'
+import { generateSidebar } from 'vitepress-sidebar'
+// ...
+
+const autoSidebar = () => {
+  let result: any = generateSidebar({
+    documentRootPath: '/docs',
+    collapseDepth: 2,
+    useTitleFromFrontmatter: true,
+    sortMenusByFrontmatterDate: true,
+    sortMenusOrderByDescending: true,
+  })
+  return result.map((year) => ({
+    ...year,
+    items: year.items.reverse(),
+  }))
+}
+
+export default defineConfig({
+  // ...
+  themeConfig: {
+    sidebar: autoSidebar(),
+  },
+  // ...
+})
 ```
 
-打印data
+配置完成后的效果
+
+![图](../img/blog-change11.png)
+
+### 7.2 优化
+
+侧边栏中，会显示docs文件夹下所有的md，包括了我们需要单独显示的pages目录
+
+如果直接在autoSideBar函数中过滤pages目录下的文件，则无法跳转，因此得从页面下手，css隐藏。（如果不需要隐藏该目录的话，以下步骤忽视）
+
+- 新建 `.vitepress/theme/MyLayout.vue` 文件
+
+  ```vue
+  <script setup lang="ts">
+  import DefaultTheme from 'vitepress/theme'
+  import { useRoute } from 'vitepress'
+  import { watch, nextTick, onMounted } from 'vue'
+  const { Layout } = DefaultTheme
+  const route = useRoute()
+
+  onMounted(() => {
+    hideSpecificSidebarItem()
+  })
+
+  watch(
+    () => route.path,
+    (_, oldPath) => {
+      if (oldPath === '/') {
+        nextTick(() => {
+          hideSpecificSidebarItem()
+        })
+      }
+    }
+  )
+
+  // 隐藏pages
+  function hideSpecificSidebarItem() {
+    const sidebarItems = document.querySelectorAll(
+      '#VPSidebarNav > .group'
+    ) as NodeListOf<HTMLElement>
+    sidebarItems.forEach((item, index) => {
+      const textContent = item.querySelector('.text')?.textContent?.trim()
+      if (textContent === 'pages') {
+        item.style.display = 'none'
+        sidebarItems[index + 1].style.borderTop = 'none'
+      }
+    })
+  }
+  </script>
+
+  <template>
+    <Layout></Layout>
+  </template>
+
+  <style scoped lang="scss"></style>
+  ```
+
+- 修改 `.vitepress/theme/index.ts` 文件
+
+  ```ts{1,11}
+  import MyLayout from './MyLayout.vue'
+  // ...
+
+  const NaiveUIProvider = defineComponent({
+    render() {
+      return h(
+        NConfigProvider,
+        { abstract: true, inlineThemeDisabled: true },
+        {
+          default: () => [
+            h(MyLayout, null, { default: this.$slots.default?.() }),
+            import.meta.env.SSR ? [h(CssRenderStyle), h(VitepressPath)] : null,
+          ],
+        }
+      )
+    },
+  })
+
+  // ...
+  ```
+
+- 效果
+
+  ![图](../img/blog-change12.png)
+
+## 8. 文章信息统计
+
+![图](../img/blog-change13.png)
+
+- 新建 `.vitepress/utils/getReadingTime.ts` 文件
+
+  ```ts
+  export function getWords(content: string): RegExpMatchArray | null {
+    // 仅匹配英文单词，忽略标点和纯数字
+    return content.match(/\b[a-zA-Z]+(?:['-]?[a-zA-Z]+)?\b/gu)
+  }
+
+  export function getChinese(content: string): RegExpMatchArray | null {
+    // 匹配中文字符
+    return content.match(/[\u4E00-\u9FD5]/gu)
+  }
+
+  export function getEnWordCount(content: string): number {
+    // 英文单词数量
+    return getWords(content)?.length || 0
+  }
+
+  export function getCnWordCount(content: string): number {
+    // 中文字符数量
+    return getChinese(content)?.length || 0
+  }
+
+  export function getWordNumber(content: string): number {
+    // 总字数统计
+    const enWordCount = getEnWordCount(content)
+    const cnWordCount = getCnWordCount(content)
+    return enWordCount + cnWordCount
+  }
+
+  export function getReadingTime(content: string, cnWordPerMinute = 350, enWordPerMinute = 160) {
+    const trimmedContent = content.trim()
+    const enWord = getEnWordCount(trimmedContent)
+    const cnWord = getCnWordCount(trimmedContent)
+
+    const totalWords = enWord + cnWord
+    const words = totalWords >= 1000 ? `${Math.round(totalWords / 100) / 10}k` : totalWords
+
+    const readingTime = cnWord / cnWordPerMinute + enWord / enWordPerMinute
+    const readTime = Math.ceil(readingTime)
+
+    return {
+      readTime,
+      words,
+    }
+  }
+  ```
+
+- 新建 `.vitepress/plugins/headerPlugin.ts` 文件
+
+  ```ts
+  import { Plugin } from 'vite'
+  import { getReadingTime } from '../utils/getReadingTime'
+  import fs from 'fs'
+
+  export function HeaderPlugin(): Plugin {
+    return {
+      name: 'header-plugin',
+      enforce: 'pre',
+      async transform(code, id) {
+        if (!id.match(/\.md\b/)) return null
+
+        const cleanContent = cleanMarkdownContent(code)
+
+        // 获取文件的最近更新时间
+        const lastUpdated = getLastUpdatedTime(id)
+
+        // 获取阅读时间和字数
+        const { readTime, words } = getReadingTime(cleanContent)
+
+        // 插入组件到文章中
+        code = insertReadingTimeAndWords(
+          `<ArticleHeader readTime="${readTime}" words="${words}" lastUpdated="${lastUpdated}" />`,
+          code
+        )
+        return code
+      },
+    }
+  }
+
+  // 获取文件的最近更新时间
+  function getLastUpdatedTime(filePath: string): string {
+    const stats = fs.statSync(filePath)
+    const lastModifiedTime = stats.mtime
+    return lastModifiedTime.toLocaleString()
+  }
+
+  // 插入目标字符串到第一个一级标题后
+  function insertReadingTimeAndWords(target: string, source: string) {
+    const headerRegex = /(^#\s.+$)/m
+    return source.replace(headerRegex, `$1\n\n${target}`)
+  }
+
+  // 去掉 Frontmatter
+  function cleanMarkdownContent(content: string): string {
+    return content.replace(/^---[\s\S]+?---\n+/g, '').trim()
+  }
+  ```
+
+- `.vitepress/config.mts` 文件
+
+  ```ts{1,6}
+  import { HeaderPlugin } from './plugins/headerPlugin'
+  // ...
+  export default defineConfig({
+    vite: [
+      // ...
+      HeaderPlugin(),
+    ],
+  })
+  ```
+
+- 新建 `.vitepress/components/ArticleHeader.vue` 组件
+
+  ```vue
+  <script setup lang="ts">
+  import {
+    AccessTimeFilled,
+    ArticleOutlined,
+    BorderColorOutlined,
+    UpdateOutlined,
+    DiscountOutlined,
+  } from '@vicons/material'
+  import { NIcon, NTag } from 'naive-ui'
+  import { useData } from 'vitepress'
+  import dayjs from 'dayjs'
+  const { frontmatter } = useData()
+  defineProps<{
+    readTime: string
+    words: string
+    lastUpdated: string
+  }>()
+  </script>
+
+  <template>
+    <div class="header">
+      <section class="info">
+        <div class="read">
+          <NIcon :size="20">
+            <AccessTimeFilled />
+          </NIcon>
+          阅读时间:
+          <p>{{ readTime }}</p>
+          分钟
+        </div>
+        <div class="words">
+          <NIcon :size="20">
+            <ArticleOutlined />
+          </NIcon>
+          文章字数:
+          <p>{{ words }}</p>
+          字
+        </div>
+        <div class="write">
+          <NIcon :size="18">
+            <BorderColorOutlined />
+          </NIcon>
+          发布日期:
+          <p>{{ dayjs(frontmatter.date).format('YYYY-MM-DD') }}</p>
+        </div>
+        <div class="update">
+          <NIcon :size="20">
+            <UpdateOutlined />
+          </NIcon>
+          最近更新:
+          <p>{{ dayjs(lastUpdated).format('YYYY-MM-DD') }}</p>
+        </div>
+      </section>
+      <section class="tags">
+        <n-tag :bordered="false" type="info" v-for="item in frontmatter.tags">
+          {{ item }}
+          <template #icon>
+            <n-icon :size="16" :component="DiscountOutlined" />
+          </template>
+        </n-tag>
+      </section>
+    </div>
+  </template>
+
+  <style scoped lang="scss">
+  .header {
+    width: 100%;
+
+    .info {
+      width: 100%;
+      display: flex;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      flex-wrap: wrap;
+      font-size: 14px;
+      color: var(--grey-color-1);
+
+      .read,
+      .words,
+      .write,
+      .update {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 8px;
+
+        p {
+          margin: 0 5px;
+        }
+
+        i {
+          margin-right: 2px;
+        }
+      }
+    }
+
+    .tags {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+
+      .n-tag {
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+  </style>
+  ```
+
+- 配置全局组件
+
+  `.vitepress/theme/index.ts`
+
+  ```ts{1,7}
+  import ArticleHeader from '../components/ArticleHeader.vue'
+  // ...
+  export default {
+    extends: DefaultTheme,
+    Layout: NaiveUIProvider,
+    enhanceApp: ({ app }) => {
+      import ArticleHeader from '../components/ArticleHeader.vue'
+      if (import.meta.env.SSR) {
+        const { collect } = setup(app)
+        app.provide('css-render-collect', collect)
+      }
+    },
+  }
+  ```
+
+- 效果
+
+  ![图](../img/blog-change14.png)
+
+## 9. 评论插件
+
+我使用的是：[@giscus/vue](https://giscus.app/zh-CN)，无跟踪，无广告，永久免费，github邮箱通知，支持暗色切换。
+
+### 9.1 安装配置
+
+- 新建一个 `公开` 仓库，打开仓库 Settings，勾选 Discussions，开启评论区
+
+  私有仓库的话访客无法查看讨论
+
+  ![图](../img/blog-change15.png)
+
+- GitHub 安装 giscus
+
+  [点击此处安装](https://github.com/apps/giscus)
+
+  ![图](../img/blog-change16.png)
+
+- giscus 配置
+
+  安装完毕后，点击 Configure 配置 giscus，选中刚刚创建的仓库，点击保存
+
+  ![图](../img/blog-change17.png)
+
+- 项目中安装
+
+  ::: code-group
+
+  ```sh [npm]
+  npm i -D @giscus/vue
+  ```
+
+  ```sh [yarn]
+  yarn add -D @giscus/vue
+  ```
+
+  ```sh [pnpm]
+  pnpm add -D @giscus/vue
+  ```
+
+  ```sh [bun]
+  bun add -D @giscus/vue
+  ```
+
+  :::
+
+### 9.2 获取设置
+
+- 去官方文档获取设置
+
+  [点击这里去获取](https://giscus.app/zh-CN)
+
+- 填写自己的仓库信息
+
+  ![图](../img/blog-change18.png)
+
+- 滚到到下边，获取设置
+
+  ![图](../img/blog-change19.png)
+
+### 9.3 使用
+
+利用默认布局组件 Layout 的 doc-after 插槽将 giscus 组件放入页面中
+
+官方文档：[vitepress 布局插槽](https://vitepress.dev/zh/guide/extending-default-theme#layout-slots)
+
+`.vitepress/theme/MyLayout.vue` 文件
+
+```vue{2,7-24}
+<script setup lang="ts">
+import Giscus from '@giscus/vue'
+import { useRoute,useData } from "vitepress";
+const { page } = useData()
+// ...
+</script>
+<template>
+  <Layout>
+     <template #doc-after>
+        <div style="margin-top: 24px">
+          <Giscus
+            :key="page.filePath"
+            repo="lee-holden/vitepress-blog-template"
+            repo-id="R_kgDONRAkeA"
+            category="Announcements"
+            category-id="IC_kwDONRAkeM4CkXRA"
+            mapping="title"
+            strict="0"
+            reactions-enabled="1"
+            emit-metadata="0"
+            input-position="top"
+            lang="zh-CN"
+            crossorigin="anonymous"
+          />
+        </div>
+    </template>
+  </Layout>
+</template>
+
+<style scoped lang="scss"></style>
+```
+
+- 效果
+
+  ![图](../img/blog-change20.png)
+
+### 9.4 优化
+
+尝试切换亮/暗样式会发现评论组件不会跟随切换，这需要与 giscus 通信实现。
+
+giscus 可以通过 message 与 giscus iframe 通信，所以我们在切换样式时通知 giscus 同步切换即可，恰好vitepress提供了 isDark 数据，我们可以监听它进行切换
+
+官方文档：[vitepress useData](https://vitepress.dev/zh/reference/runtime-api#usedata)
+
+官方文档：[giscus-to-parent-message-events](https://github.com/giscus/giscus/blob/main/ADVANCED-USAGE.md#giscus-to-parent-message-events)
+
+`.vitepress/theme/MyLayout.vue` 文件
+
+```vue{2-3,5-14,34}
+<script setup lang="ts">
+const { page, isDark } = useData()
+import { useRoute, useData, inBrowser } from 'vitepress'
+
+watch(isDark, (dark) => {
+  if (!inBrowser) return
+
+  const iframe = document.querySelector('giscus-widget')?.shadowRoot?.querySelector('iframe')
+
+  iframe?.contentWindow?.postMessage(
+    { giscus: { setConfig: { theme: dark ? 'dark' : 'light' } } },
+    'https://giscus.app'
+  )
+})
+
+// ...
+</script>
+
+<template>
+  <Layout>
+    <template #doc-after>
+      <div style="margin-top: 24px">
+        <Giscus
+          :key="page.filePath"
+          repo="lee-holden/vitepress-blog-template"
+          repo-id="R_kgDONRAkeA"
+          category="Announcements"
+          category-id="IC_kwDONRAkeM4CkXRA"
+          mapping="title"
+          strict="0"
+          reactions-enabled="1"
+          emit-metadata="0"
+          input-position="top"
+          :theme="isDark ? 'dark' : 'light'"
+          lang="zh-CN"
+          crossorigin="anonymous"
+        />
+      </div>
+    </template>
+  </Layout>
+</template>
+
+<style scoped lang="scss"></style>
+```
+
+- 效果
+
+  ![图](../img/blog-change21.png)
+
+## 10. 项目配置
+
+### 10.1 prettier
+
+- 安装vscode拓展：Prettier - Code formatter
+
+- 安装prettier库
+  ::: code-group
+
+  ```sh [npm]
+  npm i -D prettier
+  ```
+
+  ```sh [yarn]
+  yarn add -D prettier
+  ```
+
+  ```sh [pnpm]
+  pnpm add -D prettier
+  ```
+
+  ```sh [bun]
+  bun add -D prettier
+  ```
+
+  :::
+
+- 项目根目录，新建 `.prettierrc` 文件
+
+  ```json
+  {
+    "printWidth": 100,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": false,
+    "singleQuote": true,
+    "quoteProps": "as-needed",
+    "jsxSingleQuote": false,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "arrowParens": "always",
+    "proseWrap": "preserve",
+    "htmlWhitespaceSensitivity": "css",
+    "endOfLine": "lf"
+  }
+  ```
+
+- 项目根目录，新建 `.vscode/settings.json`
+
+  ```json
+  {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[html]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[css]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[scss]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[vue]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "prettier.configPath": "./.prettierrc"
+  }
+  ```
+
+- 项目根目录，新建 `.prettierignore` 文件
+
+  ```json
+  cache
+  node_modules
+  dist
+  temp
+  public
+  !docs
+  ```
+
+- 格式化全部文件
+
+  ::: code-group
+
+  ```sh [npm]
+  npx prettier --write .
+  ```
+
+  ```sh [yarn]
+  yarn prettier --write .
+  ```
+
+  ```sh [pnpm]
+  pnpm prettier --write .
+  ```
+
+  ```sh [bun]
+  bun prettier --write .
+  ```
+
+  :::
+
+### 10.2 git
+
+- 项目根目录，新建 `.gitignore` 文件
+
+  ```json
+  node_modules
+  .temp
+  docs/.vitepress/cache
+  dist
+  cache
+  .eslintcache
+  components.d.ts
+  .env.local
+  .env.\*.local
+  npm-debug.log*
+  yarn-debug.log*
+  yarn-error.log*
+  pnpm-debug.log*
+  meta.json
+  ```
+
+- 配置git仓库并且推送
+
+  ```sh
+  git init
+  git add .
+  git commit -m 'first commit'
+  git remote add origin git@github.com:lee-holden/vitepress-blog-template.git
+  git push -u origin master
+  ```
+
+## 11. 自动部署GitHub Pages
+
+- 项目根目录，新建 `.github/workflows/deploy.yml`
