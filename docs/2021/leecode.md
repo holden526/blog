@@ -14,7 +14,7 @@ tags:
 
 [题目](https://www.yuque.com/cuggz/interview/cmno8a)
 
-## 一、数字类
+## 1. 数字类
 
 我常用的方法:
 
@@ -31,7 +31,7 @@ isNaN(number / String) // 判断值是否为NaN; 可用于检测是否为数字
 array.unshift(xxx) // 在数组前插入
 ```
 
-### 1. LeeCode 第 7 题：整数反转
+### 1.1 LeeCode 第 7 题：整数反转
 
 幂表示方法：
 
@@ -40,7 +40,7 @@ Math.pow(-2, 31) // -2^31 可表示负数
 2 ** 31 //  2^31 不可为负
 ```
 
-### 2. LeeCode 第 43 题：字符串相乘
+### 1.2 LeeCode 第 43 题：字符串相乘
 
 JavaScript 中的最大安全整数是 9007199254740991，当我们进行超出这个范围的数值计算的时候就无法得到精确的值，而是一个近似值。
 
@@ -68,7 +68,7 @@ var multiply = function (num1, num2) {
 }
 ```
 
-### 3. LeeCode 第 168 题：Excel 表列名称
+### 1.3 LeeCode 第 168 题：Excel 表列名称
 
 将数字转换为 ASCII 码
 
@@ -79,7 +79,7 @@ var num = 65
 String.fromCharCode(num) // A
 ```
 
-### 4. LeeCode 第 171 题：Excel 表列名称
+### 1.4 LeeCode 第 171 题：Excel 表列名称
 
 将数字转换为 ASCII 码
 

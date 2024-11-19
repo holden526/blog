@@ -81,7 +81,7 @@ tags:
 <link href="css/test2.css" rel="stylesheet" media="(min-width:200px)"></link>
 ```
 
-<hr>
+>
 
 ## 2. flex 弹性布局
 
@@ -135,7 +135,7 @@ flex 的特殊写法
 | flex:100px; | flex:1 1 100px |                        自适应大小                        |
 |   flex:1;   |  flex:1 1 0%   |                        自适应大小                        |
 
-<hr>
+>
 
 ## 3. rem 布局
 
@@ -168,7 +168,7 @@ let htmlDom = document.documentElement
 htmlDom.style.fontSize = (htmlWidth / baseDevice) * 16 + 'px'
 ```
 
-<hr>
+>
 
 ## 4. 自适应布局
 
@@ -220,7 +220,7 @@ htmlDom.style.fontSize = (htmlWidth / baseDevice) * 16 + 'px'
 </body>
 ```
 
-<hr>
+>
 
 ## 5. 百分比布局
 
@@ -237,7 +237,7 @@ htmlDom.style.fontSize = (htmlWidth / baseDevice) * 16 + 'px'
 |           line-height            |         基于当前字体的 font-size          |
 |       transform(left, top)       |           基于自身的 left， top           |
 
-<hr>
+>
 
 ## 6. grid 布局
 
