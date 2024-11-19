@@ -1804,4 +1804,519 @@ watch(isDark, (dark) => {
 
 ## 11. 自动部署GitHub Pages
 
+官方文档：[vitepress 部署](https://vitepress.dev/zh/guide/deploy#github-pages)
+
+- 设置根目录
+
+  官方文档：[vitepress 根目录设置](https://vitepress.dev/zh/guide/deploy#setting-a-public-base-path)
+
+  如果你使用的是 Github 页面并部署到 user.github.io/repo/，请将 base 设置为 /repo/。
+
+  `.vitepress/config.mts` 文件
+
+  ```ts{3}
+  // ...
+  export default defineConfig({
+    base: '/vitepress-blog-template/', // 替换成你的仓库名称
+    // ...
+  })
+  ```
+
+  `.vitepress/components/ArticleList.vue`
+
+  ```vue{4}
+  <script setup lang="ts">
+  // ...
+  const jump = (path: string) => {
+    router.go('vitepress-blog-template' + path)
+  }
+  </script>
+
+  // ...
+  ```
+
+- 开启GitHub Pages 功能
+
+  ![图](../img/blog-change22.png)
+
 - 项目根目录，新建 `.github/workflows/deploy.yml`
+  ::: code-group
+
+  ```yml [官方示例]
+  # 构建 VitePress 站点并将其部署到 GitHub Pages 的示例工作流程
+  #
+  name: Deploy VitePress site to Pages
+
+  on:
+    # 在针对 `main` 分支的推送上运行。如果你
+    # 使用 `master` 分支作为默认分支，请将其更改为 `master`
+    push:
+      branches: [main]
+
+    # 允许你从 Actions 选项卡手动运行此工作流程
+    workflow_dispatch:
+
+  # 设置 GITHUB_TOKEN 的权限，以允许部署到 GitHub Pages
+  permissions:
+    contents: read
+    pages: write
+    id-token: write
+
+  # 只允许同时进行一次部署，跳过正在运行和最新队列之间的运行队列
+  # 但是，不要取消正在进行的运行，因为我们希望允许这些生产部署完成
+  concurrency:
+    group: pages
+    cancel-in-progress: false
+
+  jobs:
+    # 构建工作
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0 # 如果未启用 lastUpdated，则不需要
+        # - uses: pnpm/action-setup@v3 # 如果使用 pnpm，请取消此区域注释
+        #   with:
+        #     version: 9
+        # - uses: oven-sh/setup-bun@v1 # 如果使用 Bun，请取消注释
+        - name: Setup Node
+          uses: actions/setup-node@v4
+          with:
+            node-version: 20
+            cache: npm # 或 pnpm / yarn
+        - name: Setup Pages
+          uses: actions/configure-pages@v4
+        - name: Install dependencies
+          run: npm ci # 或 pnpm install / yarn install / bun install
+        - name: Build with VitePress
+          run: npm run docs:build # 或 pnpm docs:build / yarn docs:build / bun run docs:build
+        - name: Upload artifact
+          uses: actions/upload-pages-artifact@v3
+          with:
+            path: docs/.vitepress/dist
+
+    # 部署工作
+    deploy:
+      environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}
+      needs: build
+      runs-on: ubuntu-latest
+      name: Deploy
+      steps:
+        - name: Deploy to GitHub Pages
+          id: deployment
+          uses: actions/deploy-pages@v4
+  ```
+
+  ```yml [pnpm]
+  name: Deploy VitePress site to Pages
+
+  on:
+    push:
+      branches:
+        - master
+        - main
+    workflow_dispatch:
+
+  permissions:
+    contents: read
+    pages: write
+    id-token: write
+
+  concurrency:
+    group: pages
+    cancel-in-progress: false
+
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 1 # 如果启用了 vitepress lastUpdated，则改成 0
+        - uses: pnpm/action-setup@v3
+          with:
+            version: 9
+        - name: Setup Node
+          uses: actions/setup-node@v4
+          with:
+            node-version: 20
+            cache: pnpm
+        - name: Setup Pages
+          uses: actions/configure-pages@v4
+        - name: Install dependencies
+          run: pnpm install
+        - name: Build with VitePress
+          run: pnpm docs:build
+        - name: Upload artifact
+          uses: actions/upload-pages-artifact@v3
+          with:
+            path: docs/.vitepress/dist
+
+    # 部署工作
+    deploy:
+      environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}
+      needs: build
+      runs-on: ubuntu-latest
+      name: Deploy
+      steps:
+        - name: Deploy to GitHub Pages
+          id: deployment
+          uses: actions/deploy-pages@v4
+  ```
+
+  :::
+
+- 推送代码到仓库，查看Action
+
+  此处可以看到，Action已经成功运行，点进去可以看到build和部署进程，如果出现报错，可以查看报错信息
+
+  ![图](../img/blog-change23.png)
+
+  ![图](../img/blog-change24.png)
+
+  ![图](../img/blog-change25.png)
+
+- 部署成功
+
+  [vitepress-blog-template](https://lee-holden.github.io/vitepress-blog-template/)
+
+## 12. 访问统计
+
+用的是 [busuanzi](https://busuanzi.ibruce.info/)
+
+- 安装
+  ::: code-group
+
+  ```sh [pnpm]
+  pnpm add -D busuanzi.pure.js
+  ```
+
+  ```sh [npm]
+  npm i -D busuanzi.pure.js
+  ```
+
+  ```sh [yarn]
+  yarn add -D busuanzi.pure.js
+  ```
+
+  ```sh [bun]
+  bun add -D busuanzi.pure.js
+  ```
+
+  :::
+
+- `.vitepress/theme/index.ts` 文件
+
+  ```ts{1-2,8,14-18}
+  import { inBrowser } from 'vitepress'
+  import busuanzi from 'busuanzi.pure.js'
+  // ...
+
+  export default {
+    extends: DefaultTheme,
+    Layout: NaiveUIProvider,
+    enhanceApp: ({ app, router }) => {
+      app.component('ArticleHeader', ArticleHeader)
+      if (import.meta.env.SSR) {
+        const { collect } = setup(app)
+        app.provide('css-render-collect', collect)
+      }
+      if (inBrowser) {
+        router.onAfterRouteChanged = () => {
+          busuanzi.fetch()
+        }
+      }
+    },
+  }
+  ```
+
+- `.vitepress/theme/MyLayout.vue` 文件
+
+  在网站底部插槽放入，官方文档：[vitepress 布局插槽](https://vitepress.dev/zh/guide/extending-default-theme#layout-slots)
+
+  ```vue{3-12,15-33}
+  <template>
+    <Layout>
+      <template #layout-bottom>
+        <div class="bottom">
+          <div>
+            本站总访问量
+            <span id="busuanzi_value_site_pv" class="font-bold">--</span> 次 本站访客数
+            <span id="busuanzi_value_site_uv" class="font-bold">--</span> 人次
+          </div>
+          <p>前端狗都不如 © 2021-2024 holden</p>
+        </div>
+      </template>
+    </Layout>
+    <!-- ... -->
+  </template>
+
+  <style lang="scss" scoped>
+  .bottom {
+    margin-left: 5%;
+    width: 90%;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid var(--border-color-1);
+    text-align: center;
+
+    p {
+      margin-top: 5px;
+    }
+  }
+  </style>
+  ```
+
+- 效果
+
+  可以自行调整底部样式
+
+  ![图](../img/blog-change26.png)
+
+## 13. 网站加载
+
+部署Github Pages后发现，白屏时间比较长，此时可以考虑使用加载页
+
+- 新建 `.vitepress/components/Loading.vue` 文件
+
+  ```vue
+  <script setup lang="ts"></script>
+
+  <template>
+    <div class="loading">
+      <div class="loader">
+        <div v-for="_ in 5"></div>
+      </div>
+    </div>
+  </template>
+
+  <style scoped lang="scss">
+  $color: #3451b2;
+
+  .loading {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .loader {
+    position: relative;
+  }
+  .loader > div:nth-child(2) {
+    -webkit-animation: pacman-balls 1s -0.99s infinite linear;
+    animation: pacman-balls 1s -0.99s infinite linear;
+  }
+  .loader > div:nth-child(3) {
+    -webkit-animation: pacman-balls 1s -0.66s infinite linear;
+    animation: pacman-balls 1s -0.66s infinite linear;
+  }
+  .loader > div:nth-child(4) {
+    -webkit-animation: pacman-balls 1s -0.33s infinite linear;
+    animation: pacman-balls 1s -0.33s infinite linear;
+  }
+  .loader > div:nth-child(5) {
+    -webkit-animation: pacman-balls 1s 0s infinite linear;
+    animation: pacman-balls 1s 0s infinite linear;
+  }
+  .loader > div:first-of-type {
+    width: 0px;
+    height: 0px;
+    border-right: 25px solid transparent;
+    border-top: 25px solid $color;
+    border-left: 25px solid $color;
+    border-bottom: 25px solid $color;
+    border-radius: 25px;
+    -webkit-animation: rotate_pacman_half_up 0.5s 0s infinite;
+    animation: rotate_pacman_half_up 0.5s 0s infinite;
+    position: relative;
+    left: -30px;
+  }
+  .loader > div:nth-child(2) {
+    width: 0px;
+    height: 0px;
+    border-right: 25px solid transparent;
+    border-top: 25px solid $color;
+    border-left: 25px solid $color;
+    border-bottom: 25px solid $color;
+    border-radius: 25px;
+    -webkit-animation: rotate_pacman_half_down 0.5s 0s infinite;
+    animation: rotate_pacman_half_down 0.5s 0s infinite;
+    margin-top: -50px;
+    position: relative;
+    left: -30px;
+  }
+  .loader > div:nth-child(3),
+  .loader > div:nth-child(4),
+  .loader > div:nth-child(5),
+  .loader > div:nth-child(6) {
+    background-color: $color;
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    margin: 2px;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    -webkit-transform: translate(0, -6.25px);
+    transform: translate(0, -6.25px);
+    top: 25px;
+    left: 70px;
+  }
+  @-webkit-keyframes cube-transition {
+    25% {
+      -webkit-transform: translateX(50px) scale(0.5) rotate(-90deg);
+      transform: translateX(50px) scale(0.5) rotate(-90deg);
+    }
+    50% {
+      -webkit-transform: translate(50px, 50px) rotate(-180deg);
+      transform: translate(50px, 50px) rotate(-180deg);
+    }
+    75% {
+      -webkit-transform: translateY(50px) scale(0.5) rotate(-270deg);
+      transform: translateY(50px) scale(0.5) rotate(-270deg);
+    }
+    100% {
+      -webkit-transform: rotate(-360deg);
+      transform: rotate(-360deg);
+    }
+  }
+  @keyframes cube-transition {
+    25% {
+      -webkit-transform: translateX(50px) scale(0.5) rotate(-90deg);
+      transform: translateX(50px) scale(0.5) rotate(-90deg);
+    }
+    50% {
+      -webkit-transform: translate(50px, 50px) rotate(-180deg);
+      transform: translate(50px, 50px) rotate(-180deg);
+    }
+    75% {
+      -webkit-transform: translateY(50px) scale(0.5) rotate(-270deg);
+      transform: translateY(50px) scale(0.5) rotate(-270deg);
+    }
+    100% {
+      -webkit-transform: rotate(-360deg);
+      transform: rotate(-360deg);
+    }
+  }
+  @-webkit-keyframes pacman-balls {
+    75% {
+      opacity: 0.7;
+    }
+    100% {
+      -webkit-transform: translate(-100px, -6.25px);
+      transform: translate(-100px, -6.25px);
+    }
+  }
+  @keyframes pacman-balls {
+    75% {
+      opacity: 0.7;
+    }
+    100% {
+      -webkit-transform: translate(-100px, -6.25px);
+      transform: translate(-100px, -6.25px);
+    }
+  }
+  @-webkit-keyframes rotate_pacman_half_down {
+    0% {
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+    50% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+  }
+  @keyframes rotate_pacman_half_down {
+    0% {
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+    50% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+  }
+  @-webkit-keyframes rotate_pacman_half_up {
+    0% {
+      -webkit-transform: rotate(270deg);
+      transform: rotate(270deg);
+    }
+    50% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+    100% {
+      -webkit-transform: rotate(270deg);
+      transform: rotate(270deg);
+    }
+  }
+  @keyframes rotate_pacman_half_up {
+    0% {
+      -webkit-transform: rotate(270deg);
+      transform: rotate(270deg);
+    }
+    50% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+    100% {
+      -webkit-transform: rotate(270deg);
+      transform: rotate(270deg);
+    }
+  }
+  </style>
+  ```
+
+- `.vitepress/theme/MyLayout.vue` 文件
+
+  ```vue
+  <script setup lang="ts">
+  // ...
+  import { watch, nextTick, onMounted, ref } from 'vue'
+  import Loading from '../components/Loading.vue'
+  const loading = ref(true)
+
+  onMounted(() => {
+    loading.value = false
+  })
+
+  // ...
+  </script>
+
+  <template>
+    <Loading v-show="loading" />
+    <Layout v-show="!loading">
+      <!-- ... -->
+    </Layout>
+  </template>
+  ```
+
+- 效果
+
+  ![loading](../img/blog-change27.png)
+
+## 总结
+
+从0创建vitepress博客，到部署到github pages，再到自定义主题，再到添加loading动画，一步步来，收获满满。
+
+有什么问题欢迎到评论区咨询，一起交流学习。
