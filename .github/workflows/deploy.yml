@@ -1,10 +1,10 @@
-# 构建 VitePress 站点并将其部署到 GitHub Pages 的工作流程
-#
 name: Deploy VitePress site to Pages
 
 on:
   push:
-    branches: [master]
+    branches:
+      - master
+      - main
   workflow_dispatch:
 
 permissions:
@@ -23,7 +23,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # 如果未启用 lastUpdated，则不需要
+          fetch-depth: 1 # 如果启用了 vitepress lastUpdated，则改成 0
       - uses: pnpm/action-setup@v3
         with:
           version: 9
