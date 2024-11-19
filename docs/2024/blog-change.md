@@ -27,6 +27,8 @@ tags:
 [vitepress博客](https://dddhl.cn)
 
 [vitepress仓库地址](https://github.com/lee-holden/blog)
+
+[vitepress-blog-template](https://github.com/lee-holden/vitepress-blog-template)
 :::
 
 旧版本图片预览：
@@ -2315,8 +2317,65 @@ watch(isDark, (dark) => {
 
   ![loading](../img/blog-change27.png)
 
+## 14. 图片放大
+
+vitepress文章中，图片点击没有任何效果，可以使用 [vitepress-plugin-image-viewer](https://github.com/T-miracle/vitepress-plugin-image-viewer) 这个插件
+
+- 安装
+  ::: code-group
+
+  ```sh [pnpm]
+  # Tip: If you use pnpm to install, you need to install viewerjs additionally.
+  pnpm add vitepress-plugin-image-viewer viewerjs
+  ```
+
+  ```sh [npm]
+  npm i vitepress-plugin-image-viewer
+  ```
+
+  ```sh [yarn]
+  yarn add vitepress-plugin-image-viewer
+  ```
+
+  :::
+
+- `.vitepress/theme/index.ts` 文件
+
+  ```ts{2-4,11,23-26}
+  // ...
+  import 'viewerjs/dist/viewer.min.css'
+  import imageViewer from 'vitepress-plugin-image-viewer'
+  import vImageViewer from 'vitepress-plugin-image-viewer/lib/vImageViewer.vue'
+
+  // ...
+  export default {
+    extends: DefaultTheme,
+    Layout: NaiveUIProvider,
+    enhanceApp: ({ app, router }) => {
+      app.component('ArticleHeader', ArticleHeader)
+      app.component('vImageViewer', vImageViewer)
+      if (import.meta.env.SSR) {
+        const { collect } = setup(app)
+        app.provide('css-render-collect', collect)
+      }
+      if (inBrowser) {
+        router.onAfterRouteChanged = () => {
+          busuanzi.fetch()
+        }
+      }
+    },
+    setup() {
+      const route = useRoute()
+      imageViewer(route)
+    },
+  }
+  ```
+
+- 效果
+  ![pic](../img/blog-change28.png)
+
 ## 总结
 
-从0创建vitepress博客，到部署到github pages，再到自定义主题，再到添加loading动画，一步步来，收获满满。
+从0创建vitepress博客，一步步来，收获满满。
 
 有什么问题欢迎到评论区咨询，一起交流学习。
