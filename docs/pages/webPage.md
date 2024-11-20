@@ -13,71 +13,76 @@ sidebar: false
 import Table from '../.vitepress/components/Table.vue'
 const data = new Map([
   [
-    '素材类', [
+    '前端素材', [
+      { name: 'wallHere', url: 'https://wallhere.com/', remark: '国外壁纸网站，访客下载要人机验证' },
       { name: 'wallhaven',url: 'https://wallhaven.cc/', remark: '国外壁纸网站，免登录下载高清图片' },
-      { name: 'WallHere', url: 'https://wallhere.com/', remark: '国外壁纸网站，访客下载要人机验证' }
+      { name: '即时设计资源社区', url: 'https://js.design/community', remark: 'UI资源、产品设计、UI编辑器' },
+      { name: '摹客资源社区', url: 'https://www.mockplus.cn/example/rp', remark: '精美原型、组件模板和设计例子' },
+      { name: '爱给网', url: 'https://www.aigei.com/', remark: '各种音效、图标素材，可用利用油猴插件下载' },
+      { name: '17素材', url: 'https://www.17sucai.com/', remark: '各种音效、图标素材，可用利用油猴插件下载' },
+      { name: 'JQuery插件库', url: 'https://www.jq22.com/', remark: '有很多JS动画效果示例，在线预览可以获取源码' },
+      { name: 'U钙网', url: 'https://www.uugai.com/', remark: '免费在线LOGO设计，简单快捷' },
+      { name: '视觉效果合集', url: 'https://hepengwei.cn/#/canvas/freeFallingBody', remark: '前端视觉效果合集' },
+      { name: '100font', url: 'https://www.100font.com/forum-1-1.htm?tagids=1_0_0_0', remark: '免费商用字体' },
     ]
   ],
   [
-    '前端设计网站', [
-      { name: '拟态设计网', url: 'https://neumorphism.io/', remark: '一键生成拟态样式' },
-      { name: 'Cool Backgrounds', url: 'https://coolbackgrounds.io/', remark: '设计经典背景图' },
-      { name: '404设计网', url: 'https://404.life/', remark: '有多种404好康的界面,可通过代码白嫖' },
-      { name: '即时设计',url: 'https://js.design/square', remark: '有多种小程序/app的设计图,以及好用的切图工具台' },
-      { name: '520设计网', url: 'http://hao.sj520.cn/',  remark: '有多种小程序/app的设计图,以及好用的切图工具台' },
-      { name: 'U钙网', url: 'https://www.uugai.com/', remark: '设计简单logo' }
+    '学习', [
+      { name: '前端面试题汇总', url: 'https://www.yuque.com/cuggz/interview', remark: '前端面试题汇总' },
+      { name: '大厂面试每日一题', url: 'https://q.shanyue.tech/', remark: '专注于前端的互联网大厂面试题的学习平台' },
+      { name: 'vuejs-challenges', url: 'https://cn-vuejs-challenges.netlify.app/', remark: '一个 Vue.js 在线挑战平台' },
+      { name: '牛客华为机试题', url: 'https://www.nowcoder.com/exam/oj/ta?tpId=37', remark: '华为笔试面试机考在线练习' },
+    ]
+  ],
+  [
+    '常用文档', [
+      { name: 'MDN', url: 'https://developer.mozilla.org/zh-CN/', remark: '前端技术文档' },
+      { name: 'NPM', url: 'https://www.npmjs.com/', remark: 'JS库查询' },
+      { name: 'Can i use', url: 'https://caniuse.com/', remark: 'CSS兼容性查询' },
+      { name: 'tool.oschina', url: 'https://tool.oschina.net/commons', remark: 'HTTP Content-type 对照表' },
     ]
   ],
   [
     '颜色', [
-      { name: 'Grabient', url: 'https://www.grabient.com/', remark: '设计背景图渐变色' },
-      { name: 'ColorSpace', url: 'https://mycolor.space/', remark: '设计背景图渐变色' },
-      { name: 'Itmeo', url: 'https://webgradients.com/', remark: '设计背景图渐变色' },
-      { name: '颜色代码表', url: 'https://www.5tu.cn/colors/yansebiao.html', remark: '各种颜色的代码及中文名'}
+      { name: 'Grabient', url: 'https://www.grabient.com/', remark: '渐变色示例参考' },
+      { name: 'Itmeo', url: 'https://webgradients.com/', remark: '渐变色示例参考' },
+      { name: 'ColorSpace', url: 'https://mycolor.space/', remark: '渐变色生成器' },
+      { name: 'safety-color', url: 'https://css.bqrdh.com/safety-color', remark: 'web安全色' },
+      { name: '颜色代码表', url: 'https://www.5tu.cn/colors/yansebiao.html', remark: '各种颜色的Hex代码,快速取色'}
     ]
   ],
   [
-    '动画', [
-      { name: 'jQuery插件库', url: 'https://www.jq22.com/', remark: '有很多好康的动画效果,以及纯css动画' },
-      { name: 'animate.css', url: 'https://animate.style/', remark: '炒鸡无敌好用的css动画' },
-      { name: 'animastore', url: 'http://guowc.github.io/animastore/', remark: '多种简单的css动画' },
-      { name: 'animista', url: 'https://animista.net/', remark: '设计css动画工具' },
-      { name: 'animation', url: 'https://angrytools.com/css/animation/', remark: '设计css动画工具,可在线编辑' }
-    ]
-  ],
-  [
-    '工具类网站', [
-      { name: 'lodash', url: 'https://www.lodashjs.com/', remark: '工具库，内部封装了很多字符串、数组、对象等常见数据类型的处理函数' },
-      { name: 'npm', url: 'https://www.npmjs.com/', remark: '查询各种npm包的使用' },
-      { name: 'MDN', url: 'https://developer.mozilla.org/zh-CN/', remark: '面向 Web 开发者的文档' },
-      { name: 'ToolTT', url: 'https://tooltt.com/jwt-decode/', remark: '在线 JWT Token 解析解码' },
-      { name: 'Uncss', url: 'https://oct.cn/project/uncss/', remark: '在线精简css,一键去除项目中未使用的css样式表' },
-      { name: '在线生成器工具', url: 'http://tools.jb51.net/code/css3path', remark: '一键生成图片切割代码及各种工具' },
-      { name: 'shadows', url: 'https://shadows.brumm.af/', remark: '一键生成阴影代码' },
-      { name: 'CSS Grid Generator', url: 'https://cssgrid-generator.netlify.app/', remark: '一键生成网格布局' },
-      { name: 'css-separator-generator', url: 'https://wweb.dev/resources/css-separator-generator/', remark: '实现不同样式的分割线生成器' },
-      { name: 'getwaves', url: 'https://getwaves.io/', remark: '生成波浪线代码' }
-    ]
-  ],
-  [
-    '框架', [
-      { name: 'Vant', url: 'https://youzan.github.io/vant-weapp', remark: '轻量、可靠的小程序 UI 组件库' },
-      { name: 'BootStrap', url: 'https://v4.bootcss.com/', remark: '用于开发响应式布局、移动设备优先的 WEB 项目' },
-      { name: 'uView UI', url: 'https://www.uviewui.com/', remark: '全面兼容nvue的uni-app生态框架' },
-      { name: 'ColorUi', url: 'http://docs.xzeu.com/#/', remark: '适用于uni-app的css框架,兼容全端' },
-      { name: 'animation', url: 'https://angrytools.com/css/animation/', remark: '设计css动画工具,可在线编辑' },
-    ]
-  ],
-  [
-    '面试题', [
-      { name: '前端知识库', url: 'https://www.html5iq.com/5feb26ddf72c21052324d0fd.html', remark: '多种前端面试题的集合' },
-      { name: 'R2Coding', url: 'https://www.r2coding.com/', remark: 'B站Up的知识网站,包括前后端' },
+    '在线工具', [
+      { name: 'photopea', url: 'https://www.photopea.com/', remark: '在线Photoshop' },
+      { name: 'mp3cut', url: 'https://mp3cut.net/cn/', remark: '在线音频剪辑' },
+      { name: 'JSON工具网', url: 'https://www.json.cn/', remark: '在线工具合集' },
+      { name: 'lddgo', url: 'https://www.lddgo.net/index', remark: '在线工具大全' },
+      { name: '67tool', url: 'https://www.67tool.com/', remark: '在线工具大全' },
+      { name: 'regex101', url: 'https://regex101.com/', remark: '正则测试' },
+      { name: 'css-loaders', url: 'https://css-loaders.com/classic/', remark: 'CSS加载动画合集' },
+      { name: 'keen-slider', url: 'https://keen-slider.io/examples', remark: '轮播图示例合集' },
+      { name: 'animista', url: 'https://animista.net/', remark: 'css动画效果生成器' },
+      { name: 'Neumorphism', url: 'https://neumorphism.io/', remark: '拟态风格生成器' },
+      { name: 'cssgrid-generator', url: 'https://cssgrid-generator.netlify.app/', remark: 'grid布局生成器' },
+      { name: 'gradientbuttons', url: 'https://gradientbuttons.colorion.co/', remark: '渐变按钮CSS生成器' },
+      { name: 'shadows', url: 'https://shadows.brumm.af/', remark: '阴影生成器' },
+      { name: 'getwaves', url: 'https://getwaves.io/', remark: '波浪css生成器' },
+      { name: 'Coolbackgrounds', url: 'https://coolbackgrounds.io/', remark: '页面背景生成器' },
+      { name: 'css-separator-generator', url: 'https://wweb.dev/resources/css-separator-generator', remark: '不规则css生成器' },
+      { name: 'uncss', url: 'https://oct.cn/project/uncss/', remark: '一键去除项目中未使用的css样式表' },
+      { name: 'jwt-decode', url: 'https://tooltt.com/jwt-decode/', remark: '在线JWT Token解析解码' },
+      { name: 'svgeditor', url: 'https://www.jyshare.com/more/svgeditor/', remark: 'svg在线编辑器' },
+      { name: 'favicon', url: 'https://favicon.io/', remark: 'ico图标转换' },
+      { name: 'ico51', url: 'https://www.ico51.cn/', remark: 'ico图标生成' },
+      { name: 'CSS Sprites Generator', url: 'https://www.toptal.com/developers/css/sprite-generator', remark: '精灵/雪碧图制作' },
+      { name: 'tinypng', url: 'https://tinypng.com/', remark: '在线图片压缩' },
+      { name: 'boce', url: 'https://www.boce.com/', remark: '域名测速' },
     ]
   ],
 ])
 </script>
 
-## 素材类
+## 前端素材
 
 <Table 
   :columns="[
@@ -85,10 +90,10 @@ const data = new Map([
     { title: '地址', key: 'url' },
     { title: '备注', key: 'remark' }
   ]"
-  :data="data.get('素材类')"
+  :data="data.get('前端素材')"
 />
 
-## 前端设计网站
+## 学习
 
 <Table 
   :columns="[
@@ -96,7 +101,18 @@ const data = new Map([
     { title: '地址', key: 'url' },
     { title: '备注', key: 'remark' }
   ]"
-  :data="data.get('前端设计网站')"
+  :data="data.get('学习')"
+/>
+
+## 常用文档
+
+<Table 
+  :columns="[
+    { title: '名称', key: 'name' },
+    { title: '地址', key: 'url' },
+    { title: '备注', key: 'remark' }
+  ]"
+  :data="data.get('常用文档')"
 />
 
 ## 颜色
@@ -110,7 +126,7 @@ const data = new Map([
   :data="data.get('颜色')"
 />
 
-## 动画
+## 在线工具
 
 <Table 
   :columns="[
@@ -118,38 +134,5 @@ const data = new Map([
     { title: '地址', key: 'url' },
     { title: '备注', key: 'remark' }
   ]"
-  :data="data.get('动画')"
-/>
-
-## 工具类网站
-
-<Table 
-  :columns="[
-    { title: '名称', key: 'name' },
-    { title: '地址', key: 'url' },
-    { title: '备注', key: 'remark' }
-  ]"
-  :data="data.get('工具类网站')"
-/>
-
-## 框架
-
-<Table 
-  :columns="[
-    { title: '名称', key: 'name' },
-    { title: '地址', key: 'url' },
-    { title: '备注', key: 'remark' }
-  ]"
-  :data="data.get('框架')"
-/>
-
-## 面试题
-
-<Table 
-  :columns="[
-    { title: '名称', key: 'name' },
-    { title: '地址', key: 'url' },
-    { title: '备注', key: 'remark' }
-  ]"
-  :data="data.get('面试题')"
+  :data="data.get('在线工具')"
 />
