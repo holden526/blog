@@ -54,6 +54,7 @@ const data = new Map([
   [
     '在线工具', [
       { name: 'photopea', url: 'https://www.photopea.com/', remark: '在线Photoshop' },
+      { name: 'scrollbar', url: 'https://scrollbar.app/', remark: 'css滚动条样式生成器' },
       { name: 'mp3cut', url: 'https://mp3cut.net/cn/', remark: '在线音频剪辑' },
       { name: 'JSON工具网', url: 'https://www.json.cn/', remark: '在线工具合集' },
       { name: 'lddgo', url: 'https://www.lddgo.net/index', remark: '在线工具大全' },
