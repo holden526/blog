@@ -11,9 +11,6 @@ importers:
       '@giscus/vue':
         specifier: ^3.0.0
         version: 3.0.0(vue@3.5.12)
-      '@vrcd-community/markdown-it-video':
-        specifier: ^1.1.1
-        version: 1.1.1
       naive-ui:
         specifier: ^2.40.1
         version: 2.40.1(vue@3.5.12)
@@ -379,6 +376,11 @@ packages:
     cpu: [arm64]
     os: [linux]
 
+  '@pagefind/linux-x64@1.1.1':
+    resolution: {integrity: sha512-yJs7tTYbL2MI3HT+ngs9E1BfUbY9M4/YzA0yEM5xBo4Xl8Yu8Qg2xZTOQ1/F6gwvMrjCUFo8EoACs6LRDhtMrQ==}
+    cpu: [x64]
+    os: [linux]
+
   '@pagefind/windows-x64@1.1.1':
     resolution: {integrity: sha512-b7/qPqgIl+lMzkQ8fJt51SfguB396xbIIR+VZ3YrL2tLuyifDJ1wL5mEm+ddmHxJ2Fki340paPcDan9en5OmAw==}
     cpu: [x64]
@@ -619,9 +621,6 @@ packages:
     peerDependencies:
       vite: ^5.0.0
       vue: ^3.2.25
-
-  '@vrcd-community/markdown-it-video@1.1.1':
-    resolution: {integrity: sha512-Y1RUJawdUL/laFunC8t28Zto6TV0WhstfluvMaBzHVYmbZ0mrNLyqQbpBUh4tKT3khrw8Gua3cA6zqCUK9DCYA==}
 
   '@vue/compiler-core@3.5.12':
     resolution: {integrity: sha512-ISyBTRMmMYagUxhcpyEH0hpXRd/KqDU4ymofPgl2XAkY9ZhQ+h0ovEZJIiPop13UmR/54oA2cgMDjgroRelaEw==}
@@ -1640,6 +1639,9 @@ snapshots:
   '@pagefind/linux-arm64@1.1.1':
     optional: true
 
+  '@pagefind/linux-x64@1.1.1':
+    optional: true
+
   '@pagefind/windows-x64@1.1.1':
     optional: true
 
@@ -1834,8 +1836,6 @@ snapshots:
     dependencies:
       vite: 5.4.10(@types/node@22.8.7)(sass@1.80.6)
       vue: 3.5.12
-
-  '@vrcd-community/markdown-it-video@1.1.1': {}
 
   '@vue/compiler-core@3.5.12':
     dependencies:
@@ -2345,6 +2345,7 @@ snapshots:
       '@pagefind/darwin-arm64': 1.1.1
       '@pagefind/darwin-x64': 1.1.1
       '@pagefind/linux-arm64': 1.1.1
+      '@pagefind/linux-x64': 1.1.1
       '@pagefind/windows-x64': 1.1.1
 
   path-key@3.1.1: {}

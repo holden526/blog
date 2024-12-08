@@ -3,7 +3,6 @@ import { pagefindPlugin } from 'vitepress-plugin-pagefind'
 import { generateSidebar } from 'vitepress-sidebar'
 import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import { HeaderPlugin } from './plugins/headerPlugin'
-import markdownItVideo from '@vrcd-community/markdown-it-video'
 import path from 'path'
 const fileAndStyles: Record<string, string> = {}
 
@@ -132,14 +131,6 @@ export default defineConfig({
   markdown: {
     config(md) {
       md.use(groupIconMdPlugin)
-      md.use(markdownItVideo, {
-        youtube: { width: '100%', height: '387px' },
-        bilibili: { width: '100%', height: '387px' },
-        default: {
-          width: '100%',
-          height: '350px',
-        },
-      })
     },
     headers: {
       level: [1, 2, 3],
