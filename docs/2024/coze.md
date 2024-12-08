@@ -52,12 +52,17 @@ coze agent 支持分配不同的大语言模型，处理问题时，可采用合
 <script setup>
 import Card from '../.vitepress/components/Card.vue'
 import { NH3, NTabs, NTabPane } from 'naive-ui'
+import coze1 from '../img/coze1.png'
+import coze2 from '../img/coze2.png'
+import coze3 from '../img/coze3.png'
+import coze4 from '../img/coze4.png'
+import coze5 from '../img/coze5.png'
 const cozeModuleData = [
-  { text:'豆包',imgUrl:'../img/coze1.png',link:'https://www.volcengine.com/product/doubao'},
-  { text:'通义千问',imgUrl:'../img/coze2.png',link:'https://dundunlu.com/web/tongyi/'},
-  { text:'GLM-4',imgUrl:'../img/coze3.png',link:'https://chatglm.cn/'},
-  { text:'MiniMax',imgUrl:'../img/coze4.png',link:'https://www.minimaxi.com/'},
-  { text:'Kimi',imgUrl:'../img/coze5.png',link:'https://www.minimaxi.com/'},
+  { text:'豆包',imgUrl:coze1,link:'https://www.volcengine.com/product/doubao'},
+  { text:'通义千问',imgUrl:coze2,link:'https://dundunlu.com/web/tongyi/'},
+  { text:'GLM-4',imgUrl:coze3,link:'https://chatglm.cn/'},
+  { text:'MiniMax',imgUrl:coze4,link:'https://www.minimaxi.com/'},
+  { text:'Kimi',imgUrl:coze5,link:'https://www.minimaxi.com/'},
 ]
 </script>
 
