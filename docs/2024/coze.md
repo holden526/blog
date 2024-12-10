@@ -8,7 +8,7 @@ tags:
   - 幻境
 ---
 
-# Coze Agent 调试
+# Coze Agent 调研
 
 ::: tip 相关链接
 
@@ -500,6 +500,10 @@ module.exports = {
 
 [WorkBot](https://workbot.apifox.cn/)
 
+[WeChatPYAPI](https://github.com/mrsanshui/WeChatPYAPI/tree/master)
+
+[worktool](https://github.com/gallonyin/worktool)
+
 WorkBot 是一款安全稳定零封号的微信/企微RPA机器人，支持通过 API 控制企微/微信来实现聚合聊天、自动回复、群发消息、自动通过好友、定时发布朋友圈、单向好友检测清理等。
 
 - 技术实现均基于 Android官方系统SDK 和 企微/微信官方SDK，原理上保证本工具的`合法合规性`
@@ -510,7 +514,7 @@ WorkBot 是一款安全稳定零封号的微信/企微RPA机器人，支持通�
 
 #### 2.4.4 小结
 
-打通微信，可以使用 `WorkBot` 实现自动化，官方提供了大量微信操作api，部署云手机后，只需发送请求即可完成收发信息等相关操作，实现微信机器人。
+打通微信，可以使用 `WorkBot`等类似的RPA实现自动化，可以模拟微信操作，只需发送请求即可完成收发信息等相关操作，实现微信机器人。
 
 :::tip 相关需求
 
