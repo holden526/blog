@@ -1,6 +1,6 @@
 <script setup>
 import DefaultTheme from 'vitepress/theme'
-import { watch, nextTick, onMounted, ref } from 'vue'
+import { watch, nextTick, onMounted, ref, onUpdated } from 'vue'
 import { useRoute, useData, inBrowser } from 'vitepress'
 import Giscus from '@giscus/vue'
 import Loading from '../components/Loading.vue'
@@ -27,8 +27,8 @@ watch(isDark, (dark) => {
 
 watch(
   () => route.path,
-  (_, oldPath) => {
-    if (oldPath === '/') {
+  (newPath, oldPath) => {
+    if (newPath.includes('/pages/') || oldPath === '/') {
       nextTick(() => {
         hideSpecificSidebarItem()
       })
