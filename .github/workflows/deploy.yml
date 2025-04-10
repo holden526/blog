@@ -23,7 +23,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1 # 如果启用了 vitepress lastUpdated，则改成 0
+          fetch-depth: 0
       - uses: pnpm/action-setup@v3
         with:
           version: 9
