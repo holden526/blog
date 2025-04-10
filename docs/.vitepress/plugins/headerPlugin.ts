@@ -1,6 +1,8 @@
 import { Plugin } from 'vite'
 import { getReadingTime } from '../utils/getReadingTime'
-import fs from 'fs'
+import { exec } from 'child_process'
+import util from 'util'
+const execAsync = util.promisify(exec)
 
 export function HeaderPlugin(): Plugin {
   return {
@@ -11,8 +13,8 @@ export function HeaderPlugin(): Plugin {
 
       const cleanContent = cleanMarkdownContent(code)
 
-      // 获取文件的最近更新时间
-      const lastUpdated = getLastUpdatedTime(id)
+      // 异步获取文件的最近更新时间
+      const lastUpdated = await getLastUpdatedTime(id)
 
       // 获取阅读时间和字数
       const { readTime, words } = getReadingTime(cleanContent)
@@ -28,10 +30,15 @@ export function HeaderPlugin(): Plugin {
 }
 
 // 获取文件的最近更新时间
-function getLastUpdatedTime(filePath: string): string {
-  const stats = fs.statSync(filePath)
-  const lastModifiedTime = stats.mtime
-  return lastModifiedTime.toLocaleString()
+async function getLastUpdatedTime(filePath: string): Promise<string> {
+  try {
+    // 执行 git log 命令获取文件的最后提交日期
+    const { stdout } = await execAsync(`git log -1 --format=%cd "${filePath}"`)
+    return new Date(stdout.trim()).toLocaleString()
+  } catch (err) {
+    console.error(`Error getting last updated time for file ${filePath}:`, err)
+    return 'Unknown'
+  }
 }
 
 // 插入目标字符串到第一个一级标题后
