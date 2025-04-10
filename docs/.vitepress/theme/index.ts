@@ -2,7 +2,7 @@ import DefaultTheme from 'vitepress/theme'
 import busuanzi from 'busuanzi.pure.js'
 import { inBrowser } from 'vitepress'
 import { defineComponent, h, inject } from 'vue'
-import { NConfigProvider } from 'naive-ui'
+import { NConfigProvider, NMessageProvider } from 'naive-ui'
 import { setup } from '@css-render/vue3-ssr'
 import { useRoute } from 'vitepress'
 import imageViewer from 'vitepress-plugin-image-viewer'
@@ -38,16 +38,19 @@ const VitepressPath = defineComponent({
 
 const NaiveUIProvider = defineComponent({
   render() {
-    return h(
-      NConfigProvider,
-      { abstract: true, inlineThemeDisabled: true },
-      {
-        default: () => [
-          h(MyLayout, null, { default: this.$slots.default?.() }),
-          (import.meta as any).env.SSR ? [h(CssRenderStyle), h(VitepressPath)] : null,
-        ],
-      }
-    )
+    return h(NMessageProvider, null, {
+      default: () =>
+        h(
+          NConfigProvider,
+          { abstract: true, inlineThemeDisabled: true },
+          {
+            default: () => [
+              h(MyLayout, null, { default: this.$slots.default?.() }),
+              (import.meta as any).env.SSR ? [h(CssRenderStyle), h(VitepressPath)] : null,
+            ],
+          }
+        ),
+    })
   },
 })
 

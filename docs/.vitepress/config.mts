@@ -22,7 +22,7 @@ const autoSidebar = () => {
 
 export default defineConfig({
   title: '山不让尘，川不辞盈',
-  description: 'A VitePress Site',
+  description: '快不快乐有天总过去',
   lang: 'zh-CN',
   head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
   vite: {
@@ -94,8 +94,9 @@ export default defineConfig({
         items: [
           {
             items: [
-              { text: '实用网页', link: '/pages/webPage' },
-              { text: '工具插件', link: '/pages/tools' },
+              { text: '实用网站', link: '/pages/webPage' },
+              { text: '工具网站', link: '/pages/webTools' },
+              { text: 'Excel工具', link: '/pages/excelTools' },
             ],
           },
         ],
