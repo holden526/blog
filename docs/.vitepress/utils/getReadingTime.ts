@@ -1,6 +1,6 @@
 export function getWords(content: string): RegExpMatchArray | null {
-  // 仅匹配英文单词，忽略标点和纯数字
-  return content.match(/\b[a-zA-Z]+(?:['-]?[a-zA-Z]+)?\b/gu)
+  // 包含连字符单词和数字+字母组合
+  return content.match(/(\b[a-zA-Z0-9]+(?:['’-]?[a-zA-Z0-9]+)*\b)|([a-zA-Z0-9]+)/gu)
 }
 
 export function getChinese(content: string): RegExpMatchArray | null {
@@ -25,19 +25,25 @@ export function getWordNumber(content: string): number {
   return enWordCount + cnWordCount
 }
 
-export function getReadingTime(content: string, cnWordPerMinute = 350, enWordPerMinute = 160) {
+export function getReadingTime(
+  content: string,
+  cnWordPerMinute = 300, // 中文阅读速度为300字/分钟
+  enWordPerMinute = 200 // 英文阅读速度为200词/分钟
+) {
   const trimmedContent = content.trim()
   const enWord = getEnWordCount(trimmedContent)
   const cnWord = getCnWordCount(trimmedContent)
 
-  const totalWords = enWord + cnWord
-  const words = totalWords >= 1000 ? `${Math.round(totalWords / 100) / 10}k` : totalWords
+  // 优化字数显示逻辑
+  const words = enWord + cnWord
+  const formattedWords = words >= 1000 ? `${(words / 1000).toFixed(1)}k` : words.toString()
 
+  // 精确计算阅读时间
   const readingTime = cnWord / cnWordPerMinute + enWord / enWordPerMinute
-  const readTime = Math.ceil(readingTime)
+  const readTime = Math.ceil(readingTime) || 1 // 保证最小值为1分钟
 
   return {
     readTime,
-    words,
+    words: formattedWords,
   }
 }

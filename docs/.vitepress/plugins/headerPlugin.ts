@@ -49,5 +49,8 @@ function insertReadingTimeAndWords(target: string, source: string) {
 
 // 去掉 Frontmatter
 function cleanMarkdownContent(content: string): string {
-  return content.replace(/^---[\s\S]+?---\n+/g, '').trim()
+  return content
+    .replace(/^---[\s\S]+?---(\n+)?/g, '')
+    .trim()
+    .replace(/\n{3,}/g, '\n\n')
 }
