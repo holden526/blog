@@ -9,6 +9,10 @@ const props = defineProps({
   },
 })
 
+const getImageUrl = (name: string) => {
+  return new URL(`../../img/${name}`, import.meta.url).href
+}
+
 // 动态计算列数
 const gridCols = computed(() => (props.images.length === 4 ? 2 : 3))
 </script>
@@ -19,7 +23,7 @@ const gridCols = computed(() => (props.images.length === 4 ? 2 : 3))
       <n-card>
         <template #cover>
           <div class="image-container">
-            <img :src="image" />
+            <img :src="getImageUrl(image)" />
           </div>
         </template>
       </n-card>

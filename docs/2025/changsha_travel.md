@@ -196,21 +196,21 @@ const huNanTimeline = [
 #### 2.3 参考照片
 
 <PhotoGroup style="margin:20px 0;" :images="[
-  '../img/changsha_travel3.jpg',
-  '../img/changsha_travel4.jpg',
-  '../img/changsha_travel6.jpg',
-  '../img/changsha_travel7.jpg',
-  '../img/changsha_travel8.jpg',
-  '../img/changsha_travel9.jpg',
-  '../img/changsha_travel10.jpg',
-  '../img/changsha_travel11.jpg',
-  '../img/changsha_travel12.jpg',
-  '../img/changsha_travel13.jpg',
-  '../img/changsha_travel14.jpg',
-  '../img/changsha_travel15.jpg',
-  '../img/changsha_travel16.jpg',
-  '../img/changsha_travel17.jpg',
-  '../img/changsha_travel18.jpg',
+  'changsha_travel3.jpg',
+  'changsha_travel4.jpg',
+  'changsha_travel6.jpg',
+  'changsha_travel7.jpg',
+  'changsha_travel8.jpg',
+  'changsha_travel9.jpg',
+  'changsha_travel10.jpg',
+  'changsha_travel11.jpg',
+  'changsha_travel12.jpg',
+  'changsha_travel13.jpg',
+  'changsha_travel14.jpg',
+  'changsha_travel15.jpg',
+  'changsha_travel16.jpg',
+  'changsha_travel17.jpg',
+  'changsha_travel18.jpg',
 ]" />
 
 ### 3. 五一广场
@@ -232,83 +232,83 @@ const huNanTimeline = [
 IFS国金购物中心1层 `GM 巨人像`
 
 <PhotoGroup style="margin:20px 0;" :images="[
-  '../img/changsha_travel19.jpg',
-  '../img/changsha_travel20.jpg',
-  '../img/changsha_travel21.jpg',
-  '../img/changsha_travel22.jpg',
+  'changsha_travel19.jpg',
+  'changsha_travel20.jpg',
+  'changsha_travel21.jpg',
+  'changsha_travel22.jpg',
 ]" />
 
 五一广场 `春天百货KKV`
 
 <PhotoGroup style="margin:20px 0;" :images="[
- '../img/changsha_travel23.jpg',
-  '../img/changsha_travel24.jpg',
-  '../img/changsha_travel25.jpg',
-  '../img/changsha_travel26.jpg',
-  '../img/changsha_travel27.jpg',
-  '../img/changsha_travel28.jpg',
+  'changsha_travel23.jpg',
+  'changsha_travel24.jpg',
+  'changsha_travel25.jpg',
+  'changsha_travel26.jpg',
+  'changsha_travel27.jpg',
+  'changsha_travel28.jpg',
 ]" />
 
 国金中心东门通往LG1层楼梯 `长沙`
 
 <PhotoGroup style="margin:20px 0;" :images="[
- '../img/changsha_travel29.jpg',
-  '../img/changsha_travel30.jpg',
-  '../img/changsha_travel31.jpg',
-  '../img/changsha_travel32.jpg',
+  'changsha_travel29.jpg',
+  'changsha_travel30.jpg',
+  'changsha_travel31.jpg',
+  'changsha_travel32.jpg',
 ]" />
 
 IFS国金购物中心7楼 `Kaws`
 
 <PhotoGroup style="margin:20px 0;" :images="[
- '../img/changsha_travel33.jpg',
-  '../img/changsha_travel34.jpg',
-  '../img/changsha_travel35.jpg',
-  '../img/changsha_travel36.jpg',
+  'changsha_travel33.jpg',
+  'changsha_travel34.jpg',
+  'changsha_travel35.jpg',
+  'changsha_travel36.jpg',
 ]" />
 
 IFS `爱心大屏`
 
 <PhotoGroup style="margin:20px 0;" :images="[
- '../img/changsha_travel37.jpg',
-  '../img/changsha_travel38.jpg',
-  '../img/changsha_travel39.jpg',
-  '../img/changsha_travel40.jpg',
+  'changsha_travel37.jpg',
+  'changsha_travel38.jpg',
+  'changsha_travel39.jpg',
+  'changsha_travel40.jpg',
 ]" />
 
 `火宫殿`
 
 <PhotoGroup style="margin:20px 0;" :images="[
- '../img/changsha_travel41.jpg',
-  '../img/changsha_travel42.jpg',
-  '../img/changsha_travel43.jpg',
-  '../img/changsha_travel44.jpg',
+  'changsha_travel41.jpg',
+  'changsha_travel42.jpg',
+  'changsha_travel43.jpg',
+  'changsha_travel44.jpg',
 ]" />
 
 `超级文和友`
 
 <PhotoGroup style="margin:20px 0;" :images="[
- '../img/changsha_travel45.jpg',
-  '../img/changsha_travel46.jpg',
-  '../img/changsha_travel47.jpg',
+  'changsha_travel45.jpg',
+  'changsha_travel46.jpg',
+  'changsha_travel47.jpg',
 ]" />
 
 `杜甫江阁`
 
 <PhotoGroup style="margin:20px 0;" :images="[
- '../img/changsha_travel48.jpg',
-  '../img/changsha_travel49.jpg',
-  '../img/changsha_travel50.jpg',
-  '../img/changsha_travel51.jpg',
+  'changsha_travel48.jpg',
+  'changsha_travel49.jpg',
+  'changsha_travel50.jpg',
+  'changsha_travel51.jpg',
 ]" />
 
 `坡子街派出所`
 
 <PhotoGroup style="margin:20px 0;" :images="[
- '../img/changsha_travel52.jpg',
-  '../img/changsha_travel53.jpg',
-  '../img/changsha_travel54.jpg',
-  '../img/changsha_travel55.jpg',
+  'changsha_travel52.jpg',
+  'changsha_travel53.jpg',
+  'changsha_travel54.jpg',
+  'changsha_travel55.jpg',
 ]" />
 
 ## 三、5月3号行程
@@ -322,10 +322,10 @@ IFS `爱心大屏`
 #### 1.1 参观内容
 
 <PhotoGroup style="margin:20px 0;" :images="[
- '../img/changsha_travel57.jpg',
-  '../img/changsha_travel58.jpg',
-  '../img/changsha_travel59.jpg',
-  '../img/changsha_travel60.jpg',
+  'changsha_travel57.jpg',
+  'changsha_travel58.jpg',
+  'changsha_travel59.jpg',
+  'changsha_travel60.jpg',
 ]" />
 
 #### 1.2 时间线
@@ -351,9 +351,9 @@ IFS `爱心大屏`
 #### 3.2 打卡点
 
 <PhotoGroup style="margin:20px 0;" :images="[
- '../img/changsha_travel61.jpg',
-  '../img/changsha_travel62.jpg',
-  '../img/changsha_travel63.jpg',
+  'changsha_travel61.jpg',
+  'changsha_travel62.jpg',
+  'changsha_travel63.jpg',
 ]" />
 
 #### 3.2 时间线
