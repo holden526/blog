@@ -9,7 +9,7 @@ tags:
 # 五一长沙游玩攻略
 
 <script setup lang="ts">
-import TimeLine from './TimeLine.vue'
+import TimeLine from '../.vitepress/components/TimeLine.vue'
 import PhotoGroup from '../.vitepress/components/PhotoGroup.vue'
 
 // 湖南博物院时间线
@@ -95,45 +95,79 @@ const wuYiTimeline = [
   { title: '返程', content: '回酒店', time: '24:00', iconKey: 'car', type: 'info' },
 ]
 
-// 梅溪湖时间线
-const meiXiHuTimeline = [
-  { title: '出门', time: '10:30', iconKey: 'walk' },
-  {
-    title: '梅溪湖西站',
-    content: '开始参观（不限时间）',
-    time: '10:30',
-    iconKey: 'emoticon',
-    type: 'warning',
-  },
-  { title: '转点', content: '回酒店拿行李出发', time: '12:00', iconKey: 'car', type: 'info' },
-]
-
 // 长沙站时间线
 const changShaTimeline = [
-  { title: '出门', time: '12:00', iconKey: 'walk' },
+  { title: '出门', time: '9:00', iconKey: 'walk' },
   {
     title: '梅溪湖西站',
     content: '2号线光达方向 => 长沙火车站（27min）',
-    time: '12:30',
+    time: '9:30',
     iconKey: 'subway',
     type: 'success',
   },
-  { title: '转点', content: '开始下一行程', time: '12:30', iconKey: 'car', type: 'info' },
+  { title: '转点', content: '开始下一行程', time: '9:30', iconKey: 'car', type: 'info' },
+]
+
+// 橘子洲时间线
+const juZiZhouTimeline = [
+  { title: '长沙火车站出发', time: '9:40', iconKey: 'walk' },
+  {
+    title: '长沙火车站',
+    content: '2号线梅溪湖西方向 => 橘子洲·青莲站（10min）',
+    time: '10:00',
+    iconKey: 'subway',
+    type: 'success',
+  },
+  {
+    title: '橘子洲',
+    content: '开始参观（约2h）',
+    time: '12:00',
+    iconKey: 'emoticon',
+    type: 'warning',
+  },
+  { title: '转点', content: '开始下一行程', time: '12:00', iconKey: 'car', type: 'info' },
 ]
 
 // 湖南广播电视台时间线
 const huNanTimeline = [
-  { title: '长沙火车站出发', time: '12:30', iconKey: 'walk' },
+  { title: '橘子洲·青莲站出发', time: '12:00', iconKey: 'walk' },
   {
-    title: '长沙火车站',
-    content: '3号线广生方向 => 月湖公园北3号口（15min）',
-    time: '12:45',
+    title: '橘子洲·青莲站',
+    content: '2号线光达方向 => 万家丽广场（15min）',
+    time: '12:15',
     iconKey: 'subway',
     type: 'success',
   },
-  { title: '月湖公园北3号口',content:'步行至湖南广播电视台（10min）',time:'13:00', iconKey: 'walk',  },
-  { title: '转点', content: '开始下一行程', time: '14:00', iconKey: 'car', type: 'info' },
+  {
+    title: '万家丽广场',
+    content: '吃饭逛街（1h30min）',
+    time: '13:30',
+    iconKey: 'subway',
+    type: 'success',
+  },
+   {
+    title: '万家丽广场',
+    content: '5号线水渡河方向 => 马栏山站3号口（10min）',
+    time: '13:40',
+    iconKey: 'subway',
+    type: 'success',
+  },
+  { 
+    title: '马栏山站3号口步行900m',
+    content:'步行至湖南广播电视台（10min）',
+    time:'14:00',
+    iconKey: 'walk'
+  },
+  {
+    title: '湖南广播电视台',
+    content: '开始参观（约1h）',
+    time: '15:00',
+    iconKey: 'emoticon',
+    type: 'warning',
+  },
+  { title: '转点', content: '开始下一行程', time: '15:00', iconKey: 'car', type: 'info' },
 ]
+
 </script>
 
 行程：5月2号凌晨两点到达长沙南站，5月4日早上9点半到达广州
@@ -313,32 +347,39 @@ IFS `爱心大屏`
 
 ## 三、5月3号行程
 
-### 1. 梅溪湖
+### 1. 长沙站
 
-:::tip 梅溪湖
-梅溪湖位于长沙市岳麓区，是梅溪湖片区的重要组成部分。这里拥有优美的自然风光和丰富的城市配套。梅溪湖以岳麓山为背景，南接桃花岭、象鼻窝，北靠枫林路，西至雷锋镇。近年来，随着“超级中轴”项目的推进，梅溪湖西岸正加速发展，形成了集生态、文化、商业于一体的综合性区域
+顺路提前寄存行李, 小程序：`存知己`
+
+#### 1.1 时间线
+
+<TimeLine :data="changShaTimeline" />
+
+### 2. 橘子洲头
+
+#### 2.1 参观内容
+
+::: tip 橘子洲头
+五A景区，橘子洲头位于湖南省长沙市岳麓区的湘江中心，是湘江下游众多冲积沙洲中面积最大的沙洲。这里西望岳麓山，东临长沙城，四面环水，形状宛如一艘巨轮停泊在湘江之中。橘子洲头景区整体开发陆地面积达91.64公顷，是长沙的标志性景点之一。这里不仅风景优美，四季各有特色，还承载着深厚的历史文化底蕴。
 :::
 
-#### 1.1 参观内容
+#### 2.1 时间线
+
+<TimeLine :data="juZiZhouTimeline" />
+
+#### 2.2 参考照片
 
 <PhotoGroup style="margin:20px 0;" :images="[
   'changsha_travel57.jpg',
   'changsha_travel58.jpg',
   'changsha_travel59.jpg',
   'changsha_travel60.jpg',
+  'changsha_travel61.jpg',
+  'changsha_travel62.jpg',
+  'changsha_travel63.jpg',
+  'changsha_travel64.jpg',
+  'changsha_travel65.jpg',
 ]" />
-
-#### 1.2 时间线
-
-<TimeLine :data="meiXiHuTimeline" />
-
-### 2. 长沙站
-
-顺路提前寄存行李, 小程序：`存知己`
-
-#### 2.1 时间线
-
-<TimeLine :data="changShaTimeline" />
 
 ### 3. 湖南广播电视台
 
@@ -351,9 +392,9 @@ IFS `爱心大屏`
 #### 3.2 打卡点
 
 <PhotoGroup style="margin:20px 0;" :images="[
-  'changsha_travel61.jpg',
-  'changsha_travel62.jpg',
-  'changsha_travel63.jpg',
+  'changsha_travel66.jpg',
+  'changsha_travel67.jpg',
+  'changsha_travel68.jpg',
 ]" />
 
 #### 3.2 时间线
