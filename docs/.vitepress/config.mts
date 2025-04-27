@@ -28,6 +28,9 @@ export default defineConfig({
   lang: 'zh-CN',
   head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
   vite: {
+    server: {
+      host: '0.0.0.0',
+    },
     plugins: [
       pagefindPlugin({
         btnPlaceholder: '搜索',

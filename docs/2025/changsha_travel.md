@@ -178,7 +178,9 @@ const huNanTimeline = [
 
 地铁站：梅溪湖西（距离270m）
 
-![酒店](../img/2025/changsha_travel/changsha_travel1.jpg)
+<PhotoGroup style="margin:20px 0;" :images="[
+  '/2025/changsha_travel/changsha_travel1.jpg',
+]" />
 
 ## 二、5月2日行程
 
@@ -201,7 +203,9 @@ const huNanTimeline = [
 马王堆汉墓出土了大量珍贵文物，包括丝绸、玉器、金器、铜器、瓷器等，展示了汉朝时期的服饰、生活和文化。其中，素纱禅衣、T型帛画、黄纱地印花敷彩直裾式丝绵袍等尤为珍贵，还设有永生之梦灯光秀
 :::
 
-![湖南博物院](../img/2025/changsha_travel/changsha_travel2.jpg)
+<PhotoGroup style="margin:20px 0;" :images="[
+  '/2025/changsha_travel/changsha_travel2.jpg',
+]" />
 
 #### 1.2 时间线
 
@@ -230,21 +234,21 @@ const huNanTimeline = [
 #### 2.3 参考照片
 
 <PhotoGroup style="margin:20px 0;" :images="[
-  'changsha_travel3.jpg',
-  'changsha_travel4.jpg',
-  'changsha_travel6.jpg',
-  'changsha_travel7.jpg',
-  'changsha_travel8.jpg',
-  'changsha_travel9.jpg',
-  'changsha_travel10.jpg',
-  'changsha_travel11.jpg',
-  'changsha_travel12.jpg',
-  'changsha_travel13.jpg',
-  'changsha_travel14.jpg',
-  'changsha_travel15.jpg',
-  'changsha_travel16.jpg',
-  'changsha_travel17.jpg',
-  'changsha_travel18.jpg',
+  '/2025/changsha_travel/changsha_travel3.jpg',
+  '/2025/changsha_travel/changsha_travel4.jpg',
+  '/2025/changsha_travel/changsha_travel6.jpg',
+  '/2025/changsha_travel/changsha_travel7.jpg',
+  '/2025/changsha_travel/changsha_travel8.jpg',
+  '/2025/changsha_travel/changsha_travel9.jpg',
+  '/2025/changsha_travel/changsha_travel10.jpg',
+  '/2025/changsha_travel/changsha_travel11.jpg',
+  '/2025/changsha_travel/changsha_travel12.jpg',
+  '/2025/changsha_travel/changsha_travel13.jpg',
+  '/2025/changsha_travel/changsha_travel14.jpg',
+  '/2025/changsha_travel/changsha_travel15.jpg',
+  '/2025/changsha_travel/changsha_travel16.jpg',
+  '/2025/changsha_travel/changsha_travel17.jpg',
+  '/2025/changsha_travel/changsha_travel18.jpg',
 ]" />
 
 ### 3. 五一广场
@@ -255,7 +259,9 @@ const huNanTimeline = [
 五一广场位于长沙市市中心，是长沙市最大的城市广场。广场占地面积约10万平方米，是长沙市标志性建筑之一。广场内有毛泽东主席雕像、毛泽东主席铜像、毛泽东主席铜像广场、毛泽东主席铜像广场、毛泽东主席铜像广场等著名景点。广场内还有音乐喷泉、灯光秀等娱乐设施，是市民和游客休闲、娱乐的好去处。
 :::
 
-![五一广场](../img/2025/changsha_travel/changsha_travel56.jpg)
+<PhotoGroup style="margin:20px 0;" :images="[
+  '/2025/changsha_travel/changsha_travel56.jpg',
+]" />
 
 #### 3.2 时间线
 
@@ -266,83 +272,83 @@ const huNanTimeline = [
 IFS国金购物中心1层 `GM 巨人像`
 
 <PhotoGroup style="margin:20px 0;" :images="[
-  'changsha_travel19.jpg',
-  'changsha_travel20.jpg',
-  'changsha_travel21.jpg',
-  'changsha_travel22.jpg',
+  '/2025/changsha_travel/changsha_travel19.jpg',
+  '/2025/changsha_travel/changsha_travel20.jpg',
+  '/2025/changsha_travel/changsha_travel21.jpg',
+  '/2025/changsha_travel/changsha_travel22.jpg',
 ]" />
 
 五一广场 `春天百货KKV`
 
 <PhotoGroup style="margin:20px 0;" :images="[
-  'changsha_travel23.jpg',
-  'changsha_travel24.jpg',
-  'changsha_travel25.jpg',
-  'changsha_travel26.jpg',
-  'changsha_travel27.jpg',
-  'changsha_travel28.jpg',
+  '/2025/changsha_travel/changsha_travel23.jpg',
+  '/2025/changsha_travel/changsha_travel24.jpg',
+  '/2025/changsha_travel/changsha_travel25.jpg',
+  '/2025/changsha_travel/changsha_travel26.jpg',
+  '/2025/changsha_travel/changsha_travel27.jpg',
+  '/2025/changsha_travel/changsha_travel28.jpg',
 ]" />
 
 国金中心东门通往LG1层楼梯 `长沙`
 
 <PhotoGroup style="margin:20px 0;" :images="[
-  'changsha_travel29.jpg',
-  'changsha_travel30.jpg',
-  'changsha_travel31.jpg',
-  'changsha_travel32.jpg',
+  '/2025/changsha_travel/changsha_travel29.jpg',
+  '/2025/changsha_travel/changsha_travel30.jpg',
+  '/2025/changsha_travel/changsha_travel31.jpg',
+  '/2025/changsha_travel/changsha_travel32.jpg',
 ]" />
 
 IFS国金购物中心7楼 `Kaws`
 
 <PhotoGroup style="margin:20px 0;" :images="[
-  'changsha_travel33.jpg',
-  'changsha_travel34.jpg',
-  'changsha_travel35.jpg',
-  'changsha_travel36.jpg',
+  '/2025/changsha_travel/changsha_travel33.jpg',
+  '/2025/changsha_travel/changsha_travel34.jpg',
+  '/2025/changsha_travel/changsha_travel35.jpg',
+  '/2025/changsha_travel/changsha_travel36.jpg',
 ]" />
 
 IFS `爱心大屏`
 
 <PhotoGroup style="margin:20px 0;" :images="[
-  'changsha_travel37.jpg',
-  'changsha_travel38.jpg',
-  'changsha_travel39.jpg',
-  'changsha_travel40.jpg',
+  '/2025/changsha_travel/changsha_travel37.jpg',
+  '/2025/changsha_travel/changsha_travel38.jpg',
+  '/2025/changsha_travel/changsha_travel39.jpg',
+  '/2025/changsha_travel/changsha_travel40.jpg',
 ]" />
 
 `火宫殿`
 
 <PhotoGroup style="margin:20px 0;" :images="[
-  'changsha_travel41.jpg',
-  'changsha_travel42.jpg',
-  'changsha_travel43.jpg',
-  'changsha_travel44.jpg',
+  '/2025/changsha_travel/changsha_travel41.jpg',
+  '/2025/changsha_travel/changsha_travel42.jpg',
+  '/2025/changsha_travel/changsha_travel43.jpg',
+  '/2025/changsha_travel/changsha_travel44.jpg',
 ]" />
 
 `超级文和友`
 
 <PhotoGroup style="margin:20px 0;" :images="[
-  'changsha_travel45.jpg',
-  'changsha_travel46.jpg',
-  'changsha_travel47.jpg',
+  '/2025/changsha_travel/changsha_travel45.jpg',
+  '/2025/changsha_travel/changsha_travel46.jpg',
+  '/2025/changsha_travel/changsha_travel47.jpg',
 ]" />
 
 `杜甫江阁`
 
 <PhotoGroup style="margin:20px 0;" :images="[
-  'changsha_travel48.jpg',
-  'changsha_travel49.jpg',
-  'changsha_travel50.jpg',
-  'changsha_travel51.jpg',
+  '/2025/changsha_travel/changsha_travel48.jpg',
+  '/2025/changsha_travel/changsha_travel49.jpg',
+  '/2025/changsha_travel/changsha_travel50.jpg',
+  '/2025/changsha_travel/changsha_travel51.jpg',
 ]" />
 
 `坡子街派出所`
 
 <PhotoGroup style="margin:20px 0;" :images="[
-  'changsha_travel52.jpg',
-  'changsha_travel53.jpg',
-  'changsha_travel54.jpg',
-  'changsha_travel55.jpg',
+  '/2025/changsha_travel/changsha_travel52.jpg',
+  '/2025/changsha_travel/changsha_travel53.jpg',
+  '/2025/changsha_travel/changsha_travel54.jpg',
+  '/2025/changsha_travel/changsha_travel55.jpg',
 ]" />
 
 ## 三、5月3号行程
@@ -370,15 +376,15 @@ IFS `爱心大屏`
 #### 2.2 参考照片
 
 <PhotoGroup style="margin:20px 0;" :images="[
-  'changsha_travel57.jpg',
-  'changsha_travel58.jpg',
-  'changsha_travel59.jpg',
-  'changsha_travel60.jpg',
-  'changsha_travel61.jpg',
-  'changsha_travel62.jpg',
-  'changsha_travel63.jpg',
-  'changsha_travel64.jpg',
-  'changsha_travel65.jpg',
+  '/2025/changsha_travel/changsha_travel57.jpg',
+  '/2025/changsha_travel/changsha_travel58.jpg',
+  '/2025/changsha_travel/changsha_travel59.jpg',
+  '/2025/changsha_travel/changsha_travel60.jpg',
+  '/2025/changsha_travel/changsha_travel61.jpg',
+  '/2025/changsha_travel/changsha_travel62.jpg',
+  '/2025/changsha_travel/changsha_travel63.jpg',
+  '/2025/changsha_travel/changsha_travel64.jpg',
+  '/2025/changsha_travel/changsha_travel65.jpg',
 ]" />
 
 ### 3. 湖南广播电视台
@@ -392,9 +398,9 @@ IFS `爱心大屏`
 #### 3.2 打卡点
 
 <PhotoGroup style="margin:20px 0;" :images="[
-  'changsha_travel66.jpg',
-  'changsha_travel67.jpg',
-  'changsha_travel68.jpg',
+  '/2025/changsha_travel/changsha_travel66.jpg',
+  '/2025/changsha_travel/changsha_travel67.jpg',
+  '/2025/changsha_travel/changsha_travel68.jpg',
 ]" />
 
 #### 3.2 时间线
