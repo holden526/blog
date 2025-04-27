@@ -5,6 +5,7 @@ import {
   SubwayRound,
   InsertEmoticonSharp,
   DirectionsCarFilledRound,
+  FastfoodFilled,
 } from '@vicons/material'
 
 // 图标映射表
@@ -13,6 +14,7 @@ const iconMap: Record<string, any> = {
   subway: SubwayRound,
   emoticon: InsertEmoticonSharp,
   car: DirectionsCarFilledRound,
+  food: FastfoodFilled,
 }
 
 interface DataType {

@@ -142,8 +142,8 @@ const huNanTimeline = [
     title: '万家丽广场',
     content: '吃饭逛街（1h30min）',
     time: '13:30',
-    iconKey: 'subway',
-    type: 'success',
+    iconKey: 'food',
+    type: 'info',
   },
    {
     title: '万家丽广场',
