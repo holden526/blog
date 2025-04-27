@@ -1,10 +1,14 @@
 # vitepress blog
 
-一个基于 Vitepress 框架的个人简洁博客项目。
+vitepress 搭建的简约风博客
+
+预览地址：[https://dddhl.cn](https://dddhl.cn)
+
+搭建过程：[blog搭建过程](https://dddhl.cn/2024/blog-change.html)
 
 <img src="./docs/public/index.png" style="border:1px solid #efefef" />
 
-## 项目特点
+## 特点
 
 - 自定义首页
 - 网站加载页

@@ -68,7 +68,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 这一步只是安装c++编译环境（windows-build-tools是在安装这个VC++环境和python。实测可以通过手动安装python加vsc替代，满速且简单无差错，缺点是大了点，不过卸载也方便），robotjs经常需要构建兼容版本（electron-rebuild或者postinstall）。我下载的是社区版vs2022 [官方下载地址](https://visualstudio.microsoft.com/zh-hans/downloads/)。打开后勾选C++桌面开发，注意右侧还需手动勾选一项windows sdk。
 
-![1](../img/electron-robotjs.png)
+![1](../img/2023/electron-robotjs/electron-robotjs.png)
 
 ## 3. 安装robotjs
 

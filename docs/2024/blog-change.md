@@ -37,17 +37,17 @@ tags:
   <tbody>
     <tr>
       <td>
-        <img src="../img/blog-change1.png" alt="vuepress" />
+        <img src="../img/2024/blog-change/blog-change1.png" alt="vuepress" />
       </td>
     </tr>
      <tr>
       <td>
-        <img src="../img/blog-change2.png" alt="vuepress" />
+        <img src="../img/2024/blog-change/blog-change2.png" alt="vuepress" />
       </td>
     </tr>
      <tr>
       <td>
-        <img src="../img/blog-change3.png" alt="vuepress" />
+        <img src="../img/2024/blog-change/blog-change3.png" alt="vuepress" />
       </td>
     </tr>
   </tbody>
@@ -171,7 +171,7 @@ bun run docs:dev
 
 :::
 
-<img src="../img/blog-change4.png" style="border:1px solid #efefef" />
+<img src="../img/2024/blog-change/blog-change4.png" style="border:1px solid #efefef" />
 
 ## 3. 结构
 
@@ -325,7 +325,7 @@ export default defineConfig({
 
 配置完后效果图：
 
-![效果图](../img/blog-change5.png)
+![效果图](../img/2024/blog-change/blog-change5.png)
 
 ## 5. 布局框架
 
@@ -509,7 +509,7 @@ import { NButton } from 'naive-ui'
 
 按钮正常出现则配置完成
 
-![效果图](../img/blog-change6.png)
+![效果图](../img/2024/blog-change/blog-change6.png)
 
 ### 5.2 Sass
 
@@ -609,7 +609,7 @@ import ArticleList from './.vitepress/components/ArticleList.vue'
 
 此时首页会白屏，因为自定义组件没有内容
 
-![效果图](../img/blog-change7.png)
+![效果图](../img/2024/blog-change/blog-change7.png)
 
 ### 6.2 设置文章信息
 
@@ -619,7 +619,7 @@ import ArticleList from './.vitepress/components/ArticleList.vue'
 
   此项目的是以文件夹的名称按年份排序，个人习惯，可根据个人需求调整
 
-  ![文件夹](../img/blog-change8.png)
+  ![文件夹](../img/2024/blog-change/blog-change8.png)
 
 - frontmatter 可自定义key，我的配置如下（`每个文章都需要配置`）：
 
@@ -701,7 +701,7 @@ VitePress 提供了一个 createContentLoader 辅助函数，可通过它获取�
   console.log(posts)
   ```
 
-  <img src="../img/blog-change9.png" style="border:1px solid #efefef" />
+  <img src="../img/2024/blog-change/blog-change9.png" style="border:1px solid #efefef" />
 
 ### 6.4 时间线展示文章
 
@@ -1076,7 +1076,7 @@ VitePress 提供了一个 createContentLoader 辅助函数，可通过它获取�
 
 - 效果图
 
-  ![图](../img/blog-change10.png)
+  ![图](../img/2024/blog-change/blog-change10.png)
 
 ## 7. 文章侧边栏
 
@@ -1158,7 +1158,7 @@ export default defineConfig({
 
 配置完成后的效果
 
-![图](../img/blog-change11.png)
+![图](../img/2024/blog-change/blog-change11.png)
 
 ### 7.2 优化
 
@@ -1239,11 +1239,11 @@ export default defineConfig({
 
 - 效果
 
-  ![图](../img/blog-change12.png)
+  ![图](../img/2024/blog-change/blog-change12.png)
 
 ## 8. 文章信息统计
 
-![图](../img/blog-change13.png)
+![图](../img/2024/blog-change/blog-change13.png)
 
 - 新建 `.vitepress/utils/getReadingTime.ts` 文件
 
@@ -1492,7 +1492,7 @@ export default defineConfig({
 
 - 效果
 
-  ![图](../img/blog-change14.png)
+  ![图](../img/2024/blog-change/blog-change14.png)
 
 ## 9. 评论插件
 
@@ -1504,19 +1504,19 @@ export default defineConfig({
 
   私有仓库的话访客无法查看讨论
 
-  ![图](../img/blog-change15.png)
+  ![图](../img/2024/blog-change/blog-change15.png)
 
 - GitHub 安装 giscus
 
   [点击此处安装](https://github.com/apps/giscus)
 
-  ![图](../img/blog-change16.png)
+  ![图](../img/2024/blog-change/blog-change16.png)
 
 - giscus 配置
 
   安装完毕后，点击 Configure 配置 giscus，选中刚刚创建的仓库，点击保存
 
-  ![图](../img/blog-change17.png)
+  ![图](../img/2024/blog-change/blog-change17.png)
 
 - 项目中安装
 
@@ -1548,11 +1548,11 @@ export default defineConfig({
 
 - 填写自己的仓库信息
 
-  ![图](../img/blog-change18.png)
+  ![图](../img/2024/blog-change/blog-change18.png)
 
 - 滚到到下边，获取设置
 
-  ![图](../img/blog-change19.png)
+  ![图](../img/2024/blog-change/blog-change19.png)
 
 ### 9.3 使用
 
@@ -1597,7 +1597,7 @@ const { page } = useData()
 
 - 效果
 
-  ![图](../img/blog-change20.png)
+  ![图](../img/2024/blog-change/blog-change20.png)
 
 ### 9.4 优化
 
@@ -1659,7 +1659,7 @@ watch(isDark, (dark) => {
 
 - 效果
 
-  ![图](../img/blog-change21.png)
+  ![图](../img/2024/blog-change/blog-change21.png)
 
 ## 10. 项目配置
 
@@ -1839,7 +1839,7 @@ watch(isDark, (dark) => {
 
 - 开启GitHub Pages 功能
 
-  ![图](../img/blog-change22.png)
+  ![图](../img/2024/blog-change/blog-change22.png)
 
 - 项目根目录，新建 `.github/workflows/deploy.yml`
   ::: code-group
@@ -1979,11 +1979,11 @@ watch(isDark, (dark) => {
 
   此处可以看到，Action已经成功运行，点进去可以看到build和部署进程，如果出现报错，可以查看报错信息
 
-  ![图](../img/blog-change23.png)
+  ![图](../img/2024/blog-change/blog-change23.png)
 
-  ![图](../img/blog-change24.png)
+  ![图](../img/2024/blog-change/blog-change24.png)
 
-  ![图](../img/blog-change25.png)
+  ![图](../img/2024/blog-change/blog-change25.png)
 
 - 部署成功
 
@@ -2083,7 +2083,7 @@ watch(isDark, (dark) => {
 
   可以自行调整底部样式
 
-  ![图](../img/blog-change26.png)
+  ![图](../img/2024/blog-change/blog-change26.png)
 
 ## 13. 网站加载
 
@@ -2315,7 +2315,7 @@ watch(isDark, (dark) => {
 
 - 效果
 
-  ![loading](../img/blog-change27.png)
+  ![loading](../img/2024/blog-change/blog-change27.png)
 
 ## 14. 图片放大
 
@@ -2372,7 +2372,7 @@ vitepress文章中，图片点击没有任何效果，可以使用 [vitepress-pl
   ```
 
 - 效果
-  ![pic](../img/blog-change28.png)
+  ![pic](../img/2024/blog-change/blog-change28.png)
 
 ## 总结
 

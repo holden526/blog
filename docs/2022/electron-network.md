@@ -85,7 +85,7 @@ function openServer(): Promise<string> {
 
 这里有个小坑，如果单纯通过 `server.close()` 关闭服务，重复开关10次后会出警告。大致意思是监听端口过多，解决办法是关闭服务器时将监听也移除。
 
-![gif](../img/electron-network1.png)
+![gif](../img/2022/electron-network/electron-network1.png)
 
 ```js
 // 关闭server
@@ -101,7 +101,7 @@ function closeServer(): void {
 
 局域网内设备都可以访问接口，已测试手机APP访问接口成功，要注意跨域问题。
 
-![gif](../img/electron-network2.gif)
+![gif](../img/2022/electron-network/electron-network2.gif)
 
 ## 6. 整体代码
 

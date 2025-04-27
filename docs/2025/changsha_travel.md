@@ -178,7 +178,7 @@ const huNanTimeline = [
 
 地铁站：梅溪湖西（距离270m）
 
-![酒店](../img/changsha_travel1.jpg)
+![酒店](../img/2025/changsha_travel/changsha_travel1.jpg)
 
 ## 二、5月2日行程
 
@@ -201,7 +201,7 @@ const huNanTimeline = [
 马王堆汉墓出土了大量珍贵文物，包括丝绸、玉器、金器、铜器、瓷器等，展示了汉朝时期的服饰、生活和文化。其中，素纱禅衣、T型帛画、黄纱地印花敷彩直裾式丝绵袍等尤为珍贵，还设有永生之梦灯光秀
 :::
 
-![湖南博物院](../img/changsha_travel2.jpg)
+![湖南博物院](../img/2025/changsha_travel/changsha_travel2.jpg)
 
 #### 1.2 时间线
 
@@ -255,7 +255,7 @@ const huNanTimeline = [
 五一广场位于长沙市市中心，是长沙市最大的城市广场。广场占地面积约10万平方米，是长沙市标志性建筑之一。广场内有毛泽东主席雕像、毛泽东主席铜像、毛泽东主席铜像广场、毛泽东主席铜像广场、毛泽东主席铜像广场等著名景点。广场内还有音乐喷泉、灯光秀等娱乐设施，是市民和游客休闲、娱乐的好去处。
 :::
 
-![五一广场](../img/changsha_travel56.jpg)
+![五一广场](../img/2025/changsha_travel/changsha_travel56.jpg)
 
 #### 3.2 时间线
 

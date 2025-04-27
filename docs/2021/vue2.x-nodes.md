@@ -812,7 +812,7 @@ new Vue({
 2.beforeDestroy：清除定时器、解绑自定义事件、取消订阅消息等【收尾工作】。
 关于销毁 Vue 实例 : 1.销毁后借助 Vue 开发者工具看不到任何信息。 2.销毁后自定义事件会失效，但原生 DOM 事件依然有效。 3.一般不会在 beforeDestroy 操作数据，因为即便操作数据，也不会触发更新流程了。
 
-![avatar](../img/vue2.x-nodes1.png)
+![avatar](../img/2021/vue2.x-nodes/vue2.x-nodes1.png)
 
 ## 18. 组件
 
@@ -967,7 +967,7 @@ VueComponent.prototype.__proto__Vue.prototype
 
 为什么要有这个关系：让组件实例对象（vc）可以访问到 Vue 原型上的属性、方法
 
-![1](../img/vue2.x-nodes2.png)
+![1](../img/2021/vue2.x-nodes/vue2.x-nodes2.png)
 
 ## 19. 创建 Vue 脚手架
 
@@ -1038,7 +1038,7 @@ vue inspect > output.js
 
 ### 19.1 模板项目结构
 
-![1](../img/vue2.x-nodes3.png)
+![1](../img/2021/vue2.x-nodes/vue2.x-nodes3.png)
 
 ### 19.2 关于不同版本的 Vue
 
@@ -1484,7 +1484,7 @@ module.exports = {
 
 原理图：
 
-![1](../img/vue2.x-nodes4.png)
+![1](../img/2021/vue2.x-nodes/vue2.x-nodes4.png)
 
 ### 32.1 搭建 `vuex` 环境
 

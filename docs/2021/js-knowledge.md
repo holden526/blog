@@ -60,7 +60,7 @@ console.log(b()) // 2
 
 原型链是一条引用的链，实例的隐式原型指向构造函数的显式原型，可以使用`A instanceof B`来判断 B 是否在 A 的原型链上。
 
-![a](../img/js-knowledeg.png)
+![a](../img/2021/js-knowledeg/js-knowledeg.png)
 
 ## 6. 什么是变量提升？函数提升？
 

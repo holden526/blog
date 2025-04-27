@@ -217,7 +217,7 @@ console.log(a(2)(3)) // 1 + 2 + 3=6
 
 ### 11. LRU 算法
 
-![图片](../img/js-methods.png)
+![图片](../img/2022/js-methods/js-methods.png)
 
 ```
 class LRUCache {

@@ -99,7 +99,7 @@ Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模�
 
 单个项目占据的主轴空间叫做 main size，占据的交叉轴空间叫做 cross size。
 
-![layout](../img/layout1.png)
+![layout](../img/2022/layout/layout1.png)
 
 ### 1.2 容器属性
 
@@ -190,7 +190,7 @@ htmlDom.style.fontSize = (htmlWidth / baseDevice) * 16 + 'px'
 
 例子：两端宽度不变，中间宽度随浏览器宽度改变
 
-![layout](../img/layout2.gif)
+![layout](../img/2022/layout/layout2.gif)
 
 ```html
 <style>

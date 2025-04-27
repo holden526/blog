@@ -95,8 +95,8 @@ vite 官网：https://vitejs.cn
 <table>
   <tbody>
     <tr>
-      <td><img src="../img/vue3-nodes1.png" style="width:500px;height:280px;float:left" /></td>
-      <td><img src="../img/vue3-nodes2.png" style="width:500px;height:280px;" /></td>
+      <td><img src="../img/2021/vue3-nodes/vue3-nodes1.png" style="width:500px;height:280px;float:left" /></td>
+      <td><img src="../img/2021/vue3-nodes/vue3-nodes2.png" style="width:500px;height:280px;" /></td>
     </tr>
   </tbody>
 </table>
@@ -463,8 +463,8 @@ return {
 <table>
   <tbody>
     <tr>
-      <td><img src="../img/vue3-nodes3.png" />vue 2 生命周期</td>
-      <td><img src="../img/vue3-nodes4.jpg" />vue 3 生命周期</td>
+      <td><img src="../img/2021/vue3-nodes/vue3-nodes3.png" />vue 2 生命周期</td>
+      <td><img src="../img/2021/vue3-nodes/vue3-nodes4.jpg" />vue 3 生命周期</td>
     </tr>
   </tbody>
 </table>
@@ -578,7 +578,7 @@ return {
 
 ### 12.5 provide 与 inject
 
-<img src="../img/vue3-nodes5.png" style="width:300px" />
+<img src="../img/2021/vue3-nodes/vue3-nodes5.png" style="width:300px" />
 
 - 作用：实现 `祖与后代组件间` 通信
 
@@ -621,15 +621,15 @@ return {
 
 使用传统 OptionsAPI 中，新增或者修改一个需求，就需要分别在 data，methods，computed 里修改 。
 
-<img src="../img/vue3-nodes6.gif" style="width:560px;left" />
-<img src="../img/vue3-nodes7.gif" style="zoom:50%;width:560px;left" />
+<img src="../img/2021/vue3-nodes/vue3-nodes6.gif" style="width:560px;left" />
+<img src="../img/2021/vue3-nodes/vue3-nodes7.gif" style="zoom:50%;width:560px;left" />
 
 ### 13.2 Composition API 的优势
 
 我们可以更加优雅的组织我们的代码，函数。让相关功能的代码更加有序的组织在一起。
 
-<img src="../img/vue3-nodes8.gif" style="width:420px;left" />
-<img src="../img/vue3-nodes9.gif" style="width:420px;left" />
+<img src="../img/2021/vue3-nodes/vue3-nodes8.gif" style="width:420px;left" />
+<img src="../img/2021/vue3-nodes/vue3-nodes9.gif" style="width:420px;left" />
 
 ## 14. 新的组件
 

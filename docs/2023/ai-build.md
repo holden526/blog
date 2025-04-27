@@ -138,13 +138,13 @@ https://carrd.co/build
 
   结果：`AI回答需要更多细节`
 
-  <img src="../img/ai-build1.png" style="border:1px solid #efefef;margin-top:10px;">
+  <img src="../img/2023/ai-build/ai-build1.png" style="border:1px solid #efefef;margin-top:10px;">
 
 - 再上传一张网站图片，让AI做出这种类型的网站
 
   结果：`因图片含有人物照片，无法解析`
 
-  <img src="../img/ai-build2.png" style="border:1px solid #efefef;margin-top:10px;">
+  <img src="../img/2023/ai-build/ai-build2.png" style="border:1px solid #efefef;margin-top:10px;">
 
 - 再次上传草图，添加草图中网站的具体描述
 
@@ -156,15 +156,15 @@ https://carrd.co/build
   Combine this sketch to make a web page. The top is the navigation bar, and a text logo is used in the middle. Then there are three function introductions, and the bottom is contact us.
   :::
 
-  <img src="../img/ai-build3.png" style="border:1px solid #efefef;margin-top:10px;">
+  <img src="../img/2023/ai-build/ai-build3.png" style="border:1px solid #efefef;margin-top:10px;">
 
 - 将AI生成的代码拼接，用VScode查看
 
-  <img src="../img/ai-build4.png" style="border:1px solid #efefef;margin-top:10px;">
+  <img src="../img/2023/ai-build/ai-build4.png" style="border:1px solid #efefef;margin-top:10px;">
 
 - 让AI将其变成中文网站。
 
-  <img src="../img/ai-build5.png" style="border:1px solid #efefef;margin-top:10px;">
+  <img src="../img/2023/ai-build/ai-build5.png" style="border:1px solid #efefef;margin-top:10px;">
 
 - 让AI将网站加入高级设计
 
@@ -174,13 +174,13 @@ https://carrd.co/build
 
   结果：`AI仅回复建议，未更改`
 
-  <img src="../img/ai-build6.png" style="border:1px solid #efefef;margin-top:10px;">
+  <img src="../img/2023/ai-build/ai-build6.png" style="border:1px solid #efefef;margin-top:10px;">
 
 - 让AI根据它给出的建议去改善网站并上线服务器
 
   演示地址1：http://106.13.229.31:2000/careana/
 
-  <img src="../img/ai-build7.png" style="border:1px solid #efefef;margin-top:10px;">
+  <img src="../img/2023/ai-build/ai-build7.png" style="border:1px solid #efefef;margin-top:10px;">
 
 ### （2）framer（AI文字描述建站）
 
@@ -196,13 +196,13 @@ https://carrd.co/build
 
 - 第二步：查看AI一键生成的网站预览
 
-  <img src="../img/ai-build8.png" style="border:1px solid #efefef;margin-top:10px;">
+  <img src="../img/2023/ai-build/ai-build8.png" style="border:1px solid #efefef;margin-top:10px;">
 
 - 第三步：简单使用拖拽与更改文字进行布局调整，最后上线网站
 
   演示地址2：https://careana.framer.ai/
 
-  <img src="../img/ai-build9.png" style="border:1px solid #efefef;margin-top:10px;">
+  <img src="../img/2023/ai-build/ai-build9.png" style="border:1px solid #efefef;margin-top:10px;">
 
 ### （3）webflow（模板低代码建站）
 
@@ -210,13 +210,13 @@ https://carrd.co/build
 
 - 第二步：预览初始化模板网站
 
-  <img src="../img/ai-build10.png" style="border:1px solid #efefef;margin-top:10px;">
+  <img src="../img/2023/ai-build/ai-build10.png" style="border:1px solid #efefef;margin-top:10px;">
 
 - 第三步：适当调整与发布网站
 
   演示地址3：https://careana.webflow.io/
 
-  <img src="../img/ai-build11.png" style="border:1px solid #efefef;margin-top:10px;">
+  <img src="../img/2023/ai-build/ai-build11.png" style="border:1px solid #efefef;margin-top:10px;">
 
 ## 5. 小结
 

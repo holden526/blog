@@ -126,7 +126,7 @@ Promise：在catch中调用错误处理函数即可
 
 随便写了个表格
 
-<img src="../img/vue-error.png" style="border:1px solid #efefef" />
+<img src="../img/2022/vue-error/vue-error.png" style="border:1px solid #efefef" />
 
 ## 4. 完整代码
 

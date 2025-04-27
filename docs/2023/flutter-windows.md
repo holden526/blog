@@ -23,7 +23,7 @@ Tips : `放在系统变量中时，需要管理员CMD才能使用命令，可以
 解压目录\flutter\bin\cache\dart-sdk\bin
 ```
 
-![1](../img/flutter-windows1.png)
+![1](../img/2023/flutter-windows/flutter-windows1.png)
 
 ### 1.2 新建系统变量，配置源
 
@@ -36,8 +36,8 @@ PUB_HOSTED_URL=https://mirrors.tuna.tsinghua.edu.cn/dart-pub
 FLUTTER_STORAGE_BASE_URL=https://mirrors.tuna.tsinghua.edu.cn/flutter
 ```
 
-| ![1](../img/flutter-windows2.png) | ![1](../img/flutter-windows3.png) |
-| --------------------------------- | --------------------------------- |
+| ![1](../img/2023/flutter-windows/flutter-windows2.png) | ![1](../img/2023/flutter-windows/flutter-windows3.png) |
+| ------------------------------------------------------ | ------------------------------------------------------ |
 
 ### 1.3 检测配置
 
@@ -58,11 +58,11 @@ flutter doctor
 
 （2）正式进入软件界面后，在 Project 界面中点击 More Actions ，选择SDK Manager
 
-![1](../img/flutter-windows4.png)
+![1](../img/2023/flutter-windows/flutter-windows4.png)
 
 （3）在弹出的页面中，选择Android SDK Command-line Tools (latest) , 再点击ok即可安装。
 
-![1](../img/flutter-windows5.png)
+![1](../img/2023/flutter-windows/flutter-windows5.png)
 
 （4）android-licenses
 
@@ -73,7 +73,7 @@ flutter doctor --android-licenses
 
 （5）最后可以在Android Studio 中的 More Actions中选择合适的安卓模拟器进行安装，默认会带一个模拟器。
 
-![1](../img/flutter-windows6.png)
+![1](../img/2023/flutter-windows/flutter-windows6.png)
 
 ## 3. JDK
 
@@ -87,15 +87,15 @@ JAVA_HOME=安装目录
 CLASSPATH=.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;%JAVA_HOME%\lib;
 ```
 
-| ![1](../img/flutter-windows7.png) | ![1](../img/flutter-windows8.png) |
-| --------------------------------- | --------------------------------- |
+| ![1](../img/2023/flutter-windows/flutter-windows7.png) | ![1](../img/2023/flutter-windows/flutter-windows8.png) |
+| ------------------------------------------------------ | ------------------------------------------------------ |
 
 ```bash
 # 环境变量Path
 %JAVA_HOME%\bin
 ```
 
-![1](../img/flutter-windows9.png)
+![1](../img/2023/flutter-windows/flutter-windows9.png)
 
 ## 4. 拓展安装
 
@@ -103,18 +103,18 @@ CLASSPATH=.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;%JAVA_HOME%\lib;
 
 （1）vscode - 插件市场上安装
 
-| ![1](../img/flutter-windows10.png) | ![1](../img/flutter-windows11.png) |
-| ---------------------------------- | ---------------------------------- |
+| ![1](../img/2023/flutter-windows/flutter-windows10.png) | ![1](../img/2023/flutter-windows/flutter-windows11.png) |
+| ------------------------------------------------------- | ------------------------------------------------------- |
 
 （2）Android Studio - Plugins中安装
 
-![1](../img/flutter-windows12.png)
+![1](../img/2023/flutter-windows/flutter-windows12.png)
 
 ## 5. Visual Studio 2022
 
 选择C++桌面开发后，右侧列表中检查是否勾选了Windows SDK，需要勾选，再点击安装即可。
 
-![1](../img/flutter-windows13.png)
+![1](../img/2023/flutter-windows/flutter-windows13.png)
 
 ## 6. 项目创建和启动
 
@@ -122,23 +122,23 @@ CLASSPATH=.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;%JAVA_HOME%\lib;
 
 （1）ctrl+shift+p 搜索 Flutter 选择 Flutter:New Project
 
-![1](../img/flutter-windows14.png)
+![1](../img/2023/flutter-windows/flutter-windows14.png)
 
 （2）选择Application，点击后需要选择项目目录，并输入名称
 
-![1](../img/flutter-windows15.png)
+![1](../img/2023/flutter-windows/flutter-windows15.png)
 
 （3）创建项目完成
 
-![1](../img/flutter-windows16.png)
+![1](../img/2023/flutter-windows/flutter-windows16.png)
 
 （4）右下角Select Device可选择启动设备
 
-![1](../img/flutter-windows17.png)
+![1](../img/2023/flutter-windows/flutter-windows17.png)
 
 （3）选择启动的平台，下面是Android Studio默认的模拟器
 
-![1](../img/flutter-windows18.png)
+![1](../img/2023/flutter-windows/flutter-windows18.png)
 
 （4）启动项目
 
@@ -156,26 +156,26 @@ Running Gradle task 'assembleDebug'...
 
 ① 控制台输入 flutter run
 
-![1](../img/flutter-windows19.png)
+![1](../img/2023/flutter-windows/flutter-windows19.png)
 
 ② 使用vscode的运行与调试，点击运行
 
-![1](../img/flutter-windows20.png)
+![1](../img/2023/flutter-windows/flutter-windows20.png)
 
 ### 6.2 Android Studio
 
 （1）安装完拓展后会显示新的选项，选择New Flutter Project
 
-![1](../img/flutter-windows21.png)
+![1](../img/2023/flutter-windows/flutter-windows21.png)
 
 （2）选择flutter后，这边可以选择项目的初始化设置，不需要的可以取消，取消后不会生成对应目录。
 
-![1](../img/flutter-windows22.png)
+![1](../img/2023/flutter-windows/flutter-windows22.png)
 
 （3）先选择模拟器后再启动项目
 
-![1](../img/flutter-windows23.png)
+![1](../img/2023/flutter-windows/flutter-windows23.png)
 
 （4）启动后模拟器不会自动弹出，需要点击右下角的 "Running Devices"
 
-![1](../img/flutter-windows24.png)
+![1](../img/2023/flutter-windows/flutter-windows24.png)

@@ -19,7 +19,7 @@ tags:
 使用了这些： Vue3 + Vue-Cli + electron + sass + element-Plus + vuex + vue-router
 
 入选 csdn 热榜第八嘿嘿<br>
-![electron](../img/electron-init1.png)
+![electron](../img/2022/electron-init/electron-init1.png)
 
 ## 1. 创建 Vue3 项目
 
@@ -34,11 +34,11 @@ vue create demo
 
 ### 1.2 选择 Vue3
 
-![electron](../img/electron-init2.png)
+![electron](../img/2022/electron-init/electron-init2.png)
 
 ### 1.3 创建完毕后测试一下
 
-![electron](../img/electron-init3.png)
+![electron](../img/2022/electron-init/electron-init3.png)
 
 进入项目目录
 
@@ -64,8 +64,8 @@ bun run serve
 
 看到这个界面说明创建成功咯~
 
-![electron](../img/electron-init4.png)
-![electron](../img/electron-init5.png)
+![electron](../img/2022/electron-init/electron-init4.png)
+![electron](../img/2022/electron-init/electron-init5.png)
 
 ### 1.4 安装 router
 
@@ -300,7 +300,7 @@ vue add electron-builder
 ```
 
 这里我选择的是目前最新版 13.0.0
-![electron](../img/electron-init6.png)
+![electron](../img/2022/electron-init/electron-init6.png)
 
 ### 5.2 启动项目测试
 
@@ -325,12 +325,12 @@ bun run electron:serve
 :::
 
 看到这里就已经成功咯~
-![electron](../img/electron-init7.png)
+![electron](../img/2022/electron-init/electron-init7.png)
 
 ### 5.3 注释掉 DevTools 检测
 
 如果应用没安装 devTools 会自动安装，但是又慢又卡，直接在 `background.js` 注释掉
-![electron](../img/electron-init8.png)
+![electron](../img/2022/electron-init/electron-init8.png)
 
 ### 5.4 配置热加载
 
@@ -399,7 +399,7 @@ bun run electron:build
 绿色版：`dist_electron/win-unpacked`
 
 打开康康：
-![electron](../img/electron-init9.png)
+![electron](../img/2022/electron-init/electron-init9.png)
 
 ## 7. 结尾
 

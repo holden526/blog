@@ -16,4 +16,4 @@ tags:
 
 解决办法：先nvm install 一个版本，复制，改名nodejs，比如我这里是复制v20.15.1，再改名。
 
-<img src="../img/nvm-use.png" style="border:1px solid #efefef" />
+<img src="../img/2024/nvm-use/nvm-use.png" style="border:1px solid #efefef" />

@@ -560,7 +560,7 @@ document.createElement('标签名称')
 
 事件对象，有函数提供，在函数里面用形参接收即可
 
-![notes](../img/js-notes1.png)
+![notes](../img/2021/js-notes/js-notes1.png)
 
 补充：
 
@@ -572,7 +572,7 @@ pageX 和 pageY 相对于整个页面文档流，鼠标的坐标信息
 
 ### 11.2 **浏览器相应事件的机制**
 
-![notes](../img/js-notes2.png)
+![notes](../img/2021/js-notes/js-notes2.png)
 
 先从外层传递到里层（事件捕获阶段），最后传出来（事件冒泡阶段）
 
@@ -628,7 +628,7 @@ Person.prototype.a = 110
 
 对象访问机制：先去自己身上找，没有就去 proto 上找，逐级查找 最高级 Object 的 proto，没有就返回 undefined
 
-![notes](../img/js-notes3.png)
+![notes](../img/2021/js-notes/js-notes3.png)
 
 ## 14. ES6
 
@@ -638,7 +638,7 @@ ES6 以前用 var ES6 新增 let/const
 
 var 函数作用域
 
-![notes](../img/js-notes4.png)
+![notes](../img/2021/js-notes/js-notes4.png)
 
 ### 14.2 箭头函数
 
@@ -831,7 +831,7 @@ $('选择器')
 $('选择器').筛选器名称()
 ```
 
-![notes](../img/js-notes5.png)
+![notes](../img/2021/js-notes/js-notes5.png)
 
 ### 17.3 操作文本内容
 
@@ -964,7 +964,7 @@ $('div').removeProp('hello')
 
 ### 17.7 获取元素尺寸
 
-![notes](../img/js-notes6.png)
+![notes](../img/2021/js-notes/js-notes6.png)
 
 （1）width()、height()
 

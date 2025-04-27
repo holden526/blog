@@ -10,8 +10,8 @@ tags:
 
 分享一下 node.js 学习笔记。已同步发布在 CSDN，获得排名太开心了！mark 一下~
 
-![nodejs](../img/node-notes1.jpg)
-![nodejs](../img/node-notes2.png)
+![nodejs](../img/2022/node-notes/node-notes1.jpg)
+![nodejs](../img/2022/node-notes/node-notes2.png)
 
 ## 1. fs 模块
 
@@ -242,7 +242,7 @@ console.log(custom) // {name:lhd,sayHello:[Function]}
 
 建议只用一种方式，以防混淆
 
-![node](../img/node-notes3.png)
+![node](../img/2022/node-notes/node-notes3.png)
 
 （5）CommonJS 规范
 
@@ -565,19 +565,19 @@ app.use('/api', userRouter)
 
 ### 7.1 过程
 
-![node](../img/node-notes4.png)
+![node](../img/2022/node-notes/node-notes4.png)
 
 ### 7.2 中间件格式
 
 本质上就是一个 function 处理函数，格式如下：
 
-![node](../img/node-notes5.png)
+![node](../img/2022/node-notes/node-notes5.png)
 
 ### 7.3 next() 函数
 
 next() 函数是实现多个中间件连续调用的关键，它表示把流转关系转交给下一个中间件或者路由。
 
-![node](../img/node-notes6.png)
+![node](../img/2022/node-notes/node-notes6.png)
 
 ### 7.4 定义中间件函数
 
@@ -822,7 +822,7 @@ app.listen(80, () => {
 
 测试结果：
 
-![node](../img/node-notes7.png)
+![node](../img/2022/node-notes/node-notes7.png)
 
 ### 7.12 封装自定义中间件
 
@@ -1087,9 +1087,9 @@ app.listen(80, () => {
 })
 ```
 
-![node](../img/node-notes8.png)
+![node](../img/2022/node-notes/node-notes8.png)
 
-![node](../img/node-notes9.png)
+![node](../img/2022/node-notes/node-notes9.png)
 
 ## 11. 前后端身份认证
 
@@ -1322,8 +1322,8 @@ app.listen(80, () => {
 
 登录后生成 token：
 
-![node](../img/node-notes10.png)
+![node](../img/2022/node-notes/node-notes10.png)
 
 获取解析后的 token 数据：
 
-![node](../img/node-notes11.png)
+![node](../img/2022/node-notes/node-notes11.png)

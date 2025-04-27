@@ -16,7 +16,7 @@ tags:
 
 elementUi 的 table 懒加载，总共有四个层级，学院下有专业，专业下有年级，年级下有班级。每次展开层级会根据上一层父节点的 id 请求新的数据。最近发现更新子节点数据后，页面不更新。
 
-![lazy](../img/el-table-lazy1.png)
+![lazy](../img/2022/el-table-lazy/el-table-lazy1.png)
 
 ## 2. 我的解决方案
 
@@ -38,7 +38,7 @@ data() {
 
 ### 2.2 在懒加载函数记录每次请求的参数
 
-![lazy](../img/el-table-lazy2.png)
+![lazy](../img/2022/el-table-lazy/el-table-lazy2.png)
 
 `loadSomeData` 是我的懒加载函数
 

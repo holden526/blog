@@ -12,11 +12,11 @@ tags:
 
 用echarts绘制了折线图，开启dataZoom功能后，在windows下用鼠标点击拖动与使用移动设备触屏拖动均正常。但是，如果是windows触屏设备，使用触屏时拖不动下方的dataZoom。
 
-![1](../img/echarts-touch1.png)
+![1](../img/2022/echarts-touch/echarts-touch1.png)
 
 在百度和google了一番后发现，原来是官方并没有适配这种设备的触摸事件。在github上也能找到其他人提出的issue，但官方仍未解决问题。
 
-![1](../img/echarts-touch2.png)
+![1](../img/2022/echarts-touch/echarts-touch2.png)
 
 ## 2. 寻找原因
 
@@ -24,11 +24,11 @@ tags:
 
 结合部分issues提供的方案，查看了一下echarts的源码。可以发现在 node_modules/zrender/zrender.js 中，有这样一句代码，判定当前设备是否为触屏设备。
 
-![1](../img/echarts-touch3.png)
+![1](../img/2022/echarts-touch/echarts-touch3.png)
 
 在控制台输出 `'ontouchstart' in window` 结果为false。
 
-![1](../img/echarts-touch4.png)
+![1](../img/2022/echarts-touch/echarts-touch4.png)
 
 ## 3. 解决办法
 
@@ -58,9 +58,9 @@ zRenderEnv.pointerEventsSupported = false
 
 dataZoom默认的手柄太小，在触屏设备不好拖动，建议更改成圆形按钮，可以自定义更改样式，修改配置项里的handleIcon即可。
 
-![1](../img/echarts-touch5.png)
+![1](../img/2022/echarts-touch/echarts-touch5.png)
 或者同心圆
-![1](../img/echarts-touch6.png)
+![1](../img/2022/echarts-touch/echarts-touch6.png)
 
 ```js
 // 第一种，正常圆
