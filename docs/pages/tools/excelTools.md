@@ -8,8 +8,8 @@ sidebar: false
 ---
 
 <script setup> 
-import ExcelCopyWorksheet from '../.vitepress/components/tools/excel/ExcelCopyWorksheet.vue'
-import ExcelCopyColumn from '../.vitepress/components/tools/excel/ExcelCopyColumn.vue'
+import ExcelCopyWorksheet from '../../.vitepress/components/tools/excel/ExcelCopyWorksheet.vue'
+import ExcelCopyColumn from '../../.vitepress/components/tools/excel/ExcelCopyColumn.vue'
 </script>
 
 # Excel Tools

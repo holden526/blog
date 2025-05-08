@@ -135,17 +135,24 @@ export default defineConfig({
         items: [
           {
             items: [
-              { text: '实用网站', link: '/pages/webPage' },
-              { text: '工具网站', link: '/pages/webTools' },
-              { text: 'Excel工具', link: '/pages/excelTools' },
+              { text: '实用网站', link: '/pages/recommendation/webPage' },
+              { text: '工具网站', link: '/pages/recommendation/webTools' },
             ],
+          },
+        ],
+      },
+      {
+        text: '工具',
+        items: [
+          {
+            items: [{ text: 'Excel工具', link: '/pages/tools/excelTools' }],
           },
         ],
       },
     ],
     sidebar: autoSidebar(),
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/lee-holden' },
+      { icon: 'github', link: 'https://github.com/holden526' },
       {
         icon: {
           svg: `
@@ -166,7 +173,7 @@ export default defineConfig({
             </g>
           </svg>`,
         },
-        link: 'https://gitee.com/holden-lee',
+        link: 'https://gitee.com/holden526',
       },
     ],
   },

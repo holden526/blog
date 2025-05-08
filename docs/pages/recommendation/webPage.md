@@ -10,7 +10,7 @@ sidebar: false
 # 实用网页
 
 <script setup> 
-import Table from '../.vitepress/components/Table.vue'
+import Table from '../../.vitepress/components/Table.vue'
 const data = new Map([
   [
     '前端素材', [
