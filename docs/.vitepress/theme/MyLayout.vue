@@ -1,5 +1,6 @@
 <script setup>
 import DefaultTheme from 'vitepress/theme'
+import { toggleTheme } from './index'
 import { watch, nextTick, onMounted, ref } from 'vue'
 import { useRoute, useData, inBrowser } from 'vitepress'
 import Giscus from '@giscus/vue'
@@ -15,16 +16,19 @@ onMounted(() => {
   loading.value = false
 })
 
-watch(isDark, (dark) => {
-  if (!inBrowser) return
-
-  const iframe = document.querySelector('giscus-widget')?.shadowRoot?.querySelector('iframe')
-
-  iframe?.contentWindow?.postMessage(
-    { giscus: { setConfig: { theme: dark ? 'dark' : 'light' } } },
-    'https://giscus.app'
-  )
-})
+watch(
+  isDark,
+  (dark) => {
+    if (!inBrowser) return
+    const iframe = document.querySelector('giscus-widget')?.shadowRoot?.querySelector('iframe')
+    iframe?.contentWindow?.postMessage(
+      { giscus: { setConfig: { theme: dark ? 'dark' : 'light' } } },
+      'https://giscus.app'
+    )
+    toggleTheme(dark)
+  },
+  { immediate: true }
+)
 
 watch(
   () => route.path,

@@ -1,8 +1,15 @@
 import DefaultTheme from 'vitepress/theme'
 import busuanzi from 'busuanzi.pure.js'
 import { inBrowser } from 'vitepress'
-import { defineComponent, h, inject } from 'vue'
-import { NConfigProvider, NMessageProvider } from 'naive-ui'
+import { generate } from '@ant-design/colors'
+import { defineComponent, h, inject, ref } from 'vue'
+import {
+  NConfigProvider,
+  NMessageProvider,
+  darkTheme,
+  type GlobalTheme,
+  type GlobalThemeOverrides,
+} from 'naive-ui'
 import { setup } from '@css-render/vue3-ssr'
 import { useRoute } from 'vitepress'
 import imageViewer from 'vitepress-plugin-image-viewer'
@@ -37,22 +44,59 @@ const VitepressPath = defineComponent({
 })
 
 const NaiveUIProvider = defineComponent({
-  render() {
-    return h(NMessageProvider, null, {
-      default: () =>
-        h(
-          NConfigProvider,
-          { abstract: true, inlineThemeDisabled: true },
-          {
-            default: () => [
-              h(MyLayout, null, { default: this.$slots.default?.() }),
-              (import.meta as any).env.SSR ? [h(CssRenderStyle), h(VitepressPath)] : null,
-            ],
-          }
-        ),
-    })
+  setup(props, { slots }) {
+    return () =>
+      h(NMessageProvider, null, {
+        default: () =>
+          h(
+            NConfigProvider,
+            {
+              abstract: true,
+              inlineThemeDisabled: true,
+              themeOverrides: themeOverrides.value,
+              theme: theme.value,
+            },
+            {
+              default: () => [
+                h(MyLayout, null, { default: slots.default?.() }),
+                (import.meta as any).env.SSR ? [h(CssRenderStyle), h(VitepressPath)] : null,
+              ],
+            }
+          ),
+      })
   },
 })
+
+// 主题切换
+const theme = ref<GlobalTheme | null>(null)
+const primaryColor = ref('#2080f0')
+const themeOverrides = ref<GlobalThemeOverrides>({})
+const generateColors = ref<string[]>([])
+export const toggleTheme = (isDark: boolean) => {
+  theme.value = isDark ? darkTheme : null
+  primaryColor.value = isDark ? '#7B68EE' : '#2080f0'
+  setThemeOverrides()
+}
+
+export const setThemeOverrides = () => {
+  generateColors.value = theme.value
+    ? generate(primaryColor.value, {
+        theme: 'dark',
+        backgroundColor: '#1B1B1F',
+      })
+    : generate(primaryColor.value)
+
+  const commonColors = {
+    primaryColor: generateColors.value[5],
+    primaryColorHover: generateColors.value[4],
+    primaryColorPressed: generateColors.value[5],
+    primaryColorSuppl: generateColors.value[6],
+  }
+
+  themeOverrides.value = {
+    common: commonColors,
+  }
+}
 
 export default {
   extends: DefaultTheme,

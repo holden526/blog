@@ -30,6 +30,7 @@
     "vue": "^3.5.12"
   },
   "dependencies": {
+    "@ant-design/colors": "^8.0.0",
     "@giscus/vue": "^3.0.0",
     "exceljs": "^4.4.0",
     "naive-ui": "^2.40.1",
