@@ -10,6 +10,7 @@ sidebar: false
 <script setup> 
 import ExcelCopyWorksheet from '../../.vitepress/components/tools/excel/ExcelCopyWorksheet.vue'
 import ExcelCopyColumn from '../../.vitepress/components/tools/excel/ExcelCopyColumn.vue'
+import ExcelCopyColumnToRow from '../../.vitepress/components/tools/excel/ExcelCopyColumnToRow.vue'
 </script>
 
 # Excel Tools
@@ -24,7 +25,7 @@ import ExcelCopyColumn from '../../.vitepress/components/tools/excel/ExcelCopyCo
 
 <ExcelCopyWorksheet />
 
-## excel指定列复制
+## excel指定列复制到多个表
 
 ::: warning 作用
 复制A表中指定某一列的数据到B工作表中
@@ -37,3 +38,13 @@ import ExcelCopyColumn from '../../.vitepress/components/tools/excel/ExcelCopyCo
 :::
 
 <ExcelCopyColumn />
+
+## excel指定列复制到单行
+
+::: warning 作用
+复制A表中指定某一列的数据到B工作表的某一个单元格中
+
+默认串联，没有间隔符
+:::
+
+<ExcelCopyColumnToRow />
