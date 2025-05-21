@@ -11,6 +11,7 @@ sidebar: false
 import ExcelCopyWorksheet from '../../.vitepress/components/tools/excel/ExcelCopyWorksheet.vue'
 import ExcelCopyColumn from '../../.vitepress/components/tools/excel/ExcelCopyColumn.vue'
 import ExcelCopyColumnToRow from '../../.vitepress/components/tools/excel/ExcelCopyColumnToRow.vue'
+import ExcelCopyFormulaToCell from '../../.vitepress/components/tools/excel/ExcelCopyFormulaToCell.vue'
 </script>
 
 # Excel 工具集
@@ -72,3 +73,11 @@ Excel 文件中选择特定工作表，并将其复制指定数量
   :::
 
 <ExcelCopyColumnToRow />
+
+## 4. 循环复制公式到单元格
+
+::: tip 功能介绍
+设定一个模板，提取源表中每行对应索引的数据组合，然后复制到目标表每个工作表中的指定单元格。
+:::
+
+<ExcelCopyFormulaToCell />
