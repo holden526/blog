@@ -227,9 +227,6 @@ const processTemplate = (sheet: ExcelJS.Worksheet, row: ExcelJS.Row, template: s
     if (varType === 'cell') {
       // 获取单元格的文本值
       value = cell.text || cell.value?.toString() || ''
-      // if (cellIdx == 10) {
-      //   value = Number(value).toFixed(2)
-      // }
     } else if (varType === 'formula') {
       // 获取单元格公式的计算结果
       value = formatFormula(sheet, cell.formula) || ''
@@ -664,7 +661,7 @@ const copyRow = async () => {
           <li>"{cell1[小数进1]}" - 如果是数字且有小数，则直接进1</li>
           <li>"{cell1[保留2位小数]}" - 如果是数字则保留2位小数</li>
           <li>"{keyVal}" - 引用键值对生成的文本（变量名可自定义）</li>
-          <li>支持Excel公式中的ROUND函数，如"ROUND(420/50*12*0.3*0.6*0.1,2)"</li>
+          <li>支持Excel公式中的ROUND函数"</li>
         </ul>
       </n-alert>
 
