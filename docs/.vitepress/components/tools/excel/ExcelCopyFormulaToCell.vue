@@ -7,16 +7,13 @@ import {
   UploadFileInfo,
   useMessage,
   NButton,
-  NPopconfirm,
-  NSelect,
-  NDataTable,
   NHighlight,
   useThemeVars,
   NAlert,
   NTooltip,
 } from 'naive-ui'
 import { KeyboardDoubleArrowRightFilled, HelpOutlined } from '@vicons/material'
-import { ref, reactive, h } from 'vue'
+import { ref } from 'vue'
 import ExcelJS from 'exceljs'
 const copySheetName = ref('')
 const themeVars = useThemeVars()
@@ -28,58 +25,23 @@ const loading = ref(false)
 let inputFile: File | null | undefined = null
 let outputFile: File | null | undefined = null
 
-// 键值对列表 - 用于生成动态文本内容
-const keyValuePairs = reactive<
-  {
-    id: number
-    key: string
-    cellIndex: number
-    prefix: string
-    suffix: string
-    condition: string
-  }[]
->([])
-
-// 用于生成唯一ID
-let nextId = 1
-
-// 添加新行到键值对表格
-const addNewRow = () => {
-  keyValuePairs.push({
-    id: nextId++,
-    key: '',
-    cellIndex: 1,
-    prefix: '，',
-    suffix: '台班',
-    condition: 'notEmpty',
-  })
-}
-
-// 条件选项
-const conditionOptions = [
-  { label: '非空时显示', value: 'notEmpty' },
-  { label: '始终显示', value: 'always' },
-  { label: '大于0时显示', value: 'greaterThanZero' },
-]
-
-// 键值对变量名称 - 在模板中使用此变量名引用键值对生成的文本
-const keyValueVarName = ref('keyVal')
-
 // 模板文本 - 用于生成最终输出内容
 const templateText = ref(`
-{cell5}
+{值B}{值C}~{值D}
 
 一、清理工程量
 
-1、清理排水系淤泥体积：{formula26}={cell26}m³
-2、清理灌木及杂草面积：{formula28}={cell28}m²
-3、树木清砍：{cell27[小数进1]}株
+1、清理排水系淤泥体积：{公式AC}={值AC[保留2位小数]}m³
+2、清理灌木及杂草面积：{公式AD}={值AD}m²
+3、树木清砍：{值AE[小数进1]}株
 4、清理孤石：
-
+5、清理边沟: {值Y}m;平台水沟{值Z}m;急流槽{值AA}m;截水沟{值AB}m;
 
 二、投入情况
 
-1、2025年2月13日能达公司投入{cell30}人{keyVal}。`)
+1、2025年2月13日能达公司投入{值AF}人。100型防撞车{值AG}台班，60挖机{值AH}台班，拖车{值AI}台班，自卸车{值AJ}台班，大巴车{值AK}台班，施工车{值AL}台班。
+
+`)
 
 // 获取输入文件
 const handleInputChange = async ({ fileList }: { fileList: UploadFileInfo[] }) => {
@@ -91,17 +53,13 @@ const handleOutputChange = async ({ fileList }: { fileList: UploadFileInfo[] }) 
   outputFile = fileList[0]?.file
 }
 
-// 删除键值对
-const removeKeyValuePair = (index: number) => {
-  keyValuePairs.splice(index, 1)
-  message.success('删除键值对成功')
-}
-
-// 更新键值对
-const updateKeyValuePair = (index: number, field: string, value: any) => {
-  if (keyValuePairs[index]) {
-    keyValuePairs[index][field] = value
+// 将列字母转换为列索引
+const columnLetterToIndex = (letter: string): number => {
+  let result = 0
+  for (let i = 0; i < letter.length; i++) {
+    result = result * 26 + (letter.charCodeAt(i) - 64)
   }
+  return result
 }
 
 // 递归解析公式中的单元格引用
@@ -216,18 +174,18 @@ const formatFormula = (sheet: ExcelJS.Worksheet, formula: string | undefined): s
 const processTemplate = (sheet: ExcelJS.Worksheet, row: ExcelJS.Row, template: string): string => {
   let result = template
 
-  // 1. 处理 {cell} 和 {formula} 变量，增加对特殊格式的支持
+  // 1. 处理 {值} 和 {公式} 变量，增加对特殊格式的支持
   // 优化正则表达式，确保能正确捕获括号内内容，增加对保留小数位的支持
-  const templateVarPattern = /{(cell|formula)(\d+)(?:\[(四舍五入|小数进1|保留\d+位小数)\])?}/g
-  result = result.replace(templateVarPattern, (match, varType, cellIndex, roundingMethod) => {
-    const cellIdx = parseInt(cellIndex)
-    const cell = row.getCell(cellIdx)
+  const templateVarPattern = /{(值|公式)([A-Z]+)(?:\[(四舍五入|小数进1|保留\d+位小数)\])?}/g
+  result = result.replace(templateVarPattern, (match, varType, columnLetter, roundingMethod) => {
+    const columnIndex = columnLetterToIndex(columnLetter)
+    const cell = row.getCell(columnIndex)
     let value = ''
 
-    if (varType === 'cell') {
+    if (varType === '值') {
       // 获取单元格的文本值
       value = cell.text || cell.value?.toString() || ''
-    } else if (varType === 'formula') {
+    } else if (varType === '公式') {
       // 获取单元格公式的计算结果
       value = formatFormula(sheet, cell.formula) || ''
     }
@@ -248,38 +206,6 @@ const processTemplate = (sheet: ExcelJS.Worksheet, row: ExcelJS.Row, template: s
 
     return value
   })
-
-  // 2. 处理键值对列表 - 根据条件筛选并生成文本
-  const keyValueTextItems = keyValuePairs
-    .filter((item) => {
-      const value =
-        row.getCell(item.cellIndex).text || row.getCell(item.cellIndex).value?.toString() || ''
-
-      if (item.condition === 'notEmpty') {
-        // 非空时显示
-        return value && value.trim() !== ''
-      } else if (item.condition === 'always') {
-        // 始终显示
-        return true
-      } else if (item.condition === 'greaterThanZero') {
-        // 大于0时显示
-        const numValue = parseFloat(value)
-        return !isNaN(numValue) && numValue > 0
-      }
-
-      return false
-    })
-    .map((item) => {
-      const value =
-        row.getCell(item.cellIndex).text || row.getCell(item.cellIndex).value?.toString() || ''
-      return `${item.prefix}${item.key}${value}${item.suffix}`
-    })
-
-  const keyValueText = keyValueTextItems.join('')
-
-  // 替换键值对变量
-  const keyValueVarPattern = new RegExp(`{${keyValueVarName.value}}`, 'g')
-  result = result.replace(keyValueVarPattern, keyValueText)
 
   // 3. 去除所有 [四舍五入]、[小数进1] 和 [保留N位小数] 标记
   result = result.replace(/\[四舍五入\]|\[小数进1\]|\[保留\d+位小数\]/g, '')
@@ -349,11 +275,6 @@ const copyRow = async () => {
       // 直接通过索引获取B表中的工作表
       const bSheet = workbookB.worksheets[sheetIndex]
 
-      // // 使用正则表达式匹配从“二、”开始到文本末尾的内容
-      // const pattern = /二、[\s\S]*/
-      // const match = bSheet.getCell(trimmedPastePosition).text.match(pattern)
-      // const extractedText = match![0] ?? ''
-
       // 使用模板处理函数生成最终文本
       const result = processTemplate(aSheet, row, templateText.value)
 
@@ -377,7 +298,7 @@ const copyRow = async () => {
       const url = URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = url
-      link.download = '复制行文件.xlsx'
+      link.download = `${copySheetName.value}复制结果.xlsx`
       link.click()
       URL.revokeObjectURL(url)
 
@@ -486,147 +407,6 @@ const copyRow = async () => {
       </div>
     </div>
 
-    <div class="action-buttons">
-      <n-button strong secondary type="info" :loading="loading" @click="copyRow">
-        执行复制
-      </n-button>
-    </div>
-
-    <!-- 键值对管理部分 -->
-    <div class="key-value-section">
-      <h3 style="margin-bottom: 10px">
-        键值对管理
-        <NTooltip trigger="hover" placement="right">
-          <template #trigger>
-            <n-icon size="18" class="help-icon">
-              <HelpOutlined />
-            </n-icon>
-          </template>
-          键值对用于生成动态文本，例如"100型防撞车5台班"。在模板中使用 {keyVal}
-          引用这些键值对生成的文本。
-        </NTooltip>
-      </h3>
-
-      <div class="key-value-var-name">
-        <span>键值对变量名：</span>
-        <n-input
-          v-model:value="keyValueVarName"
-          style="width: 200px"
-          placeholder="在模板中使用的变量名"
-        />
-        <NTooltip trigger="hover" placement="right">
-          <template #trigger>
-            <n-icon size="18" class="help-icon">
-              <HelpOutlined />
-            </n-icon>
-          </template>
-          在模板中使用 {变量名} 来引用键值对生成的文本，例如 {keyVal}
-        </NTooltip>
-      </div>
-
-      <div class="key-value-table">
-        <n-data-table
-          :columns="[
-            {
-              title: '键名称',
-              key: 'key',
-              render: (row, index) => {
-                return h(
-                  NTooltip,
-                  {
-                    trigger: 'hover',
-                    placement: 'top',
-                  },
-                  {
-                    default: () => row.key || '请填写内容', // 显示工具提示的内容
-                    trigger: () =>
-                      h(NInput, {
-                        value: row.key,
-                        onUpdateValue: (v) => updateKeyValuePair(index, 'key', v),
-                        placeholder: '例如：100型防撞车',
-                      }),
-                  }
-                )
-              },
-            },
-            {
-              title: '单元格索引',
-              key: 'cellIndex',
-              render: (row, index) => {
-                return h(NInputNumber, {
-                  value: row.cellIndex,
-                  min: 1,
-                  onUpdateValue: (v) => updateKeyValuePair(index, 'cellIndex', v),
-                  placeholder: '例如：31',
-                })
-              },
-            },
-            {
-              title: '前缀',
-              key: 'prefix',
-              render: (row, index) => {
-                return h(NInput, {
-                  value: row.prefix,
-                  onUpdateValue: (v) => updateKeyValuePair(index, 'prefix', v),
-                  placeholder: '例如：，',
-                })
-              },
-            },
-            {
-              title: '后缀',
-              key: 'suffix',
-              render: (row, index) => {
-                return h(NInput, {
-                  value: row.suffix,
-                  onUpdateValue: (v) => updateKeyValuePair(index, 'suffix', v),
-                  placeholder: '例如：台班',
-                })
-              },
-            },
-            {
-              title: '显示条件',
-              key: 'condition',
-              render: (row, index) => {
-                return h(NSelect, {
-                  value: row.condition,
-                  options: conditionOptions,
-                  onUpdateValue: (v) => updateKeyValuePair(index, 'condition', v),
-                })
-              },
-            },
-            {
-              title: '操作',
-              key: 'actions',
-              render: (row, index) => {
-                return h(
-                  NPopconfirm,
-                  {
-                    positiveText: '确定',
-                    negativeText: '取消',
-                    onPositiveClick: () => removeKeyValuePair(index),
-                  },
-                  {
-                    trigger: () =>
-                      h(NButton, { size: 'small', type: 'error' }, { default: () => '删除' }),
-                    default: () => '确定要删除该键值对吗？',
-                  }
-                )
-              },
-            },
-          ]"
-          :data="keyValuePairs"
-          :row-key="(row) => row.id"
-          :bordered="false"
-          :single-line="false"
-          style="width: 100%"
-        />
-
-        <n-button style="width: 100%; margin-top: 10px" type="warning" @click="addNewRow"
-          >新增键值对</n-button
-        >
-      </div>
-    </div>
-
     <div class="template-input">
       <h3>
         输出模板
@@ -641,8 +421,8 @@ const copyRow = async () => {
       </h3>
 
       <n-highlight
-        text="模板语法说明：{cellX} 引用单元格文本，{formulaX} 引用公式，{变量名} 引用键值对列表。"
-        :patterns="['{cellX}', '{formulaX}', '{变量名}']"
+        text="模板语法说明：{值X} 引用单元格文本，{公式X} 引用公式。X为Excel列标识（如A、B、C...）"
+        :patterns="['{值X}', '{公式X}']"
         :highlight-style="{
           padding: '0 6px',
           borderRadius: themeVars.borderRadius,
@@ -655,23 +435,35 @@ const copyRow = async () => {
 
       <n-alert style="margin-top: 10px" title="模板语法详解" type="info">
         <ul class="template-syntax-list">
-          <li>"{cell1}" - 引用第1列的文本值</li>
-          <li>"{formula1}" - 引用第1列的公式计算结果</li>
-          <li>"{cell1[四舍五入]}" - 如果是数字则四舍五入</li>
-          <li>"{cell1[小数进1]}" - 如果是数字且有小数，则直接进1</li>
-          <li>"{cell1[保留2位小数]}" - 如果是数字则保留2位小数</li>
-          <li>"{keyVal}" - 引用键值对生成的文本（变量名可自定义）</li>
-          <li>支持Excel公式中的ROUND函数"</li>
+          <li>{值A} => 引用A列的文本值</li>
+          <li>{公式B} => 引用B列的公式计算结果</li>
+          <li>{值C[四舍五入]} => 如果是数字则四舍五入</li>
+          <li>{值D[小数进1]} => 如果是数字且有小数，则直接进位到整数</li>
+          <li>{值E[保留x位小数]} => 保留指定x(1/2/3...)位数的小数</li>
         </ul>
       </n-alert>
 
       <n-input
-        style="margin-top: 10px"
         v-model:value="templateText"
         type="textarea"
-        :autosize="{ minRows: 10, maxRows: 20 }"
-        placeholder="请输入输出模板，使用 {cellX} 引用单元格文本，{formulaX} 引用公式，{变量名} 引用键值对列表"
+        placeholder="请输入模板文本"
+        :autosize="{
+          minRows: 10,
+          maxRows: 20,
+        }"
+        style="margin-top: 10px"
       />
+
+      <n-button
+        style="width: 100%; margin-top: 20px"
+        strong
+        secondary
+        type="info"
+        :loading="loading"
+        @click="copyRow"
+      >
+        开始复制
+      </n-button>
     </div>
   </div>
 </template>
@@ -722,12 +514,6 @@ const copyRow = async () => {
         margin-top: 8px;
       }
     }
-  }
-
-  .action-buttons {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
   }
 
   .key-value-section {
