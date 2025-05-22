@@ -22,24 +22,24 @@ const endRow = ref(1) // 结束行
 const pastePosition = ref('') // 粘贴位置
 const message = useMessage()
 const loading = ref(false)
+const recursionDepth = ref(1) // 添加递归层数控制，默认为1层
 let inputFile: File | null | undefined = null
 let outputFile: File | null | undefined = null
 
 // 模板文本 - 用于生成最终输出内容
 const templateText = ref(`
-{值B}{值C}~{值D}
+{值E}
 
 一、清理工程量
 
-1、清理排水系淤泥体积：{公式AC}={值AC[保留2位小数]}m³
-2、清理灌木及杂草面积：{公式AD}={值AD}m²
-3、树木清砍：{值AE[小数进1]}株
-4、清理孤石：
-5、清理边沟: {值Y}m;平台水沟{值Z}m;急流槽{值AA}m;截水沟{值AB}m;
+1、清理排水系淤泥体积：{公式AE[递归2层]}={值AE[保留2位小数]}m³
+2、清理灌木及杂草面积：{公式AG[递归1层]}={值AG}m²
+3、树木清砍：{值AF[小数进1]}株
+4、清理边沟: {值Q}m;平台水沟{值R}m;急流槽{值S}m;截水沟{值T}m;
 
 二、投入情况
 
-1、2025年2月13日能达公司投入{值AF}人。100型防撞车{值AG}台班，60挖机{值AH}台班，拖车{值AI}台班，自卸车{值AJ}台班，大巴车{值AK}台班，施工车{值AL}台班。
+1、2025年2月13日能达公司投入{值AI}人。100型防撞车{值AJ}台班，60挖机{值AK}台班，12t自卸车{值AL}台班，20t拖车{值AM}台班，大巴车{值AN}台班，施工车{值AO}台班。
 
 `)
 
@@ -86,7 +86,11 @@ const parseFormula = (sheet: ExcelJS.Worksheet, formula: string | undefined): st
 }
 
 // 格式化公式为可读形式
-const formatFormula = (sheet: ExcelJS.Worksheet, formula: string | undefined): string => {
+const formatFormula = (
+  sheet: ExcelJS.Worksheet,
+  formula: string | undefined,
+  depth: number = 1
+): string => {
   if (!formula) return ''
 
   // 移除公式前的等号
@@ -132,9 +136,9 @@ const formatFormula = (sheet: ExcelJS.Worksheet, formula: string | undefined): s
     const cell = sheet.getCell(`${m.column}${m.row}`)
     let replacement = cell.text || cell.value?.toString() || ''
 
-    // 如果单元格有公式，递归解析
-    if (cell.formula) {
-      replacement = `${formatFormula(sheet, cell.formula)}`
+    // 如果单元格有公式，根据递归深度决定是否继续解析
+    if (cell.formula && depth > 1) {
+      replacement = `${formatFormula(sheet, cell.formula, depth - 1)}`
     }
 
     // 如果是空值，返回空字符串
@@ -176,7 +180,8 @@ const processTemplate = (sheet: ExcelJS.Worksheet, row: ExcelJS.Row, template: s
 
   // 1. 处理 {值} 和 {公式} 变量，增加对特殊格式的支持
   // 优化正则表达式，确保能正确捕获括号内内容，增加对保留小数位的支持
-  const templateVarPattern = /{(值|公式)([A-Z]+)(?:\[(四舍五入|小数进1|保留\d+位小数)\])?}/g
+  const templateVarPattern =
+    /{(值|公式)([A-Z]+)(?:\[(四舍五入|小数进1|保留\d+位小数|递归\d+层)\])?}/g
   result = result.replace(templateVarPattern, (match, varType, columnLetter, roundingMethod) => {
     const columnIndex = columnLetterToIndex(columnLetter)
     const cell = row.getCell(columnIndex)
@@ -186,8 +191,17 @@ const processTemplate = (sheet: ExcelJS.Worksheet, row: ExcelJS.Row, template: s
       // 获取单元格的文本值
       value = cell.text || cell.value?.toString() || ''
     } else if (varType === '公式') {
-      // 获取单元格公式的计算结果
-      value = formatFormula(sheet, cell.formula) || ''
+      // 检查是否有单独的递归层级设置
+      let currentDepth = recursionDepth.value
+      if (roundingMethod && roundingMethod.startsWith('递归')) {
+        // 从 "递归X层" 中提取数字
+        const depthMatch = roundingMethod.match(/递归(\d+)层/)
+        if (depthMatch && depthMatch[1]) {
+          currentDepth = parseInt(depthMatch[1])
+        }
+      }
+      // 获取单元格公式的计算结果，使用当前设置的递归层数或单独指定的层数
+      value = formatFormula(sheet, cell.formula, currentDepth) || ''
     }
 
     // 只有当 roundingMethod 存在且 value 是数字时才处理
@@ -207,8 +221,8 @@ const processTemplate = (sheet: ExcelJS.Worksheet, row: ExcelJS.Row, template: s
     return value
   })
 
-  // 3. 去除所有 [四舍五入]、[小数进1] 和 [保留N位小数] 标记
-  result = result.replace(/\[四舍五入\]|\[小数进1\]|\[保留\d+位小数\]/g, '')
+  // 3. 去除所有 [四舍五入]、[小数进1]、[保留N位小数] 和 [递归N层] 标记
+  result = result.replace(/\[四舍五入\]|\[小数进1\]|\[保留\d+位小数\]|\[递归\d+层\]/g, '')
 
   return result
 }
@@ -405,6 +419,23 @@ const copyRow = async () => {
           在B表中的哪个单元格位置粘贴生成的内容
         </NTooltip>
       </div>
+      <div class="input-item">
+        <p>公式递归：</p>
+        <n-input-number
+          v-model:value="recursionDepth"
+          :min="1"
+          :max="10"
+          placeholder="请输入递归层数"
+        />
+        <NTooltip trigger="hover" placement="right">
+          <template #trigger>
+            <n-icon size="18" class="help-icon">
+              <HelpOutlined />
+            </n-icon>
+          </template>
+          公式解析的公用递归层数，默认为1层。例如：当解析B1+C1+C2时，如果B1也是公式，层数为1则直接使用B1的值，层数为2则解析B1的公式。另外，可通过模板语法单独设置每个单元格的递归层数。
+        </NTooltip>
+      </div>
     </div>
 
     <div class="template-input">
@@ -436,7 +467,8 @@ const copyRow = async () => {
       <n-alert style="margin-top: 10px" title="模板语法详解" type="info">
         <ul class="template-syntax-list">
           <li>{值A} => 引用A列的文本值</li>
-          <li>{公式B} => 引用B列的公式计算结果</li>
+          <li>{公式B} => 引用B列的公式计算结果（受递归层数控制）</li>
+          <li>{公式C[递归x层]} => 引用C列的公式，并单独指定递归x(1/2/3...)层</li>
           <li>{值C[四舍五入]} => 如果是数字则四舍五入</li>
           <li>{值D[小数进1]} => 如果是数字且有小数，则直接进位到整数</li>
           <li>{值E[保留x位小数]} => 保留指定x(1/2/3...)位数的小数</li>
