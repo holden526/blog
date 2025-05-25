@@ -8,10 +8,17 @@ import {
   NIcon,
   NButton,
   NAlert,
+  NInputNumber,
+  useMessage,
   type UploadFileInfo,
 } from 'naive-ui'
 import { ImageFilled as ImageIcon } from '@vicons/material'
 import * as htmlToImage from 'html-to-image'
+const message = useMessage()
+const loading = ref(false)
+const watermarkWidth = ref(250)
+let imageWidth = 0
+let imageHeight = 0
 
 // 文件上传相关
 const fileList = ref<UploadFileInfo[]>([])
@@ -31,7 +38,7 @@ const watermarkTemplates: WatermarkTemplate[] = [
     style: {
       bottom: '10px',
       left: '10px',
-      width: '250px',
+      width: '250px', // 固定宽度
     },
     render: () => {
       return h('div', { class: 'watermark-template1' }, [
@@ -118,7 +125,11 @@ const selectedTemplate = computed(() => {
 // 计算水印样式
 const getWatermarkStyle = computed((): any => {
   if (!selectedTemplate.value) return {}
-  return { ...(selectedTemplate.value.style as Object), position: 'absolute' }
+  return {
+    ...(selectedTemplate.value.style as Object),
+    position: 'absolute',
+    width: `${watermarkWidth.value}px`, // 在这里应用动态宽度
+  }
 })
 
 // 处理文件变化
@@ -133,7 +144,14 @@ const handleFileChange = (options: { file: UploadFileInfo; fileList: UploadFileI
   if (file.file) {
     const reader = new FileReader()
     reader.onload = (e) => {
+      // 创建一个临时的 Image 对象来获取图片尺寸
+      const img = new Image()
+      img.onload = () => {
+        imageHeight = img.height
+        imageWidth = img.width
+      }
       previewImage.value = e.target?.result as string
+      img.src = e.target?.result as string
       selectedTemplateId.value = ''
     }
     reader.readAsDataURL(file.file as File)
@@ -146,11 +164,15 @@ const selectWatermarkTemplate = (id: string) => {
 }
 const downloadImage = async () => {
   if (!imageContainer.value) return
-
+  message.info('图片正在生成中，请稍等...')
   try {
+    loading.value = true
     // 直接将当前HTML转为PNG
     const blob = await htmlToImage.toBlob(imageContainer.value, {
       cacheBust: true,
+      canvasHeight: imageHeight,
+      canvasWidth: imageWidth,
+      pixelRatio: 1,
     })
 
     if (!blob) {
@@ -166,6 +188,7 @@ const downloadImage = async () => {
   } catch (err) {
     console.error('导出图片失败:', err)
   }
+  loading.value = false
 }
 const handleWatermarkKeydown = (e: KeyboardEvent) => {
   if (e.key === 'Enter' && !e.shiftKey) {
@@ -198,8 +221,17 @@ const handleWatermarkKeydown = (e: KeyboardEvent) => {
 
         <div v-if="previewImage" class="preview-section">
           <n-alert style="margin-bottom: 20px" title="提示" type="info">
-            请从下方选择一个水印模板，水印可拖动调整位置
+            请从下方选择一个水印模板，文本内容在图片处可编辑
           </n-alert>
+
+          <div class="paramsInput">
+            <p>水印宽度：</p>
+            <n-input-number
+              v-model:value="watermarkWidth"
+              :min="250"
+              placeholder="请输入水印宽度"
+            />
+          </div>
 
           <div class="watermark-templates">
             <div
@@ -229,7 +261,7 @@ const handleWatermarkKeydown = (e: KeyboardEvent) => {
           </div>
 
           <div class="action-bar">
-            <n-button type="primary" @click="downloadImage">下载图片</n-button>
+            <n-button :loading type="primary" @click="downloadImage">下载图片</n-button>
           </div>
         </div>
       </n-space>
@@ -320,6 +352,16 @@ const handleWatermarkKeydown = (e: KeyboardEvent) => {
   }
 }
 
+.paramsInput {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  .n-input-number {
+    flex: 1;
+  }
+  margin-bottom: 15px;
+}
+
 .watermark-container {
   max-width: 800px;
   margin: 0 auto;
@@ -340,8 +382,12 @@ const handleWatermarkKeydown = (e: KeyboardEvent) => {
 .watermark-templates {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
   margin-bottom: 20px;
+  justify-content: space-between;
+  gap: 15px;
+  border: 1px dashed #ddd;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 .template-item {
