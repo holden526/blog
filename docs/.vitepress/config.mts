@@ -145,7 +145,10 @@ export default defineConfig({
         text: '工具',
         items: [
           {
-            items: [{ text: 'Excel工具', link: '/pages/tools/excelTools' }],
+            items: [
+              { text: 'Excel工具', link: '/pages/tools/excelTools' },
+              { text: '图片工具', link: '/pages/tools/picTools' },
+            ],
           },
         ],
       },

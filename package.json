@@ -33,6 +33,7 @@
     "@ant-design/colors": "^8.0.0",
     "@giscus/vue": "^3.0.0",
     "exceljs": "^4.4.0",
+    "html-to-image": "^1.11.13",
     "naive-ui": "^2.40.1",
     "pagefind": "^1.1.1",
     "viewerjs": "^1.11.6",
