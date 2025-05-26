@@ -11,7 +11,7 @@ sidebar: false
 import Watermark from '../../.vitepress/components/tools/pic/Watermark.vue'
 </script>
 
-# Excel 工具集
+# 图片工具集
 
 图片处理工具集，运行于本地
 
