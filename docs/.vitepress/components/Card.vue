@@ -1,19 +1,51 @@
 <script setup lang="ts">
-const props = defineProps<{
-  data: { imgUrl: string; text: string; link: string }[]
-}>()
+import { onMounted, ref } from 'vue'
+const props = defineProps({
+  data: {
+    type: Array as () => { url: string; text: string; link?: string }[],
+    required: true,
+  },
+  target: {
+    type: String as () => '_blank' | '_self' | '_parent' | '_top',
+    default: '_blank',
+  },
+})
+const imageList = ref<{ url: string; text: string; link: string }[]>([])
+const imagesImport = (import.meta as any).glob('../../img/**')
+
+onMounted(() => {
+  props.data.forEach(async (i) => {
+    const url = await getImageUrl(i.url)
+    imageList.value.push({ url: url ?? '', text: i.text, link: i.link ?? '' })
+  })
+})
+
+const getImageUrl = async (name: string) => {
+  const importer = imagesImport[`../../img${name}`]
+  if (importer) {
+    try {
+      const module = (await importer()) as any
+      return module.default || ''
+    } catch (err) {
+      console.error('导入图片失败:', err)
+    }
+  } else {
+    console.error('图片未找到:', name)
+  }
+  return ''
+}
 
 const clickCard = (item: string) => {
   if (item) {
-    window.open(item, '_blank')
+    window.open(item, props.target)
   }
 }
 </script>
 
 <template>
   <div class="card">
-    <div v-for="item in props.data" class="card-item" @click="clickCard(item.link)">
-      <img :src="item.imgUrl" class="card-img" />
+    <div v-for="item in imageList" class="card-item" @click="clickCard(item.link)">
+      <img :src="item.url" class="card-img" />
       <div class="text">
         {{ item.text }}
       </div>

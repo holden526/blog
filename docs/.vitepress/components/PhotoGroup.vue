@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { NGrid, NGridItem, NCard, NSpin, NImage } from 'naive-ui'
-const imagesImport = import.meta.glob('../../img/**')
+const imagesImport = (import.meta as any).glob('../../img/**')
 
 const props = defineProps({
   images: {

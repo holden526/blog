@@ -52,17 +52,12 @@ coze agent 支持分配不同的大语言模型，处理问题时，可采用合
 <script setup>
 import Card from '../.vitepress/components/Card.vue'
 import { NH3, NTabs, NTabPane } from 'naive-ui'
-import coze1 from '../img/2024/coze/coze1.png'
-import coze2 from '../img/2024/coze/coze2.png'
-import coze3 from '../img/2024/coze/coze3.png'
-import coze4 from '../img/2024/coze/coze4.png'
-import coze5 from '../img/2024/coze/coze5.png'
 const cozeModuleData = [
-  { text:'豆包',imgUrl:coze1,link:'https://www.volcengine.com/product/doubao'},
-  { text:'通义千问',imgUrl:coze2,link:'https://dundunlu.com/web/tongyi/'},
-  { text:'GLM-4',imgUrl:coze3,link:'https://chatglm.cn/'},
-  { text:'MiniMax',imgUrl:coze4,link:'https://www.minimaxi.com/'},
-  { text:'Kimi',imgUrl:coze5,link:'https://www.minimaxi.com/'},
+  { text:'豆包',url:'/2024/coze/coze1.png',link:'https://www.volcengine.com/product/doubao'},
+  { text:'通义千问',url:'/2024/coze/coze2.png',link:'https://dundunlu.com/web/tongyi/'},
+  { text:'GLM-4',url:'/2024/coze/coze3.png',link:'https://chatglm.cn/'},
+  { text:'MiniMax',url:'/2024/coze/coze4.png',link:'https://www.minimaxi.com/'},
+  { text:'Kimi',url:'/2024/coze/coze5.png',link:'https://www.minimaxi.com/'},
 ]
 </script>
 
@@ -490,7 +485,7 @@ module.exports = {
 测试效果：
 
 <video controls style="height:350px;width:100%;">
-  <source src="/assets/coze-chat.mp4" type="video/mp4" />
+  <source src="/assets/coze/coze-chat.mp4" type="video/mp4" />
   您的浏览器不支持 video 标签。
 </video>
 
@@ -510,7 +505,7 @@ WorkBot 是一款安全稳定零封号的微信/企微RPA机器人，支持通�
 - 采用 Google 安卓系统的 官方无障碍服务，并在此基础上 自研自动化框架，无 hook 函数、无侵入、无破坏、无内存修改，兼容绝大部分机型，`支持长时间运行稳定`
 - 支持数据独立隔离，定制更高级数据的安全方案
 
-<img src="/assets/sendMessage.gif" style="height:350px">
+<img src="/assets/coze/sendMessage.gif" style="height:350px">
 
 #### 2.4.4 小结
 
