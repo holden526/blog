@@ -45,9 +45,6 @@ importers:
       '@vicons/material':
         specifier: ^0.12.0
         version: 0.12.0
-      busuanzi.pure.js:
-        specifier: ^1.0.3
-        version: 1.0.3
       dayjs:
         specifier: ^1.11.13
         version: 1.11.13
@@ -974,9 +971,6 @@ packages:
   buffers@0.1.1:
     resolution: {integrity: sha512-9q/rDEGSb/Qsvv2qvzIzdluL5k7AaJOTrw23z9reQthrbF7is4CtlT0DXyO1oei2DCp4uojjzQ7igaSHp1kAEQ==}
     engines: {node: '>=0.2.0'}
-
-  busuanzi.pure.js@1.0.3:
-    resolution: {integrity: sha512-tPULdyx+8NNb9geZYDpktKmHAYx9f2LEOBaHyWCaM7iPEMIa/43KgYAUluuU7YG9UFSOFpj4dO7Nj2Vlu3V9Rg==}
 
   cacheable-request@2.1.4:
     resolution: {integrity: sha512-vag0O2LKZ/najSoUwDbVlnlCFvhBE/7mGTY2B5FgCBDcRD+oVV1HYTOwM6JZfMg/hIcM6IwnTZ1uQQL5/X3xIQ==}
@@ -3745,8 +3739,6 @@ snapshots:
       ieee754: 1.2.1
 
   buffers@0.1.1: {}
-
-  busuanzi.pure.js@1.0.3: {}
 
   cacheable-request@2.1.4:
     dependencies:

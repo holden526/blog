@@ -6,12 +6,13 @@ import { useRoute, useData, inBrowser } from 'vitepress'
 import Giscus from '@giscus/vue'
 import Loading from '../components/Loading.vue'
 import { toggleDark } from '../plugins/themeChangeAni'
+import { loadVercount } from '../plugins/vercount'
 const { Layout } = DefaultTheme
 const { isDark, page } = useData()
 const route = useRoute()
 const loading = ref(true)
 const nowYear = new Date().getFullYear()
-
+loadVercount()
 toggleDark(isDark)
 
 onMounted(() => {
@@ -64,8 +65,8 @@ function hideSpecificSidebarItem() {
       <div class="bottom">
         <div>
           本站总访问量
-          <span id="busuanzi_value_site_pv" class="font-bold">--</span> 次 本站访客数
-          <span id="busuanzi_value_site_uv" class="font-bold">--</span> 人次
+          <span id="busuanzi_value_site_pv">-</span> 次 本站总访客数
+          <span id="busuanzi_value_site_uv">-</span> 人
         </div>
         <p>{{ `下辈子别选前端 © 2021-${nowYear} holden 本站已开源` }}</p>
       </div>

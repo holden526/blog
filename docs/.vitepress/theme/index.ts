@@ -1,6 +1,4 @@
 import DefaultTheme from 'vitepress/theme'
-import busuanzi from 'busuanzi.pure.js'
-import { inBrowser } from 'vitepress'
 import { generate } from '@ant-design/colors'
 import { defineComponent, h, inject, ref } from 'vue'
 import {
@@ -15,6 +13,7 @@ import { useRoute } from 'vitepress'
 import imageViewer from 'vitepress-plugin-image-viewer'
 import vImageViewer from 'vitepress-plugin-image-viewer/lib/vImageViewer.vue'
 import ArticleHeader from '../components/ArticleHeader.vue'
+import ArticleFooter from '../components/ArticleFooter.vue'
 import MyLayout from './MyLayout.vue'
 import './styles/global.css'
 import 'viewerjs/dist/viewer.min.css'
@@ -106,20 +105,15 @@ export default {
     // 图片放大
     imageViewer(route)
   },
-  enhanceApp: ({ app, router }) => {
+  enhanceApp: ({ app }) => {
     // 全局组件
     app.component('vImageViewer', vImageViewer)
     app.component('ArticleHeader', ArticleHeader)
+    app.component('ArticleFooter', ArticleFooter)
     // css-render
     if ((import.meta as any).env.SSR) {
       const { collect } = setup(app)
       app.provide('css-render-collect', collect)
-    }
-    // 统计
-    if (inBrowser) {
-      router.onAfterRouteChanged = () => {
-        busuanzi.fetch()
-      }
     }
   },
 }

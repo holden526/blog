@@ -3,6 +3,7 @@ import { pagefindPlugin } from 'vitepress-plugin-pagefind'
 import { generateSidebar } from 'vitepress-sidebar'
 import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import { HeaderPlugin } from './plugins/headerPlugin'
+import { FooterPlugin } from './plugins/footerPlugin'
 import viteImagemin from 'vite-plugin-imagemin'
 import viteCompression from 'vite-plugin-compression'
 import path from 'path'
@@ -46,6 +47,7 @@ export default defineConfig({
       }),
       groupIconVitePlugin(),
       HeaderPlugin(),
+      FooterPlugin(),
       viteCompression({
         verbose: true,
         disable: false,
