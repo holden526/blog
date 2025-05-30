@@ -6,13 +6,11 @@ import { useRoute, useData, inBrowser } from 'vitepress'
 import Giscus from '@giscus/vue'
 import Loading from '../components/Loading.vue'
 import { toggleDark } from '../plugins/themeChangeAni'
-import { loadVercount } from '../plugins/vercount'
 const { Layout } = DefaultTheme
 const { isDark, page } = useData()
 const route = useRoute()
 const loading = ref(true)
 const nowYear = new Date().getFullYear()
-loadVercount()
 toggleDark(isDark)
 
 onMounted(() => {
@@ -56,6 +54,18 @@ function hideSpecificSidebarItem() {
     }
   })
 }
+
+// 加载访问统计
+const loadVerCount = () => {
+  if (typeof window !== 'undefined') {
+    const script = document.createElement('script')
+    script.type = 'text/javascript'
+    script.src = 'https://events.vercount.one/js'
+    script.async = true
+    document.body.appendChild(script)
+  }
+}
+loadVerCount()
 </script>
 
 <template>
