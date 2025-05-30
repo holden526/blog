@@ -74,7 +74,7 @@ function hideSpecificSidebarItem() {
       <div style="margin-top: 24px">
         <Giscus
           :key="page.filePath"
-          repo="lee-holden/blog"
+          repo="holden526/blog"
           repo-id="R_kgDONLMmMw"
           category="Announcements"
           category-id="DIC_kwDONLMmM84CkKCl"

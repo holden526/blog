@@ -20,15 +20,15 @@ tags:
 优点：`vitepress可配置项、api都比较多，大部分功能都能实现`
 
 :::details 相关链接
-[vuepress博客](https://lee-holden.github.io/vuepress-blog/)
+[vuepress博客](https://holden526.github.io/vuepress-blog/)
 
-[vuepress仓库地址](https://github.com/lee-holden/vuepress-blog)
+[vuepress仓库地址](https://github.com/holden526/vuepress-blog)
 
 [vitepress博客](https://dddhl.cn)
 
-[vitepress仓库地址](https://github.com/lee-holden/blog)
+[vitepress仓库地址](https://github.com/holden526/blog)
 
-[vitepress-blog-template](https://github.com/lee-holden/vitepress-blog-template)
+[vitepress-blog-template](https://github.com/holden526/vitepress-blog-template)
 :::
 
 旧版本图片预览：
@@ -1575,7 +1575,7 @@ const { page } = useData()
         <div style="margin-top: 24px">
           <Giscus
             :key="page.filePath"
-            repo="lee-holden/vitepress-blog-template"
+            repo="holden526/vitepress-blog-template"
             repo-id="R_kgDONRAkeA"
             category="Announcements"
             category-id="IC_kwDONRAkeM4CkXRA"
@@ -1636,7 +1636,7 @@ watch(isDark, (dark) => {
       <div style="margin-top: 24px">
         <Giscus
           :key="page.filePath"
-          repo="lee-holden/vitepress-blog-template"
+          repo="holden526/vitepress-blog-template"
           repo-id="R_kgDONRAkeA"
           category="Announcements"
           category-id="IC_kwDONRAkeM4CkXRA"
@@ -1800,7 +1800,7 @@ watch(isDark, (dark) => {
   git init
   git add .
   git commit -m 'first commit'
-  git remote add origin git@github.com:lee-holden/vitepress-blog-template.git
+  git remote add origin git@github.com:holden526/vitepress-blog-template.git
   git push -u origin master
   ```
 
@@ -1987,7 +1987,7 @@ watch(isDark, (dark) => {
 
 - 部署成功
 
-  [vitepress-blog-template](https://lee-holden.github.io/vitepress-blog-template/)
+  [vitepress-blog-template](https://holden526.github.io/vitepress-blog-template/)
 
 ## 12. 访问统计
 
