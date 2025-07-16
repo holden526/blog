@@ -4,7 +4,6 @@ import {
   ArticleOutlined,
   BorderColorOutlined,
   UpdateOutlined,
-  MenuBookRound,
   DiscountOutlined,
 } from '@vicons/material'
 import { NIcon, NTag } from 'naive-ui'
@@ -50,13 +49,6 @@ defineProps<{
         </NIcon>
         最近更新:
         <p>{{ dayjs(lastUpdated).format('YYYY-MM-DD') }}</p>
-      </div>
-      <div class="update">
-        <NIcon :size="20">
-          <MenuBookRound />
-        </NIcon>
-        阅读量:
-        <p id="busuanzi_value_page_pv">-</p>
       </div>
     </section>
     <section class="tags">
