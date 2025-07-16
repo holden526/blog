@@ -196,6 +196,9 @@ const processLoopTemplate = (
       // 替换 {序号} 为当前行号（从1开始）
       iterationContent = iterationContent.replace(/\{序号\}/g, (i + 1).toString())
 
+      // 去掉每次迭代内容末尾的换行符
+      iterationContent = iterationContent.replace(/\n\s*$/, '')
+
       loopResult += iterationContent
     }
 
