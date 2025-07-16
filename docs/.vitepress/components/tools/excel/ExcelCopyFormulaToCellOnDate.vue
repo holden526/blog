@@ -35,11 +35,11 @@ const templateText = ref(`
 [循环结束]
 
 二、投入情况
-1. 清理工人：119人，共119工日。
-2. 100型防撞车：2台，共2台班。
-3. 12t自卸车：2台，共2台班。
-4. 大巴车：2台，共2台班。
-5. 施工车：2台，共2台班。
+1. 清理工人：{值1R}人，共{值1R}工日。
+2. 100型防撞车：{值1S}台，共{值1S}台班。
+3. 12t自卸车：{值1W}台，共{值1W}台班。
+4. 大巴车：{值1Z}台，共{值1Z}台班。
+5. 施工车：{值1AA}台，共{值1AA}台班。
 `)
 
 // 获取输入文件
@@ -230,7 +230,7 @@ const processTemplate = (
 
       if (varType === '值') {
         // 获取单元格的文本值
-        value = cell.text || cell.value?.toString() || ''
+        value = cell.text || cell.result.toString() || cell.value?.toString() || ''
       } else if (varType === '公式') {
         // 检查是否有单独的递归层级设置
         let currentDepth = recursionDepth.value
@@ -577,6 +577,7 @@ const copyRow = async () => {
       <n-alert style="margin-top: 10px" title="使用示例" type="success">
         <div class="template-example">
           <h4>动态循环示例：</h4>
+          序号代表每次循环的行数，1代表本次循环第一行
           <pre>
 一、清理范围：
 [循环开始]
@@ -584,10 +585,10 @@ const copyRow = async () => {
 [循环结束]</pre
           >
           <p>
-            会根据当前分组的实际行数自动生成：<br />
-            1、某项目某地点某内容<br />
-            2、某项目某地点某内容<br />
-            3、某项目某地点某内容<br />
+            一、清理范围：<br />
+            1、{值1D}{值1E}{值1F}<br />
+            2、{值2D}{值2E}{值2F}<br />
+            3、{值3D}{值3E}{值3F}<br />
             ...
           </p>
         </div>
