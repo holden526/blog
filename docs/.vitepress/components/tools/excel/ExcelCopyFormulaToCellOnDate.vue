@@ -233,7 +233,7 @@ const processTemplate = (
 
       if (varType === '值') {
         // 获取单元格的文本值
-        value = cell.text || cell.result.toString() || cell.value?.toString() || ''
+        value = cell.text || cell.result?.toString() || cell.value?.toString() || ''
       } else if (varType === '公式') {
         // 检查是否有单独的递归层级设置
         let currentDepth = recursionDepth.value
