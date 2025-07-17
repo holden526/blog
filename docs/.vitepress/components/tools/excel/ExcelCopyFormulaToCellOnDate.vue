@@ -196,8 +196,8 @@ const processLoopTemplate = (
       // 替换 {序号} 为当前行号（从1开始）
       iterationContent = iterationContent.replace(/\{序号\}/g, (i + 1).toString())
 
-      // 去掉每次迭代内容末尾的换行符
-      iterationContent = iterationContent.replace(/\n\s*$/, '')
+      // 去掉每次迭代内容前后的空白和换行符
+      iterationContent = iterationContent.trim()
 
       loopResult += iterationContent
     }
@@ -579,16 +579,15 @@ const copyRow = async () => {
 
       <n-alert style="margin-top: 10px" title="使用示例" type="success">
         <div class="template-example">
-          <h4>动态循环示例：</h4>
           序号代表每次循环的行数，1代表本次循环第一行
           <pre>
-一、清理范围：
 [循环开始]
 {序号}、{值{序号}D}{值{序号}E}{值{序号}F}
-[循环结束]</pre
+[循环结束]
+</pre
           >
+          渲染结果：
           <p>
-            一、清理范围：<br />
             1、{值1D}{值1E}{值1F}<br />
             2、{值2D}{值2E}{值2F}<br />
             3、{值3D}{值3E}{值3F}<br />
@@ -709,20 +708,12 @@ const copyRow = async () => {
         line-height: 1.5;
       }
     }
-
     .template-example {
-      h4 {
-        margin: 10px 0 5px 0;
-        color: #2080f0;
-      }
-
-      pre {
-        background: #f5f5f5;
-        padding: 10px;
+      pre,
+      p {
+        border: 1px solid #d9d9d9;
         border-radius: 4px;
-        margin: 5px 0 15px 0;
-        font-size: 12px;
-        line-height: 1.4;
+        padding: 10px;
       }
     }
   }

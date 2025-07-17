@@ -20,7 +20,6 @@ const themeVars = useThemeVars()
 const startRow = ref(1) // 开始行
 const endRow = ref(1) // 结束行
 const pastePosition = ref('') // 粘贴位置
-const loopRowCount = ref(1) // 新增：每次循环的行数
 const message = useMessage()
 const loading = ref(false)
 const recursionDepth = ref(1) // 添加递归层数控制，默认为1层
@@ -29,18 +28,18 @@ let outputFile: File | null | undefined = null
 
 // 模板文本 - 用于生成最终输出内容
 const templateText = ref(`
-{值1E}
+{值E}
 
 一、清理工程量
 
-1、清理排水系淤泥体积：{公式1AE[递归2层]}={值1AE[保留2位小数]}m³
-2、清理灌木及杂草面积：{公式1AG[递归1层]}={值1AG}m²
-3、树木清砍：{值1AF[小数进1]}株
-4、清理边沟: {值1Q}m;平台水沟{值1R}m;急流槽{值1S}m;截水沟{值1T}m;
+1、清理排水系淤泥体积：{公式AE[递归2层]}={值AE[保留2位小数]}m³
+2、清理灌木及杂草面积：{公式AG[递归1层]}={值AG}m²
+3、树木清砍：{值AF[小数进1]}株
+4、清理边沟: {值Q}m;平台水沟{值R}m;急流槽{值S}m;截水沟{值T}m;
 
 二、投入情况
 
-1、2025年2月13日能达公司投入{值1AI}人。100型防撞车{值1AJ}台班，60挖机{值1AK}台班，12t自卸车{值1AL}台班，20t拖车{值1AM}台班，大巴车{值1AN}台班，施工车{值1AO}台班。
+1、2025年2月13日能达公司投入{值AI}人。100型防撞车{值AJ}台班，60挖机{值AK}台班，12t自卸车{值AL}台班，20t拖车{值AM}台班，大巴车{值AN}台班，施工车{值AO}台班。
 
 `)
 
@@ -175,63 +174,54 @@ const formatFormula = (
   return result
 }
 
-// 处理模板变量替换 - 修改以支持新的语法 {值行号列号}
-const processTemplate = (
-  sheet: ExcelJS.Worksheet,
-  baseRowNumber: number,
-  template: string
-): string => {
+// 处理模板变量替换
+const processTemplate = (sheet: ExcelJS.Worksheet, row: ExcelJS.Row, template: string): string => {
   let result = template
 
-  // 修改正则表达式以匹配新的语法格式：{值1A}、{公式2B}等
+  // 1. 处理 {值} 和 {公式} 变量，增加对特殊格式的支持
+  // 优化正则表达式，确保能正确捕获括号内内容，增加对保留小数位的支持
   const templateVarPattern =
-    /{(值|公式)(\d+)([A-Z]+)(?:\[(四舍五入|小数进1|保留\d+位小数|递归\d+层)\])?}/g
+    /{(值|公式)([A-Z]+)(?:\[(四舍五入|小数进1|保留\d+位小数|递归\d+层)\])?}/g
+  result = result.replace(templateVarPattern, (match, varType, columnLetter, roundingMethod) => {
+    const columnIndex = columnLetterToIndex(columnLetter)
+    const cell = row.getCell(columnIndex)
+    let value = ''
 
-  result = result.replace(
-    templateVarPattern,
-    (match, varType, rowOffset, columnLetter, roundingMethod) => {
-      const columnIndex = columnLetterToIndex(columnLetter)
-      // 计算实际行号：基础行号 + 偏移量 - 1（因为偏移量从1开始）
-      const actualRowNumber = baseRowNumber + parseInt(rowOffset) - 1
-      const cell = sheet.getCell(`${columnLetter}${actualRowNumber}`)
-      let value = ''
-
-      if (varType === '值') {
-        // 获取单元格的文本值
-        value = cell.text || cell.value?.toString() || ''
-      } else if (varType === '公式') {
-        // 检查是否有单独的递归层级设置
-        let currentDepth = recursionDepth.value
-        if (roundingMethod && roundingMethod.startsWith('递归')) {
-          // 从 "递归X层" 中提取数字
-          const depthMatch = roundingMethod.match(/递归(\d+)层/)
-          if (depthMatch && depthMatch[1]) {
-            currentDepth = parseInt(depthMatch[1])
-          }
-        }
-        // 获取单元格公式的计算结果，使用当前设置的递归层数或单独指定的层数
-        value = formatFormula(sheet, cell.formula, currentDepth) || ''
-      }
-
-      // 只有当 roundingMethod 存在且 value 是数字时才处理
-      if (roundingMethod && value && !isNaN(Number(value))) {
-        const numValue = Number(value)
-        if (roundingMethod === '四舍五入') {
-          return Math.round(numValue).toString()
-        } else if (roundingMethod === '小数进1') {
-          return Math.ceil(numValue).toString()
-        } else if (roundingMethod.startsWith('保留')) {
-          // 处理保留小数位的情况
-          const decimalPlaces = parseInt(roundingMethod.match(/\d+/)?.[0] || '0')
-          return numValue.toFixed(decimalPlaces)
+    if (varType === '值') {
+      // 获取单元格的文本值
+      value = cell.text || cell.value?.toString() || ''
+    } else if (varType === '公式') {
+      // 检查是否有单独的递归层级设置
+      let currentDepth = recursionDepth.value
+      if (roundingMethod && roundingMethod.startsWith('递归')) {
+        // 从 "递归X层" 中提取数字
+        const depthMatch = roundingMethod.match(/递归(\d+)层/)
+        if (depthMatch && depthMatch[1]) {
+          currentDepth = parseInt(depthMatch[1])
         }
       }
-
-      return value
+      // 获取单元格公式的计算结果，使用当前设置的递归层数或单独指定的层数
+      value = formatFormula(sheet, cell.formula, currentDepth) || ''
     }
-  )
 
-  // 去除所有 [四舍五入]、[小数进1]、[保留N位小数] 和 [递归N层] 标记
+    // 只有当 roundingMethod 存在且 value 是数字时才处理
+    if (roundingMethod && value && !isNaN(Number(value))) {
+      const numValue = Number(value)
+      if (roundingMethod === '四舍五入') {
+        return Math.round(numValue).toString()
+      } else if (roundingMethod === '小数进1') {
+        return Math.ceil(numValue).toString()
+      } else if (roundingMethod.startsWith('保留')) {
+        // 处理保留小数位的情况
+        const decimalPlaces = parseInt(roundingMethod.match(/\d+/)?.[0] || '0')
+        return numValue.toFixed(decimalPlaces)
+      }
+    }
+
+    return value
+  })
+
+  // 3. 去除所有 [四舍五入]、[小数进1]、[保留N位小数] 和 [递归N层] 标记
   result = result.replace(/\[四舍五入\]|\[小数进1\]|\[保留\d+位小数\]|\[递归\d+层\]/g, '')
 
   return result
@@ -253,8 +243,7 @@ const copyRow = async () => {
       !trimmedCopySheetName ||
       !trimmedPastePosition ||
       startRow.value <= 0 ||
-      endRow.value <= 0 ||
-      loopRowCount.value <= 0
+      endRow.value <= 0
     ) {
       message.error('请输入复制的完整信息')
       return
@@ -283,30 +272,33 @@ const copyRow = async () => {
     let successCount = 0
     let failCount = 0
 
-    // 按循环行数分组处理
-    for (
-      let startRowIndex = startRow.value;
-      startRowIndex <= endRow.value;
-      startRowIndex += loopRowCount.value
-    ) {
-      // 计算当前循环的结束行
-      const currentEndRow = Math.min(startRowIndex + loopRowCount.value - 1, endRow.value)
-
+    // 遍历A表中的指定行
+    for (let rowNumber = startRow.value; rowNumber <= endRow.value; rowNumber++) {
       // 计算对应的B表工作表索引
-      const groupIndex = Math.floor((startRowIndex - startRow.value) / loopRowCount.value)
-      const bSheet = workbookB.worksheets[groupIndex]
+      const rowOffset = rowNumber - startRow.value
+      const sheetIndex = rowOffset // 从0开始的索引
 
-      if (!bSheet) {
-        message.error(`B表不存在第 ${groupIndex + 1} 个工作表`)
+      // 获取A表中的行数据
+      const row = aSheet.getRow(rowNumber)
+      if (!row) {
+        message.error(`找不到行 ${rowNumber}`)
         failCount++
         continue
       }
 
-      // 使用模板处理函数生成最终文本，传入当前循环的起始行号
-      const result = processTemplate(aSheet, startRowIndex, templateText.value)
+      // 直接通过索引获取B表中的工作表
+      const bSheet = workbookB.worksheets[sheetIndex]
 
-      bSheet.getCell(trimmedPastePosition).value = result
-      successCount++
+      // 使用模板处理函数生成最终文本
+      const result = processTemplate(aSheet, row, templateText.value)
+
+      if (bSheet) {
+        bSheet.getCell(trimmedPastePosition).value = result
+        successCount++
+      } else {
+        message.error(`B表不存在第 ${sheetIndex + 1} 个工作表`)
+        failCount++
+      }
     }
 
     if (successCount > 0) {
@@ -412,18 +404,6 @@ const copyRow = async () => {
         </NTooltip>
       </div>
       <div class="input-item">
-        <p>循环行数：</p>
-        <n-input-number v-model:value="loopRowCount" :min="1" placeholder="请输入每次循环的行数" />
-        <NTooltip trigger="hover" placement="right">
-          <template #trigger>
-            <n-icon size="18" class="help-icon">
-              <HelpOutlined />
-            </n-icon>
-          </template>
-          每次循环处理几行数据，例如设置为3，则第1-3行数据输出到B表第1个工作表，第4-6行数据输出到B表第2个工作表
-        </NTooltip>
-      </div>
-      <div class="input-item">
         <p>粘贴位置：</p>
         <n-input
           v-model:value="pastePosition"
@@ -472,8 +452,8 @@ const copyRow = async () => {
       </h3>
 
       <n-highlight
-        text="模板语法说明：{值行号列号} 引用单元格文本，{公式行号列号} 引用公式。行号为相对偏移（1表示第1行），列号为Excel列标识（如A、B、C...）"
-        :patterns="['{值行号列号}', '{公式行号列号}']"
+        text="模板语法说明：{值X} 引用单元格文本，{公式X} 引用公式。X为Excel列标识（如A、B、C...）"
+        :patterns="['{值X}', '{公式X}']"
         :highlight-style="{
           padding: '0 6px',
           borderRadius: themeVars.borderRadius,
@@ -486,13 +466,12 @@ const copyRow = async () => {
 
       <n-alert style="margin-top: 10px" title="模板语法详解" type="info">
         <ul class="template-syntax-list">
-          <li>{值1A} => 引用当前循环第1行A列的文本值</li>
-          <li>{公式2B} => 引用当前循环第2行B列的公式计算结果（受递归层数控制）</li>
-          <li>{公式3C[递归x层]} => 引用当前循环第3行C列的公式，并单独指定递归x(1/2/3...)层</li>
-          <li>{值1C[四舍五入]} => 如果是数字则四舍五入</li>
-          <li>{值2D[小数进1]} => 如果是数字且有小数，则直接进位到整数</li>
-          <li>{值1E[保留x位小数]} => 保留指定x(1/2/3...)位数的小数</li>
-          <li>行号说明：1表示当前循环的第1行，2表示第2行，以此类推</li>
+          <li>{值A} => 引用A列的文本值</li>
+          <li>{公式B} => 引用B列的公式计算结果（受递归层数控制）</li>
+          <li>{公式C[递归x层]} => 引用C列的公式，并单独指定递归x(1/2/3...)层</li>
+          <li>{值C[四舍五入]} => 如果是数字则四舍五入</li>
+          <li>{值D[小数进1]} => 如果是数字且有小数，则直接进位到整数</li>
+          <li>{值E[保留x位小数]} => 保留指定x(1/2/3...)位数的小数</li>
         </ul>
       </n-alert>
 

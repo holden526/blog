@@ -13,6 +13,7 @@ import ExcelCopyColumn from '../../.vitepress/components/tools/excel/ExcelCopyCo
 import ExcelCopyColumnToRow from '../../.vitepress/components/tools/excel/ExcelCopyColumnToRow.vue'
 import ExcelCopyFormulaToCell from '../../.vitepress/components/tools/excel/ExcelCopyFormulaToCell.vue'
 import ExcelCopyFormulaToCellOnDate from '../../.vitepress/components/tools/excel/ExcelCopyFormulaToCellOnDate.vue'
+import ExcelAddBorder from '../../.vitepress/components/tools/excel/ExcelAddBorder.vue'
 </script>
 
 # Excel 工具集
@@ -75,7 +76,7 @@ Excel 文件中选择特定工作表，并将其复制指定数量
 
 <ExcelCopyColumnToRow />
 
-## 4. 循环复制公式到单元格(固定行数)
+## 4. 循环复制公式到单元格
 
 ::: tip 功能介绍
 设定一个模板，提取源表中每行对应索引的数据组合，然后复制到目标表每个工作表中的指定单元格。
@@ -83,7 +84,7 @@ Excel 文件中选择特定工作表，并将其复制指定数量
 
 <ExcelCopyFormulaToCell />
 
-## 5. 循环复制公式到单元格(按固定单元格的日期区分)
+## 5. 循环复制公式到单元格(按固定单元格的日期分组)
 
 ::: tip 功能介绍
 设定一个模板，提取源表中每行对应索引的数据组合，然后复制到目标表每个工作表中的指定单元格。
@@ -93,3 +94,11 @@ Excel 文件中选择特定工作表，并将其复制指定数量
 :::
 
 <ExcelCopyFormulaToCellOnDate />
+
+## 6. 所有工作表新增边框
+
+::: tip 功能介绍
+指定单元格，可多选，给所有工作表新增边框
+:::
+
+<ExcelAddBorder />
