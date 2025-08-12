@@ -12,6 +12,9 @@ import {
   NInputGroupLabel,
   NCheckbox,
   NSpace,
+  NP,
+  NCard,
+  NText,
 } from 'naive-ui'
 import { ref } from 'vue'
 import ExcelJS from 'exceljs'
@@ -19,7 +22,7 @@ import { DriveFolderUploadOutlined } from '@vicons/material'
 const cellRanges = ref('')
 const message = useMessage()
 const loading = ref(false)
-let inputFile: File | null | undefined = null
+const inputFile = ref<File | null>(null)
 
 // 边框选择
 const borderOptions = ref({
@@ -31,7 +34,7 @@ const borderOptions = ref({
 
 // 获取文件
 const handleInputChange = async ({ fileList }: { fileList: UploadFileInfo[] }) => {
-  inputFile = fileList[0]?.file
+  inputFile.value = fileList[0]?.file as File | null
 }
 
 // 解析单元格字符串，只接受单个单元格，用逗号分隔
@@ -52,56 +55,193 @@ const parseCellRanges = (rangeString: string): string[] => {
 }
 
 // 为单元格添加指定的边框
-const addSelectedBorders = (cell: ExcelJS.Cell) => {
-  if (!cell.border) {
-    cell.border = {}
+const addSelectedBorders = (cell: ExcelJS.Cell, cellAddress: string) => {
+  console.log(`开始处理单元格 ${cellAddress}`)
+
+  // 检查是否是合并单元格
+  const worksheet = cell.worksheet
+  let isMergedCell = false
+  let mergeRange = null
+
+  if (worksheet && worksheet.model.merges) {
+    // 检查当前单元格是否在合并区域内
+    for (const merge of worksheet.model.merges) {
+      const mergeStr = typeof merge === 'string' ? merge : merge.toString()
+      const [topLeft, bottomRight] = mergeStr.split(':')
+
+      // 解析合并区域的范围
+      const topLeftMatch = topLeft.match(/^([A-Z]+)(\d+)$/)
+      const bottomRightMatch = bottomRight ? bottomRight.match(/^([A-Z]+)(\d+)$/) : topLeftMatch
+
+      if (topLeftMatch && bottomRightMatch) {
+        const startCol = columnToNumber(topLeftMatch[1])
+        const startRow = parseInt(topLeftMatch[2])
+        const endCol = columnToNumber(bottomRightMatch[1])
+        const endRow = parseInt(bottomRightMatch[2])
+
+        // 解析当前单元格的坐标
+        const cellMatch = cellAddress.match(/^([A-Z]+)(\d+)$/)
+        if (cellMatch) {
+          const cellCol = columnToNumber(cellMatch[1])
+          const cellRow = parseInt(cellMatch[2])
+
+          // 检查是否在合并范围内
+          if (
+            cellCol >= startCol &&
+            cellCol <= endCol &&
+            cellRow >= startRow &&
+            cellRow <= endRow
+          ) {
+            isMergedCell = true
+            mergeRange = { startRow, startCol, endRow, endCol, topLeft }
+            console.log(`发现合并单元格: ${cellAddress} 在范围 ${mergeStr} 内`)
+            break
+          }
+        }
+      }
+    }
   }
 
-  // 只为选中的边框添加样式
+  if (isMergedCell && mergeRange) {
+    // 如果是合并单元格，只为合并区域的主单元格（左上角）设置边框
+    if (cellAddress === mergeRange.topLeft) {
+      console.log(`${cellAddress} 是合并单元格的主单元格，设置边框`)
+      setMergedCellBorder(worksheet, mergeRange)
+    } else {
+      console.log(`跳过合并单元格中的从属单元格: ${cellAddress}`)
+      return
+    }
+  } else {
+    // 普通单元格，直接设置边框
+    console.log(`${cellAddress} 是普通单元格，设置边框`)
+    setSingleCellBorder(cell, cellAddress)
+  }
+}
+
+// 将列字母转换为数字 (A=1, B=2, ..., Z=26, AA=27, ...)
+const columnToNumber = (col: string): number => {
+  let result = 0
+  for (let i = 0; i < col.length; i++) {
+    result = result * 26 + (col.charCodeAt(i) - 64)
+  }
+  return result
+}
+
+// 为合并单元格设置边框
+const setMergedCellBorder = (worksheet: ExcelJS.Worksheet, mergeRange: any) => {
+  // 对于合并单元格，我们需要为边界单元格设置相应的边框
+  for (let row = mergeRange.startRow; row <= mergeRange.endRow; row++) {
+    for (let col = mergeRange.startCol; col <= mergeRange.endCol; col++) {
+      const cell = worksheet.getCell(row, col)
+      const isTopBorder = row === mergeRange.startRow
+      const isBottomBorder = row === mergeRange.endRow
+      const isLeftBorder = col === mergeRange.startCol
+      const isRightBorder = col === mergeRange.endCol
+
+      const cellBorder: any = {}
+
+      // 只有当用户选择了对应方向的边框，且单元格在相应的边界上时，才添加边框
+      if (borderOptions.value.top && isTopBorder) {
+        cellBorder.top = { style: 'thin', color: { argb: 'FF000000' } }
+      }
+      if (borderOptions.value.bottom && isBottomBorder) {
+        cellBorder.bottom = { style: 'thin', color: { argb: 'FF000000' } }
+      }
+      if (borderOptions.value.left && isLeftBorder) {
+        cellBorder.left = { style: 'thin', color: { argb: 'FF000000' } }
+      }
+      if (borderOptions.value.right && isRightBorder) {
+        cellBorder.right = { style: 'thin', color: { argb: 'FF000000' } }
+      }
+
+      // 保留原有样式，只更新边框部分
+      if (Object.keys(cellBorder).length > 0) {
+        const originalStyle = cell.style || {}
+        cell.style = {
+          ...originalStyle,
+          border: {
+            ...originalStyle.border,
+            ...cellBorder,
+          },
+        }
+      }
+    }
+  }
+  console.log(`✅ 合并单元格边框设置完成`)
+}
+
+// 为单个单元格设置边框
+const setSingleCellBorder = (cell: ExcelJS.Cell, cellAddress: string) => {
+  const originalStyle = cell.style || {}
+  const newBorder: any = { ...originalStyle.border }
+
+  // 只为用户选择的边框方向添加样式
   if (borderOptions.value.top) {
-    cell.border.top = {
-      style: 'thin',
-      color: { argb: 'FF000000' }, // 黑色
-    }
+    newBorder.top = { style: 'thin', color: { argb: 'FF000000' } }
   }
-
   if (borderOptions.value.right) {
-    cell.border.right = {
-      style: 'thin',
-      color: { argb: 'FF000000' }, // 黑色
-    }
+    newBorder.right = { style: 'thin', color: { argb: 'FF000000' } }
   }
-
   if (borderOptions.value.bottom) {
-    cell.border.bottom = {
-      style: 'thin',
-      color: { argb: 'FF000000' }, // 黑色
-    }
+    newBorder.bottom = { style: 'thin', color: { argb: 'FF000000' } }
+  }
+  if (borderOptions.value.left) {
+    newBorder.left = { style: 'thin', color: { argb: 'FF000000' } }
   }
 
-  if (borderOptions.value.left) {
-    cell.border.left = {
-      style: 'thin',
-      color: { argb: 'FF000000' }, // 黑色
-    }
+  // 应用新样式
+  cell.style = {
+    ...originalStyle,
+    border: newBorder,
   }
+
+  console.log(`✅ 单元格 ${cellAddress} 边框设置完成`)
 }
 
 // 为指定的单元格添加边框
 const processCells = (sheet: ExcelJS.Worksheet, cellAddresses: string[]) => {
+  console.log(`工作表 "${sheet.name}" 开始处理单元格:`, cellAddresses)
+
   cellAddresses.forEach((cellAddress) => {
     try {
-      const cell = sheet.getCell(cellAddress)
-      addSelectedBorders(cell)
+      // 使用行列坐标确保精确定位
+      const match = cellAddress.match(/^([A-Z]+)(\d+)$/)
+      if (!match) {
+        console.error(`无效的单元格地址: ${cellAddress}`)
+        return
+      }
+
+      const colStr = match[1]
+      const rowNum = parseInt(match[2])
+
+      // 将列字母转换为数字
+      let colNum = 0
+      for (let i = 0; i < colStr.length; i++) {
+        colNum = colNum * 26 + (colStr.charCodeAt(i) - 64)
+      }
+
+      // 使用行列坐标获取单元格，确保精确定位
+      const cell = sheet.getCell(rowNum, colNum)
+
+      console.log(`处理单元格: ${cellAddress} (行${rowNum},列${colNum}), 实际地址: ${cell.address}`)
+
+      // 验证地址是否匹配
+      if (cell.address === cellAddress) {
+        addSelectedBorders(cell, cellAddress)
+      } else {
+        console.error(`地址不匹配: 期望 ${cellAddress}, 实际 ${cell.address}`)
+      }
     } catch (error) {
-      console.log(`处理单元格 ${cellAddress} 时出错:`, error)
+      console.error(`处理单元格 ${cellAddress} 时出错:`, error)
     }
   })
+
+  console.log(`工作表 "${sheet.name}" 处理完成`)
 }
 
 const addBorders = async () => {
   try {
-    if (!inputFile) {
+    if (!inputFile.value) {
       message.error('请选择 Excel 文件')
       return
     }
@@ -119,7 +259,7 @@ const addBorders = async () => {
 
     loading.value = true
 
-    const data = await inputFile.arrayBuffer()
+    const data = await inputFile.value!.arrayBuffer()
     const workbook = new ExcelJS.Workbook()
     await workbook.xlsx.load(data)
 
@@ -137,15 +277,49 @@ const addBorders = async () => {
       .map(([direction, _]) => direction)
       .join('、')
 
-    console.log(`将为以下单元格添加${selectedBorders}边框: ${cellAddresses.join(', ')}`)
+    console.log(`🎯 目标操作: 为单元格 [${cellAddresses.join(', ')}] 添加 ${selectedBorders} 边框`)
+
+    // 记录所有被修改的单元格
+    const modifiedCells: string[] = []
 
     // 遍历所有工作表
     workbook.worksheets.forEach((sheet, index) => {
-      console.log(`正在处理工作表: ${sheet.name}`)
+      console.log(`📋 正在处理工作表: ${sheet.name}`)
+
+      // 在处理前，记录工作表中所有有边框的单元格
+      const beforeProcessing: string[] = []
+      sheet.eachRow({ includeEmpty: true }, (row, rowNumber) => {
+        row.eachCell({ includeEmpty: true }, (cell, colNumber) => {
+          if (cell.border && Object.keys(cell.border).length > 0) {
+            beforeProcessing.push(cell.address)
+          }
+        })
+      })
+      console.log(`处理前有边框的单元格:`, beforeProcessing)
 
       // 为每个工作表的指定单元格添加边框
       processCells(sheet, cellAddresses)
+
+      // 处理后，再次检查所有有边框的单元格
+      const afterProcessing: string[] = []
+      sheet.eachRow({ includeEmpty: true }, (row, rowNumber) => {
+        row.eachCell({ includeEmpty: true }, (cell, colNumber) => {
+          if (cell.border && Object.keys(cell.border).length > 0) {
+            afterProcessing.push(cell.address)
+          }
+        })
+      })
+      console.log(`处理后有边框的单元格:`, afterProcessing)
+
+      // 找出新增的边框单元格
+      const newBorderedCells = afterProcessing.filter((addr) => !beforeProcessing.includes(addr))
+      if (newBorderedCells.length > 0) {
+        console.log(`🆕 新增边框的单元格:`, newBorderedCells)
+        modifiedCells.push(...newBorderedCells.map((addr) => `${sheet.name}:${addr}`))
+      }
     })
+
+    console.log(`📊 总共修改的单元格:`, modifiedCells)
 
     // 生成 Excel 文件并保存为 Blob
     const buffer = await workbook.xlsx.writeBuffer()
@@ -161,10 +335,10 @@ const addBorders = async () => {
     link.click()
     URL.revokeObjectURL(url)
 
-    message.success('边框添加完成并已下载')
+    message.success(`边框添加完成！实际修改了 ${modifiedCells.length} 个单元格`)
   } catch (error) {
     message.error('处理文件时出现异常，请检查文件格式和单元格')
-    console.log(error)
+    console.error('处理异常:', error)
   }
   loading.value = false
 }
