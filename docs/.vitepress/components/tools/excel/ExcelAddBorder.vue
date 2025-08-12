@@ -37,21 +37,59 @@ const handleInputChange = async ({ fileList }: { fileList: UploadFileInfo[] }) =
   inputFile.value = fileList[0]?.file as File | null
 }
 
-// 解析单元格字符串，只接受单个单元格，用逗号分隔
+// 解析单元格字符串，支持单个单元格和区域范围
 const parseCellRanges = (rangeString: string): string[] => {
   if (!rangeString.trim()) return []
 
-  const cells = rangeString.split(',').map((cell) => cell.trim().toUpperCase())
+  const ranges = rangeString.split(',').map((range) => range.trim().toUpperCase())
   const validCells: string[] = []
 
-  cells.forEach((cell) => {
-    // 验证单元格格式（例如：A1, B2, AA10）
-    if (/^[A-Z]+\d+$/.test(cell)) {
-      validCells.push(cell)
+  ranges.forEach((range) => {
+    // 检查是否是区域范围格式 (如: A1:B5)
+    if (range.includes(':')) {
+      const [startCell, endCell] = range.split(':')
+
+      // 验证起始和结束单元格格式
+      const startMatch = startCell.match(/^([A-Z]+)(\d+)$/)
+      const endMatch = endCell.match(/^([A-Z]+)(\d+)$/)
+
+      if (startMatch && endMatch) {
+        const startCol = columnToNumber(startMatch[1])
+        const startRow = parseInt(startMatch[2])
+        const endCol = columnToNumber(endMatch[1])
+        const endRow = parseInt(endMatch[2])
+
+        // 生成区域内所有单元格
+        for (let row = startRow; row <= endRow; row++) {
+          for (let col = startCol; col <= endCol; col++) {
+            const cellAddress = numberToColumn(col) + row
+            validCells.push(cellAddress)
+          }
+        }
+        console.log(
+          `解析区域 ${range}: 包含 ${(endRow - startRow + 1) * (endCol - startCol + 1)} 个单元格`
+        )
+      }
+    } else {
+      // 单个单元格格式 (如: A1, B2)
+      if (/^[A-Z]+\d+$/.test(range)) {
+        validCells.push(range)
+      }
     }
   })
 
   return validCells
+}
+
+// 将数字转换为列字母 (1=A, 2=B, ..., 26=Z, 27=AA, ...)
+const numberToColumn = (num: number): string => {
+  let result = ''
+  while (num > 0) {
+    num--
+    result = String.fromCharCode(65 + (num % 26)) + result
+    num = Math.floor(num / 26)
+  }
+  return result
 }
 
 // 为单元格添加指定的边框
@@ -351,6 +389,8 @@ const addBorders = async () => {
         <ul class="template-syntax-list">
           <li>单个单元格 => A1</li>
           <li>多个单元格 => A1,B2,C3 (用英文逗号分隔)</li>
+          <li>区域范围 => A2:F23 (从A2到F23的所有单元格)</li>
+          <li>混合使用 => A1,B2:D5,F10 (可以混合单个单元格和区域)</li>
           <li>边框选择 => 可以同时选择上、右、下、左任意组合</li>
         </ul>
       </n-alert>
