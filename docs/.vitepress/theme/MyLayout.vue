@@ -54,18 +54,6 @@ function hideSpecificSidebarItem() {
     }
   })
 }
-
-// 加载访问统计
-const loadVerCount = () => {
-  if (typeof window !== 'undefined') {
-    const script = document.createElement('script')
-    script.type = 'text/javascript'
-    script.src = 'https://events.vercount.one/js'
-    script.async = true
-    document.body.appendChild(script)
-  }
-}
-loadVerCount()
 </script>
 
 <template>
@@ -75,8 +63,8 @@ loadVerCount()
       <div class="bottom">
         <div>
           本站总访问量
-          <span id="busuanzi_value_site_pv">-</span> 次 本站总访客数
-          <span id="busuanzi_value_site_uv">-</span> 人
+          <span id="vercount_value_site_pv">-</span> 次 本站总访客数
+          <span id="vercount_value_site_uv">-</span> 人
         </div>
         <p>{{ `下辈子别选前端 © 2021-${nowYear} holden 本站已开源` }}</p>
       </div>

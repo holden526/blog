@@ -26,7 +26,16 @@ export default defineConfig({
   title: '山不让尘，川不辞盈',
   description: '快不快乐有天总过去',
   lang: 'zh-CN',
-  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.ico' }],
+    [
+      'script',
+      {
+        src: 'https://events.vercount.one/js',
+        defer: 'defer',
+      },
+    ],
+  ],
   vite: {
     server: {
       host: '0.0.0.0',
