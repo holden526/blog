@@ -40,6 +40,9 @@ export default defineConfig({
     server: {
       host: '0.0.0.0',
     },
+    optimizeDeps: {
+      include: ['pdfjs-dist'],
+    },
     plugins: [
       pagefindPlugin({
         btnPlaceholder: '搜索',
@@ -157,6 +160,7 @@ export default defineConfig({
             items: [
               { text: 'Excel工具', link: '/pages/tools/excelTools' },
               { text: '图片工具', link: '/pages/tools/picTools' },
+              { text: 'PDF工具', link: '/pages/tools/pdfTools' },
             ],
           },
         ],

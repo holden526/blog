@@ -33,8 +33,10 @@
     "@giscus/vue": "^3.0.0",
     "exceljs": "^4.4.0",
     "html-to-image": "^1.11.13",
+    "jszip": "^3.10.1",
     "naive-ui": "^2.40.1",
     "pagefind": "^1.1.1",
+    "pdfjs-dist": "^5.4.54",
     "viewerjs": "^1.11.6",
     "vitepress-plugin-group-icons": "^1.3.0",
     "vitepress-plugin-pagefind": "^0.4.10"
