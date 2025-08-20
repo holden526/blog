@@ -17,4 +17,6 @@ PDF处理工具集，运行于本地
 
 ## 1. PDF分页导出
 
-<PdfSplice />
+<ClientOnly>
+  <PdfSplice />
+</ClientOnly>
