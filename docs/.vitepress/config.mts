@@ -22,6 +22,10 @@ const autoSidebar = () => {
   }))
 }
 
+const SITE_URL = 'https://dddhl.cn'
+const SITE_NAME = '山不让尘，川不辞盈'
+const DEFAULT_DESCRIPTION = '快不快乐有天总过去'
+
 export default defineConfig({
   title: '山不让尘，川不辞盈',
   description: '快不快乐有天总过去',
@@ -36,6 +40,11 @@ export default defineConfig({
       },
     ],
   ],
+  // 基础 SEO 配置
+  cleanUrls: true,
+  lastUpdated: true,
+  titleTemplate: `:title | ${SITE_NAME}`,
+  sitemap: { hostname: SITE_URL },
   vite: {
     server: {
       host: '0.0.0.0',
@@ -130,6 +139,69 @@ export default defineConfig({
     if (style) {
       return code.replace(/<\/head>/, `${style}</head>`)
     }
+  },
+  // 每页注入 canonical、description、OG/Twitter、JSON-LD 结构化数据
+  transformHead({ pageData }) {
+    const fm: any = pageData.frontmatter || {}
+    const title = fm.title || pageData.title || SITE_NAME
+    const description = fm.description || DEFAULT_DESCRIPTION
+    const image =
+      (fm.image && (fm.image.startsWith('http') ? fm.image : SITE_URL + fm.image)) ||
+      `${SITE_URL}/favicon.ico`
+    const author = fm.author || 'Author'
+    const tags = Array.isArray(fm.tags) ? fm.tags : fm.tags ? [fm.tags] : []
+    const draft = !!fm.draft
+
+    // 计算 canonical
+    const routePath =
+      '/' +
+      (pageData.relativePath || '')
+        .replace(/(^|\/)index\.md$/, '$1')
+        .replace(/\.md$/, '/')
+        .replace(/\/+/, '/')
+    const canonical = (SITE_URL.replace(/\/+$/, '') + routePath).replace(/\/+$/, '/')
+
+    const ldJson: any = {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: title,
+      name: title,
+      description,
+      image,
+      author: { '@type': 'Person', name: author },
+      publisher: {
+        '@type': 'Organization',
+        name: SITE_NAME,
+        logo: {
+          '@type': 'ImageObject',
+          url: `${SITE_URL}/favicon.ico`,
+        },
+      },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+      datePublished: fm.date || undefined,
+      dateModified: pageData.lastUpdated ? new Date(pageData.lastUpdated).toISOString() : undefined,
+      keywords: tags.join(', '),
+    }
+
+    const head: any = [
+      ['link', { rel: 'canonical', href: canonical }],
+      ['meta', { name: 'description', content: description }],
+      ['meta', { property: 'og:type', content: 'article' }],
+      ['meta', { property: 'og:site_name', content: SITE_NAME }],
+      ['meta', { property: 'og:title', content: title }],
+      ['meta', { property: 'og:description', content: description }],
+      ['meta', { property: 'og:url', content: canonical }],
+      ['meta', { property: 'og:image', content: image }],
+      ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+      ['meta', { name: 'twitter:title', content: title }],
+      ['meta', { name: 'twitter:description', content: description }],
+      ['meta', { name: 'twitter:image', content: image }],
+      ['meta', { name: 'robots', content: draft ? 'noindex, nofollow' : 'index, follow' }],
+      ['script', { type: 'application/ld+json' }, JSON.stringify(ldJson)],
+    ]
+
+    if (tags.length) head.push(['meta', { name: 'keywords', content: tags.join(', ') }])
+    return head
   },
   themeConfig: {
     outline: [2, 6],
