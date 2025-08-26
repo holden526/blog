@@ -699,17 +699,18 @@ const copyColumn = async () => {
   }
   .batch-tasks {
     margin-top: 20px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid var(--vp-c-border);
     padding-top: 20px;
 
     h3 {
       margin-bottom: 10px;
+      color: var(--vp-c-text-1);
     }
 
     .clickable-cell {
       cursor: pointer;
       &:hover {
-        background-color: #f5f5f5;
+        background-color: var(--vp-c-bg-soft);
       }
     }
   }

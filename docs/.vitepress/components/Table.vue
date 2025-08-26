@@ -53,10 +53,40 @@ const getRenderType = (
 <style scoped lang="scss">
 .table {
   width: 100%;
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--vp-c-border);
+    background-color: var(--vp-c-bg);
+  }
+  
   th,
   td {
     text-align: center;
     vertical-align: center;
+    padding: 8px 12px;
+    border: 1px solid var(--vp-c-border);
+    color: var(--vp-c-text-1);
+  }
+  
+  th {
+    background-color: var(--vp-c-bg-soft);
+    font-weight: 600;
+  }
+  
+  tr:hover {
+    background-color: var(--vp-c-bg-soft);
+  }
+  
+  a {
+    color: var(--vp-c-brand-1);
+    text-decoration: none;
+    
+    &:hover {
+      color: var(--vp-c-brand-2);
+      text-decoration: underline;
+    }
   }
 }
 </style>

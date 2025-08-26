@@ -235,16 +235,16 @@ const clearFiles = () => {
   justify-content: center;
   min-height: 120px;
   padding: 24px;
-  border: 2px dashed #d9d9d9;
+  border: 2px dashed var(--vp-c-border);
   border-radius: 8px;
-  background-color: #fafafa;
+  background-color: var(--vp-c-bg-soft);
   cursor: pointer;
   transition: all 0.3s ease;
   width: 100%;
 
   &:hover {
-    border-color: #40a9ff;
-    background-color: #f0f9ff;
+    border-color: var(--vp-c-brand-1);
+    background-color: var(--vp-c-brand-soft);
   }
 }
 
@@ -270,12 +270,15 @@ const clearFiles = () => {
 
 .info-area {
   padding: 16px;
-  background-color: #f8f9fa;
+  background-color: var(--vp-c-bg-soft);
   border-radius: 6px;
-  border-left: 4px solid #1890ff;
+  border-left: 4px solid var(--vp-c-brand-1);
   margin-top: 20px;
+  color: var(--vp-c-text-1);
+  
   code {
-    background-color: #f1f3f4;
+    background-color: var(--vp-c-bg-mute);
+    color: var(--vp-c-text-2);
     padding: 2px 6px;
     border-radius: 4px;
     font-family: 'Courier New', monospace;

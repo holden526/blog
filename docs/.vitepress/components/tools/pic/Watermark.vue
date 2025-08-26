@@ -279,7 +279,7 @@ const handleWatermarkKeydown = (e: KeyboardEvent) => {
   height: 100%;
   .title {
     font-size: 16px;
-    background-color: rgba(100, 146, 224, 0.8);
+    background-color: rgba(100, 146, 224, 0.9);
     width: 100%;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -289,11 +289,11 @@ const handleWatermarkKeydown = (e: KeyboardEvent) => {
     font-weight: bold;
   }
   .content {
-    background-color: rgba(220, 216, 213, 0.8);
+    background-color: rgba(255, 255, 255, 0.95);
     width: 100%;
     font-size: 16px;
     font-weight: bold;
-    color: #000;
+    color: #333;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     padding: 10px;
@@ -301,6 +301,14 @@ const handleWatermarkKeydown = (e: KeyboardEvent) => {
       width: 100%;
       text-align: left;
       white-space: pre;
+    }
+  }
+  
+  /* 暗色主题适配 */
+  html.dark & {
+    .content {
+      background-color: rgba(40, 44, 52, 0.95);
+      color: #e6e6e6;
     }
   }
 }
@@ -315,7 +323,7 @@ const handleWatermarkKeydown = (e: KeyboardEvent) => {
     text-align: center;
     font-size: 16px;
     font-weight: bold;
-    background-color: rgba(100, 146, 224, 0.8);
+    background-color: rgba(100, 146, 224, 0.9);
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     height: 35px;
@@ -345,7 +353,7 @@ const handleWatermarkKeydown = (e: KeyboardEvent) => {
       width: 10px;
       height: 10px;
       border-radius: 100%;
-      background-color: rgba(238, 194, 70, 0.8);
+      background-color: rgba(238, 194, 70, 0.9);
       position: absolute;
       left: 18px;
     }
@@ -385,9 +393,10 @@ const handleWatermarkKeydown = (e: KeyboardEvent) => {
   margin-bottom: 20px;
   justify-content: space-between;
   gap: 15px;
-  border: 1px dashed #ddd;
+  border: 1px dashed var(--vp-c-border);
   border-radius: 5px;
   padding: 5px;
+  background-color: var(--vp-c-bg-soft);
 }
 
 .template-item {
@@ -398,12 +407,12 @@ const handleWatermarkKeydown = (e: KeyboardEvent) => {
 }
 
 .template-item:hover {
-  background-color: #f5f5f5;
+  background-color: var(--vp-c-bg-soft);
 }
 
 .template-item.selected {
-  border-color: #18a058;
-  background-color: #f0f9f4;
+  border-color: var(--vp-c-brand-1);
+  background-color: var(--vp-c-brand-soft);
 }
 
 .template-name {
@@ -419,9 +428,10 @@ const handleWatermarkKeydown = (e: KeyboardEvent) => {
 
 .preview-container {
   margin: 20px 0;
-  border: 1px solid #eee;
+  border: 1px solid var(--vp-c-border);
   padding: 10px;
   border-radius: 5px;
+  background-color: var(--vp-c-bg);
 }
 
 .image-container {
