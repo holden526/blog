@@ -6,12 +6,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
+    "generate:commits": "node scripts/generate-commits.js",
+    "docs:dev": "npm run generate:commits && vitepress dev docs",
+    "docs:build": "npm run generate:commits && vitepress build docs",
     "docs:preview": "vitepress preview docs"
   },
   "keywords": [],
-  "author": "",
+  "author": "holden",
   "license": "ISC",
   "devDependencies": {
     "@css-render/vue3-ssr": "^0.15.14",

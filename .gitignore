@@ -98,3 +98,4 @@ temp/
 
 # JSON files (if they contain sensitive data)
 meta.json
+commits.json
