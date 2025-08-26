@@ -2,8 +2,12 @@
 import { NTimeline, NTimelineItem, NIcon, NBackTop, NTag, NCard, NScrollbar } from 'naive-ui'
 import { useRouter } from 'vitepress'
 import dayjs from 'dayjs'
-import { ref, onMounted } from 'vue'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import 'dayjs/locale/zh-cn'
+import { ref, onMounted, computed } from 'vue'
 import { EmailOutlined, UpdateOutlined, DiscountOutlined } from '@vicons/material'
+dayjs.extend(relativeTime)
+dayjs.locale('zh-cn')
 const commitsData = ref([])
 const router = useRouter()
 // @ts-ignore
@@ -19,6 +23,14 @@ onMounted(async () => {
     console.warn('获取 commits 数据失败:', error)
     commitsData.value = []
   }
+})
+
+// 计算动态相对时间
+const commitsWithDynamicTime = computed(() => {
+  return commitsData.value.map((commit) => ({
+    ...commit,
+    dynamicRelativeDate: dayjs(commit.date).fromNow(),
+  }))
 })
 
 const list = posts
@@ -63,17 +75,22 @@ const jump = (path: string) => {
         </div>
         <n-scrollbar style="max-height: 300px">
           <div class="commit-list">
-            <div v-for="commit in commitsData.slice(0, 20)" :key="commit.hash" class="commit-item">
+            <div
+              v-for="commit in commitsWithDynamicTime.slice(0, 20)"
+              :key="commit.hash"
+              class="commit-item"
+            >
               <div class="commit-message">{{ commit.message }}</div>
               <div class="commit-meta">
                 <span class="commit-author">{{ commit.author }}</span>
-                <span class="commit-date">{{ commit.relativeDate }}</span>
+                <span class="commit-date">{{ commit.dynamicRelativeDate }}</span>
               </div>
             </div>
           </div>
         </n-scrollbar>
       </div>
     </section>
+
     <section class="right-wrapper">
       <n-timeline size="large">
         <n-timeline-item v-for="item in list">
@@ -143,12 +160,12 @@ const jump = (path: string) => {
       }
 
       .name {
-        font-size: 20px;
+        font-size: var(--font-size-md);
         margin: 10px 0;
       }
 
       .text {
-        font-size: 14px;
+        font-size: var(--font-size-base);
         color: var(--grey-color-1);
         user-select: none;
       }
@@ -175,7 +192,7 @@ const jump = (path: string) => {
         display: flex;
         align-items: center;
         gap: 8px;
-        font-size: 16px;
+        font-size: var(--font-size-md);
         font-weight: 600;
         margin-bottom: 15px;
         color: var(--black-color-1);
@@ -192,7 +209,7 @@ const jump = (path: string) => {
           }
 
           .commit-message {
-            font-size: 13px;
+            font-size: var(--font-size-base);
             color: var(--black-color-1);
             line-height: 1.4;
             margin-bottom: 6px;
@@ -206,7 +223,7 @@ const jump = (path: string) => {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 11px;
+            font-size: var(--font-size-sm);
             color: var(--grey-color-1);
 
             .commit-author {
@@ -215,6 +232,7 @@ const jump = (path: string) => {
 
             .commit-date {
               font-style: italic;
+              margin-right: 1.5px;
             }
           }
         }
@@ -247,9 +265,9 @@ const jump = (path: string) => {
         width: 130px;
         left: -140px;
         top: -2px;
-        font-size: 12px;
-        line-height: 12px;
-        height: 12px;
+        font-size: var(--font-size-sm);
+        line-height: var(--font-size-sm);
+        height: var(--font-size-sm);
         text-align: right;
       }
 
@@ -273,7 +291,7 @@ const jump = (path: string) => {
       justify-content: space-around;
 
       .title {
-        font-size: 20px;
+        font-size: var(--font-size-lg);
         font-weight: 700;
         cursor: pointer;
       }
@@ -290,7 +308,7 @@ const jump = (path: string) => {
 
       .info,
       .date {
-        font-size: 14px;
+        font-size: var(--font-size-base);
         color: var(--grey-color-1);
         margin-top: 5px;
         overflow: hidden;
@@ -310,7 +328,6 @@ const jump = (path: string) => {
     flex-direction: column;
 
     .left-wrapper {
-      min-width: 300px;
       width: 100%;
       position: static;
       flex-direction: row;
@@ -320,6 +337,7 @@ const jump = (path: string) => {
         flex: 1;
         height: 200px;
         padding: 15px 10px;
+        min-width: 0;
 
         .avatar {
           width: 60px;
@@ -327,16 +345,15 @@ const jump = (path: string) => {
         }
 
         .name {
-          font-size: 16px;
           margin: 8px 0;
         }
 
         .text {
-          font-size: 12px;
+          font-size: var(--font-size-base);
         }
 
         .email {
-          font-size: 12px;
+          font-size: var(--font-size-base);
           margin-top: 8px;
         }
       }
@@ -345,9 +362,10 @@ const jump = (path: string) => {
         flex: 1;
         max-height: 200px;
         padding: 10px;
+        min-width: 0;
 
         .updates-header {
-          font-size: 14px;
+          font-size: var(--font-size-base);
           margin-bottom: 10px;
         }
 
@@ -356,12 +374,12 @@ const jump = (path: string) => {
             padding: 6px 0;
 
             .commit-message {
-              font-size: 12px;
+              font-size: var(--font-size-base);
               -webkit-line-clamp: 1;
             }
 
             .commit-meta {
-              font-size: 10px;
+              font-size: var(--font-size-base);
             }
           }
         }
@@ -399,6 +417,7 @@ const jump = (path: string) => {
         .profile-card,
         .recent-updates {
           width: 100%;
+          min-width: 0;
         }
       }
     }

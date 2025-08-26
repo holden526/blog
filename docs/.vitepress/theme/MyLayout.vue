@@ -102,7 +102,7 @@ function hideSpecificSidebarItem() {
   justify-content: center;
   border-top: 1px solid var(--border-color-1);
   text-align: center;
-
+  font-size: var(--font-size-base);
   p {
     margin-top: 5px;
   }

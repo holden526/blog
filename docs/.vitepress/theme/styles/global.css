@@ -1,12 +1,26 @@
 @import './rewrite.css';
 
 :root {
+  /* 常用色彩变量 */
   --border-color-1: rgb(242, 243, 245);
   --black-color-1: rgb(60, 60, 67);
   --grey-color-1: rgb(134, 144, 156);
   --grey-color-2: rgb(229, 230, 235);
   --blue-color-1: rgb(22, 93, 255);
   --border-radius: 8px;
+
+  /* 常用字体大小变量 */
+  font-size: 16px;
+  --font-size-xs: 0.625rem; /* 10px */
+  --font-size-sm: 0.75rem; /* 12px */
+  --font-size-base: 0.875rem; /* 14px */
+  --font-size-md: 1rem; /* 16px */
+  --font-size-lg: 1.125rem; /* 18px */
+  --font-size-xl: 1.25rem; /* 20px */
+  --font-size-2xl: 1.5rem; /* 24px */
+  --font-size-3xl: 1.875rem; /* 30px */
+  --font-size-4xl: 2.25rem; /* 36px */
+
   img {
     display: block;
     margin: auto;
