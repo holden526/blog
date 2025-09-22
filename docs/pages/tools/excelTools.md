@@ -14,6 +14,7 @@ import ExcelCopyColumnToRow from '../../.vitepress/components/tools/excel/ExcelC
 import ExcelCopyFormulaToCell from '../../.vitepress/components/tools/excel/ExcelCopyFormulaToCell.vue'
 import ExcelCopyFormulaToCellOnDate from '../../.vitepress/components/tools/excel/ExcelCopyFormulaToCellOnDate.vue'
 import ExcelAddBorder from '../../.vitepress/components/tools/excel/ExcelAddBorder.vue'
+import ExcelDataExpand from '../../.vitepress/components/tools/excel/ExcelDataExpand.vue'
 </script>
 
 # Excel 工具集
@@ -102,3 +103,7 @@ Excel 文件中选择特定工作表，并将其复制指定数量
 :::
 
 <ExcelAddBorder />
+
+## 6. 公式结果扩大30%
+
+<ExcelDataExpand />
