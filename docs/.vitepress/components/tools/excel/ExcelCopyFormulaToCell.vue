@@ -20,6 +20,7 @@ const themeVars = useThemeVars()
 const startRow = ref(1) // 开始行
 const endRow = ref(1) // 结束行
 const pastePosition = ref('') // 粘贴位置
+const dateFormat = ref('YYYY.MM.DD') // 日期格式
 const message = useMessage()
 const loading = ref(false)
 const recursionDepth = ref(1) // 添加递归层数控制，默认为1层
@@ -62,6 +63,55 @@ const columnLetterToIndex = (letter: string): number => {
   return result
 }
 
+// 日期格式化函数
+const formatDate = (date: Date, format: string): string => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hours = date.getHours()
+  const minutes = date.getMinutes()
+  const seconds = date.getSeconds()
+
+  return format
+    .replace(/YYYY/g, year.toString())
+    .replace(/YY/g, year.toString().slice(-2))
+    .replace(/MM/g, month.toString().padStart(2, '0'))
+    .replace(/M/g, month.toString())
+    .replace(/DD/g, day.toString().padStart(2, '0'))
+    .replace(/D/g, day.toString())
+    .replace(/HH/g, hours.toString().padStart(2, '0'))
+    .replace(/H/g, hours.toString())
+    .replace(/mm/g, minutes.toString().padStart(2, '0'))
+    .replace(/m/g, minutes.toString())
+    .replace(/SS/g, seconds.toString().padStart(2, '0'))
+    .replace(/S/g, seconds.toString())
+}
+
+// 判断值是否为日期并格式化
+const formatValue = (cell: ExcelJS.Cell): string => {
+  if (!cell) return ''
+
+  const value = cell.value
+
+  // 如果是日期
+  if (value instanceof Date && !isNaN(value.getTime())) {
+    return formatDate(value, dateFormat.value)
+  }
+
+  // 如果是数字 + 特殊格式
+  if (typeof value === 'number' && cell.numFmt) {
+    if (cell.numFmt === 'K0+000') {
+      const km = Math.floor(value / 1000)
+      const m = value % 1000
+      return `K${km}+${m.toString().padStart(3, '0')}`
+    }
+    // 你还可以在这里继续扩展其他 numFmt 格式
+  }
+
+  // 默认情况
+  return cell.text || value?.toString() || ''
+}
+
 // 递归解析公式中的单元格引用
 const parseFormula = (sheet: ExcelJS.Worksheet, formula: string | undefined): string => {
   if (!formula) return ''
@@ -80,8 +130,8 @@ const parseFormula = (sheet: ExcelJS.Worksheet, formula: string | undefined): st
       return parseFormula(sheet, cell.formula)
     }
 
-    // 否则返回单元格的值
-    return cell.text || cell.value?.toString() || ''
+    // 否则返回单元格的值，使用新的格式化函数处理日期
+    return formatValue(cell) || ''
   })
 }
 
@@ -134,7 +184,7 @@ const formatFormula = (
   for (let i = matches.length - 1; i >= 0; i--) {
     const m = matches[i]
     const cell = sheet.getCell(`${m.column}${m.row}`)
-    let replacement = cell.text || cell.value?.toString() || ''
+    let replacement = formatValue(cell) || ''
 
     // 如果单元格有公式，根据递归深度决定是否继续解析
     if (cell.formula && depth > 1) {
@@ -188,8 +238,8 @@ const processTemplate = (sheet: ExcelJS.Worksheet, row: ExcelJS.Row, template: s
     let value = ''
 
     if (varType === '值') {
-      // 获取单元格的文本值
-      value = cell.text || cell.value?.toString() || ''
+      // 获取单元格的值，使用新的格式化函数处理日期
+      value = formatValue(cell) || ''
     } else if (varType === '公式') {
       // 检查是否有单独的递归层级设置
       let currentDepth = recursionDepth.value
@@ -420,6 +470,18 @@ const copyRow = async () => {
         </NTooltip>
       </div>
       <div class="input-item">
+        <p>日期格式：</p>
+        <n-input v-model:value="dateFormat" type="text" placeholder="请输入日期格式" />
+        <NTooltip trigger="hover" placement="right">
+          <template #trigger>
+            <n-icon size="18" class="help-icon">
+              <HelpOutlined />
+            </n-icon>
+          </template>
+          当单元格值为日期时的显示格式。支持：YYYY(年)、MM/M(月)、DD/D(日)、HH/H(时)、mm/m(分)、SS/S(秒)
+        </NTooltip>
+      </div>
+      <div class="input-item">
         <p>公式递归：</p>
         <n-input-number
           v-model:value="recursionDepth"
@@ -466,7 +528,7 @@ const copyRow = async () => {
 
       <n-alert style="margin-top: 10px" title="模板语法详解" type="info">
         <ul class="template-syntax-list">
-          <li>{值A} => 引用A列的文本值</li>
+          <li>{值A} => 引用A列的文本值（如果是日期会按设定格式显示）</li>
           <li>{公式B} => 引用B列的公式计算结果（受递归层数控制）</li>
           <li>{公式C[递归x层]} => 引用C列的公式，并单独指定递归x(1/2/3...)层</li>
           <li>{值C[四舍五入]} => 如果是数字则四舍五入</li>
