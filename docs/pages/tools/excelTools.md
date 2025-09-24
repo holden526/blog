@@ -16,6 +16,7 @@ import ExcelCopyFormulaToCellOnDate from '../../.vitepress/components/tools/exce
 import ExcelAddBorder from '../../.vitepress/components/tools/excel/ExcelAddBorder.vue'
 import ExcelDataExpand from '../../.vitepress/components/tools/excel/ExcelDataExpand.vue'
 import ExcelFormula from '../../.vitepress/components/tools/excel/ExcelFormula.vue'
+import ExcelChangeVal from '../../.vitepress/components/tools/excel/ExcelChangeVal.vue'
 </script>
 
 # Excel 工具集
@@ -112,3 +113,7 @@ Excel 文件中选择特定工作表，并将其复制指定数量
 ## 7. 获取计算式
 
 <ExcelFormula />
+
+## 7. 修改工作表的指定单元格
+
+<ExcelChangeVal />
