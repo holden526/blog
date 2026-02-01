@@ -57,7 +57,7 @@ import { NTabs, NTabPane, NTag,NAlert } from 'naive-ui'
 
 - 输入照片
 
-<img src="../img/2026/image_edit/holden-input-1.JPG" />
+<img src="../img/2026/image_edit/holden-input-1.jpg" />
 
 ### 1.2 模型输出结果
 
