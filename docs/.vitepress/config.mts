@@ -16,7 +16,7 @@ const autoSidebar = () => {
     sortMenusByFrontmatterDate: true,
     sortMenusOrderByDescending: true,
   })
-  return result.map((year) => ({
+  return result.map((year: any) => ({
     ...year,
     items: year.items.reverse(),
   }))
@@ -49,6 +49,7 @@ export default defineConfig({
   vite: {
     server: {
       host: '0.0.0.0',
+      port: 5260,
     },
     optimizeDeps: {
       include: ['pdfjs-dist'],
@@ -269,6 +270,9 @@ export default defineConfig({
   markdown: {
     config(md) {
       md.use(groupIconMdPlugin)
+    },
+    image: {
+      lazyLoading: true,
     },
     headers: {
       level: [1, 2, 3],
