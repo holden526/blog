@@ -479,28 +479,53 @@ ps：从左到右分别是1、2、3、4轮结果
 输出结果：眼镜基本保持一致，与人物有关
 :::
 
-<table>
-  <tbody>
-    <tr>
-      <td><img src="../img/2026/image_edit/holden-glasses-1.png" /></td>
-      <td><img src="../img/2026/image_edit/rick-glasses-1.png" /></td>
-    </tr>
-  </tbody>
-</table>
+<n-tabs type="segment" animated style="margin-top:10px">
+  <!-- Qwen -->
+  <n-tab-pane name="1" tab="qwen-无参考图">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:15px">
+      <img src="../img/2026/image_edit/holden-glasses-qwen-1.png" width="200px" />
+      =
+      <img src="../img/2026/image_edit/rick-glasses-qwen-1.png" width="200px" />
+    </div>
+  </n-tab-pane>
 
-:::tip 有参考图
+  <!-- Doubao -->
+  <n-tab-pane name="2" tab="doubao-无参考图">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:15px">
+      <img src="../img/2026/image_edit/holden-glasses-doubao-1.jpeg" width="200px" />
+      =
+      <img src="../img/2026/image_edit/rick-glasses-doubao-1.jpeg" width="200px" />
+    </div>
+  </n-tab-pane>
+</n-tabs>
+
+:::warning 有参考图
 输出结果：眼镜基本保持一致
 :::
 
-<table>
-  <tbody>
-    <tr>
-      <td><img src="../img/2026/image_edit/glasses-input-1.webp" /></td>
-      <td><img src="../img/2026/image_edit/holden-glasses-2.png" /></td>
-      <td><img src="../img/2026/image_edit/rick-glasses-2.png" /></td>
-    </tr>
-  </tbody>
-</table>
+<n-tabs type="segment" animated style="margin:10px 0;">
+  <!-- Qwen -->
+  <n-tab-pane name="1" tab="qwen-有参考图">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:15px">
+      <img src="../img/2026/image_edit/glasses-input-1.webp" width="200px" />
+      =>
+      <img src="../img/2026/image_edit/holden-glasses-qwen-2.png" width="200px" />
+      =
+      <img src="../img/2026/image_edit/rick-glasses-qwen-2.png" width="200px" />
+    </div>
+  </n-tab-pane>
+
+  <!-- Doubao -->
+  <n-tab-pane name="2" tab="doubao-有参考图">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:15px">
+      <img src="../img/2026/image_edit/glasses-input-1.webp" width="200px" />
+      =>
+      <img src="../img/2026/image_edit/holden-glasses-doubao-2.jpeg" width="200px" />
+      =
+      <img src="../img/2026/image_edit/rick-glasses-doubao-2.jpeg" width="200px" />
+    </div>
+  </n-tab-pane>
+</n-tabs>
 
 ### 6.3 总结
 
