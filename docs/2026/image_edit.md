@@ -4,6 +4,7 @@ date: 2026-02-01
 info: 现有模型能力对比
 tags:
   - AI
+  - Image Edit
 ---
 
 <script setup>
