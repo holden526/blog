@@ -32,9 +32,18 @@ const startRow = ref(7)
 const endRow = ref(100)
 const sheetName = ref('')
 
-// 固定值
-const width = 0.5
-const height = 0.6
+// 宽度来源：'fixed' 表示手动输入，'column' 表示从列读取
+const widthSource = ref<'fixed' | 'column'>('fixed')
+// 高度来源：'fixed' 表示手动输入，'column' 表示从列读取
+const heightSource = ref<'fixed' | 'column'>('fixed')
+
+// 固定值（手动输入时）
+const widthFixed = ref(0.5)
+const heightFixed = ref(0.6)
+
+// 列设置（从列读取时）
+const widthCol = ref('') // 宽度所在列
+const heightCol = ref('') // 高度所在列
 
 // 公式类型选择：'area' 表示 长×宽，'volume' 表示 长×宽×高
 const formulaType = ref<'area' | 'volume'>('area')
@@ -105,6 +114,36 @@ const processExcel = async () => {
       const resultCell = worksheet.getCell(`${resultCol.value.trim()}${row}`)
       const outputCell = worksheet.getCell(`${outputCol.value.trim()}${row}`)
 
+      // 获取当前行的宽度值
+      let width: number
+      if (widthSource.value === 'column') {
+        const widthCell = worksheet.getCell(`${widthCol.value.trim()}${row}`)
+        const widthVal = widthCell.value
+        width = typeof widthVal === 'number' ? widthVal : parseFloat(String(widthVal))
+        if (isNaN(width) || width === 0) {
+          continue // 跳过无效宽度值的行
+        }
+      } else {
+        width = widthFixed.value
+      }
+
+      // 获取当前行的高度值（体积模式需要）
+      let height: number
+      if (formulaType.value === 'volume') {
+        if (heightSource.value === 'column') {
+          const heightCell = worksheet.getCell(`${heightCol.value.trim()}${row}`)
+          const heightVal = heightCell.value
+          height = typeof heightVal === 'number' ? heightVal : parseFloat(String(heightVal))
+          if (isNaN(height) || height === 0) {
+            continue // 跳过无效高度值的行
+          }
+        } else {
+          height = heightFixed.value
+        }
+      } else {
+        height = heightFixed.value // 面积模式下不需要高度，使用默认值
+      }
+
       const rawValue = resultCell.value
 
       // 情况1：空值，跳过
@@ -154,6 +193,7 @@ const processExcel = async () => {
           continue
         }
 
+        // 子情况2c：包含除法或其他运算，当作数值处理（fall through）
         // 其他情况（如单个值 =100），当作数值处理（fall through）
       }
 
@@ -175,10 +215,13 @@ const processExcel = async () => {
       let formulaText = ''
       if (formulaType.value === 'area') {
         const length = parseFloat((numericValue / width).toFixed(2))
-        formulaText = `${length} * 0.5`
+        const widthDisplay = widthSource.value === 'column' ? `${widthCol.value.trim()}${row}` : width
+        formulaText = `${length} * ${widthDisplay}`
       } else {
         const length = parseFloat((numericValue / width / height).toFixed(2))
-        formulaText = `${length} * 0.5 * 0.6`
+        const widthDisplay = widthSource.value === 'column' ? `${widthCol.value.trim()}${row}` : width
+        const heightDisplay = heightSource.value === 'column' ? `${heightCol.value.trim()}${row}` : height
+        formulaText = `${length} * ${widthDisplay} * ${heightDisplay}`
       }
 
       outputCell.value = formulaText
@@ -226,7 +269,8 @@ const processExcel = async () => {
           <li>指定输出公式的列（如 H）</li>
           <li>设置处理的行范围</li>
           <li>选择公式类型：长×宽 或 长×宽×高</li>
-          <li>宽固定为 0.5，高固定为 0.6</li>
+          <li>宽度：可手动输入固定值（默认0.5）或从指定列读取</li>
+          <li>高度（体积模式）：可手动输入固定值（默认0.6）或从指定列读取</li>
           <li>若结果列含公式，直接复制；否则根据数值反推“长度”生成公式</li>
         </ul>
       </n-alert>
@@ -282,6 +326,56 @@ const processExcel = async () => {
           placeholder="选择公式类型"
         />
       </n-input-group>
+
+      <!-- 宽度配置 -->
+      <n-card title="宽度配置" embedded style="margin: 16px 0">
+        <n-input-group style="margin: 13px 0">
+          <n-input-group-label>来源方式</n-input-group-label>
+          <n-select
+            v-model:value="widthSource"
+            :options="[
+              { label: '手动输入固定值（默认0.5）', value: 'fixed' },
+              { label: '从指定列读取', value: 'column' },
+            ]"
+            placeholder="选择宽度来源"
+          />
+        </n-input-group>
+
+        <n-input-group v-if="widthSource === 'fixed'" style="margin: 13px 0">
+          <n-input-group-label>宽度固定值</n-input-group-label>
+          <n-input-number v-model:value="widthFixed" :min="0.01" :step="0.1" />
+        </n-input-group>
+
+        <n-input-group v-if="widthSource === 'column'" style="margin: 13px 0">
+          <n-input-group-label>宽度所在列</n-input-group-label>
+          <n-input v-model:value="widthCol" placeholder="如：B" />
+        </n-input-group>
+      </n-card>
+
+      <!-- 高度配置（仅体积模式显示） -->
+      <n-card v-if="formulaType === 'volume'" title="高度配置" embedded style="margin: 16px 0">
+        <n-input-group style="margin: 13px 0">
+          <n-input-group-label>来源方式</n-input-group-label>
+          <n-select
+            v-model:value="heightSource"
+            :options="[
+              { label: '手动输入固定值（默认0.6）', value: 'fixed' },
+              { label: '从指定列读取', value: 'column' },
+            ]"
+            placeholder="选择高度来源"
+          />
+        </n-input-group>
+
+        <n-input-group v-if="heightSource === 'fixed'" style="margin: 13px 0">
+          <n-input-group-label>高度固定值</n-input-group-label>
+          <n-input-number v-model:value="heightFixed" :min="0.01" :step="0.1" />
+        </n-input-group>
+
+        <n-input-group v-if="heightSource === 'column'" style="margin: 13px 0">
+          <n-input-group-label>高度所在列</n-input-group-label>
+          <n-input v-model:value="heightCol" placeholder="如：C" />
+        </n-input-group>
+      </n-card>
     </n-card>
 
     <!-- 处理按钮 -->
@@ -300,7 +394,9 @@ const processExcel = async () => {
         !resultCol.trim() ||
         !outputCol.trim() ||
         startRow <= 0 ||
-        endRow < startRow
+        endRow < startRow ||
+        (widthSource === 'column' && !widthCol.trim()) ||
+        (formulaType === 'volume' && heightSource === 'column' && !heightCol.trim())
       "
     >
       {{ loading ? '处理中...' : '开始处理并下载' }}
